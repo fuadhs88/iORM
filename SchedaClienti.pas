@@ -4566,7 +4566,7 @@ begin
       // Ovviamente procede solo se vi sono documenti selezionati
       if SelRec = 0 then
         Exception.Create('Non ci sono documenti selezionati.');
-      // Cicla per tutti i documenti selezionati e li esporta
+      // Cicla per tutti i documenti selezionati
       for I := 0 to SelRec - 1 do
       begin
         // Focus sul record attuale

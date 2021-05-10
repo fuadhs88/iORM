@@ -10,7 +10,7 @@ uses
   cxGridDBTableView, cxGridCardView, cxGridCustomTableView,
   cxGridTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
   StdCtrls, Buttons, cxLookAndFeels, cxLookAndFeelPainters, cxNavigator,
-  cxGridCustomLayoutView;
+  cxGridCustomLayoutView, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TSelezioneStatoForm = class(TForm)

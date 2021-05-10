@@ -5192,6 +5192,17 @@ begin
       Q.SQL.Add('T.STATOBACKGROUND = (SELECT FIRST 1 S.BACKGROUND FROM STATI S WHERE S.DESCRIZIONE = ''' + NuovoStato + ''')');
       Q.SQL.Add('WHERE T.ID = ' + IntToStr(ID));
     end
+    // Se è un rapportino giornaliero
+    else if TipoDoc = 'Rapp.giorn.' then
+    begin
+      Q.SQL.Add('UPDATE RAPGIORN T SET');
+      Q.SQL.Add('T.STATODESCRIZIONE = ''' + NuovoStato + ''',');
+      Q.SQL.Add('T.STATOFOREGROUND = (SELECT FIRST 1 S.FOREGROUND FROM STATI S WHERE S.DESCRIZIONE = ''' + NuovoStato + '''),');
+      Q.SQL.Add('T.STATOBACKGROUND = (SELECT FIRST 1 S.BACKGROUND FROM STATI S WHERE S.DESCRIZIONE = ''' + NuovoStato + ''')');
+      Q.SQL.Add('WHERE T.NUMDOC = ' + IntToStr(NumDoc));
+      Q.SQL.Add('  AND T.DATADOC = ''' + FormatDateTime('mm/dd/yyyy', DataDoc) + '''');
+      Q.SQL.Add('  AND T.REGISTRO = ''' + RegDoc + '''');
+    end
     // Se è una Dichiarazione di conformità...
     else if TipoDoc = 'Conformita' then
     begin
@@ -5201,8 +5212,8 @@ begin
       Q.SQL.Add('T.STATOBACKGROUND = (SELECT FIRST 1 S.BACKGROUND FROM STATI S WHERE S.DESCRIZIONE = ''' + NuovoStato + ''')');
       Q.SQL.Add('WHERE T.CODICE = ' + IntToStr(NumDoc));
       Q.SQL.Add('  AND T.DATA = ''' + FormatDateTime('mm/dd/yyyy', DataDoc) + '''');
-      // Se è una Lettera/Testo...
     end
+    // Se è una Lettera/Testo...
     else if TipoDoc = 'Lettera' then
     begin
       Q.SQL.Add('UPDATE TESTI T SET');
@@ -5211,8 +5222,8 @@ begin
       Q.SQL.Add('T.STATOBACKGROUND = (SELECT FIRST 1 S.BACKGROUND FROM STATI S WHERE S.DESCRIZIONE = ''' + NuovoStato + ''')');
       Q.SQL.Add('WHERE T.CODICE = ' + IntToStr(NumDoc));
       Q.SQL.Add('  AND T.DATA = ''' + FormatDateTime('mm/dd/yyyy', DataDoc) + '''');
-      // Se invece è un altro tipo di documento...
     end
+    // Se invece è un altro tipo di documento...
     else
     begin
       Q.SQL.Add('UPDATE PRVORDCL T SET');

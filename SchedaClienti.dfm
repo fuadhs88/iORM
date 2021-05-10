@@ -365,7 +365,7 @@ object ClientiForm: TClientiForm
         Top = 0
         Width = 793
         Height = 581
-        ActivePage = TabMagazzino
+        ActivePage = TabArticoli
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -417,9 +417,6 @@ object ClientiForm: TClientiForm
             object TabClientiElenco: TcxTabSheet
               Caption = '   Elenco   '
               ImageIndex = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelRubrica: TPanel
                 Left = 0
                 Top = 0
@@ -5122,8 +5119,6 @@ object ClientiForm: TClientiForm
               object TabSheetDocGrid: TcxTabSheet
                 Caption = 'Elenco'
                 ImageIndex = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 DesignSize = (
                   785
                   169)
@@ -6369,8 +6364,6 @@ object ClientiForm: TClientiForm
               object TabSheetDocADA: TcxTabSheet
                 Caption = 'ADA'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridDoc: TcxDBPivotGrid
                   Left = 0
                   Top = 25
@@ -10091,8 +10084,6 @@ object ClientiForm: TClientiForm
               object TabGMGrid: TcxTabSheet
                 Caption = 'Elenco'
                 ImageIndex = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 DesignSize = (
                   785
                   232)
@@ -11082,8 +11073,6 @@ object ClientiForm: TClientiForm
               object TabGMADA: TcxTabSheet
                 Caption = 'ADA'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridGM: TcxDBPivotGrid
                   Left = 0
                   Top = 25
@@ -12593,9 +12582,6 @@ object ClientiForm: TClientiForm
             object TabPraticheElenco: TcxTabSheet
               Caption = '   Elenco   '
               ImageIndex = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelPratiche: TPanel
                 Left = 0
                 Top = 0
@@ -15764,8 +15750,6 @@ object ClientiForm: TClientiForm
                 Color = clWhite
                 ImageIndex = 1
                 ParentColor = False
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 DesignSize = (
                   785
                   305)
@@ -16776,8 +16760,6 @@ object ClientiForm: TClientiForm
               object TabScadADA: TcxTabSheet
                 Caption = 'ADA'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridScad: TcxDBPivotGrid
                   Left = 0
                   Top = 25
@@ -18970,6 +18952,8 @@ object ClientiForm: TClientiForm
               LevelTabs.Style = 10
               LookAndFeel.Kind = lfUltraFlat
               LookAndFeel.NativeStyle = False
+              LookAndFeel.ScrollbarMode = sbmDefault
+              LookAndFeel.ScrollMode = scmDefault
               RootLevelOptions.DetailFrameColor = clBlack
               RootLevelOptions.DetailFrameWidth = 1
               object tvArt: TcxGridDBTableView
@@ -21711,9 +21695,6 @@ object ClientiForm: TClientiForm
             object TabImpegniElenco: TcxTabSheet
               Caption = '   Elenco   '
               ImageIndex = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelImpegni: TPanel
                 Left = 0
                 Top = 0
@@ -23641,9 +23622,6 @@ object ClientiForm: TClientiForm
             object TabManodopera: TcxTabSheet
               Caption = ' Manodopera '
               ImageIndex = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelGOS: TPanel
                 Left = 0
                 Top = 0
@@ -25437,8 +25415,6 @@ object ClientiForm: TClientiForm
                   object TabGOSOreElenco: TcxTabSheet
                     Caption = 'Elenco'
                     ImageIndex = 0
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     DesignSize = (
                       685
                       285)
@@ -26528,8 +26504,6 @@ object ClientiForm: TClientiForm
                     Caption = 'Grafici'
                     Enabled = False
                     ImageIndex = 2
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     object GridChartOre: TcxGrid
                       Left = 0
                       Top = 0
@@ -26671,9 +26645,6 @@ object ClientiForm: TClientiForm
             object TabSpese: TcxTabSheet
               Caption = ' Altre spese '
               ImageIndex = 1
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelGosSpese: TPanel
                 Left = 0
                 Top = 0
@@ -28601,8 +28572,6 @@ object ClientiForm: TClientiForm
                   object TabGOSSpeseElenco: TcxTabSheet
                     Caption = 'Elenco'
                     ImageIndex = 0
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     DesignSize = (
                       685
                       285)
@@ -29275,8 +29244,6 @@ object ClientiForm: TClientiForm
                     Caption = 'Grafici'
                     Enabled = False
                     ImageIndex = 2
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     object GridChartSpese: TcxGrid
                       Left = 0
                       Top = 0
@@ -29474,7 +29441,6 @@ object ClientiForm: TClientiForm
       Control = PanelAllegati
       Color = 16768991
       ParentColor = False
-      ExplicitWidth = 8
     end
     object PanelAgendaRight: TPanel
       Left = 819
@@ -32089,7 +32055,7 @@ object ClientiForm: TClientiForm
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 44305.812280740740000000
+      ReportDocument.CreationDate = 44326.416490335650000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'A.D.A. giornale di magazzino'
       OptionsFormatting.SuppressContentColoration = True
@@ -32529,7 +32495,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Levante - Agenda'
-      ReportDocument.CreationDate = 44305.812280914350000000
+      ReportDocument.CreationDate = 44326.416490335650000000
       OptionsFormatting.UseNativeStyles = True
       PrintRange.TimePrintFrom = 0.291666666666666700
       PrintRange.TimePrintTo = 0.875000000000000000
@@ -32592,7 +32558,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Statistiche ore dipendenti'
-      ReportDocument.CreationDate = 44305.812280914350000000
+      ReportDocument.CreationDate = 44326.416490509260000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'Rapporto ADA dipendenti'
       OptionsFormatting.SuppressContentColoration = True
@@ -32653,7 +32619,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Rapporto ADA spese varie'
-      ReportDocument.CreationDate = 44305.812280914350000000
+      ReportDocument.CreationDate = 44326.416490509260000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'Rapporto ADA spese'
       OptionsFormatting.SuppressContentColoration = True
@@ -32729,7 +32695,7 @@ object ClientiForm: TClientiForm
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 44305.812280914350000000
+      ReportDocument.CreationDate = 44326.416490509260000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'A.D.A. documenti'
       OptionsFormatting.SuppressContentColoration = True
@@ -32758,7 +32724,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'ADA scadenze '
-      ReportDocument.CreationDate = 44305.812280914350000000
+      ReportDocument.CreationDate = 44326.416490509260000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'A.D.A. scadenze'
       OptionsFormatting.SuppressContentColoration = True
@@ -32788,7 +32754,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Elenco documenti'
-      ReportDocument.CreationDate = 44305.812280914350000000
+      ReportDocument.CreationDate = 44326.416490509260000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'Elenco documenti'
       TimeFormat = 0
