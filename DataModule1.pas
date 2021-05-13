@@ -2,23 +2,23 @@ unit DataModule1;
 
 interface
 
-//uses
-//  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-//  DB, IBODataset, DBCtrls, IB_Components, DBTables, ComCtrls, Qrprntr, quickrpt,
-//  SmartKey, FileCtrl, IniFiles, QRCtrls, Registry,
-//  Mask, StdCtrls, IB_StoredProc, ZLIBArchive, cxGridBandedTableView,
-//  cxCustomPivotGrid, cxContainer, cxEdit, ImgList, cxEditRepositoryItems,
-//  AppEvnts, PLab, cxGridCardView, cxClasses, cxStyles, cxGridTableView,
-//  IB_SessionProps, ExtCtrls, IB_Process, ThreadLev,
-//  cxGrid, cxGridLevel, cxGraphics, cxGridCustomView,
-//  cxGridCustomTableView, cxCurrencyEdit,
-//  Variants, dxPSCore,
-//  PLTypes, Math, cxDBEdit, FormMessage,
-//  cxDBCheckListBox, cxDropDownEdit, cxDBLookupComboBox, cxPC, FormLevanteListAnag,
-//  UnitCambiaDefaultPrinter, cxDBPivotGrid, cxScheduler, cxGridDBBandedTableView,
-//  UnitFileRepository, IB_Script, cxTextEdit, cxGridDBTableView, cxCustomData,
-//  IB_Access, PLBaseLab, dxCore, cxDBEditRepository, cxLocalization,
-//  cxPropertiesStore;
+// uses
+// Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+// DB, IBODataset, DBCtrls, IB_Components, DBTables, ComCtrls, Qrprntr, quickrpt,
+// SmartKey, FileCtrl, IniFiles, QRCtrls, Registry,
+// Mask, StdCtrls, IB_StoredProc, ZLIBArchive, cxGridBandedTableView,
+// cxCustomPivotGrid, cxContainer, cxEdit, ImgList, cxEditRepositoryItems,
+// AppEvnts, PLab, cxGridCardView, cxClasses, cxStyles, cxGridTableView,
+// IB_SessionProps, ExtCtrls, IB_Process, ThreadLev,
+// cxGrid, cxGridLevel, cxGraphics, cxGridCustomView,
+// cxGridCustomTableView, cxCurrencyEdit,
+// Variants, dxPSCore,
+// PLTypes, Math, cxDBEdit, FormMessage,
+// cxDBCheckListBox, cxDropDownEdit, cxDBLookupComboBox, cxPC, FormLevanteListAnag,
+// UnitCambiaDefaultPrinter, cxDBPivotGrid, cxScheduler, cxGridDBBandedTableView,
+// UnitFileRepository, IB_Script, cxTextEdit, cxGridDBTableView, cxCustomData,
+// IB_Access, PLBaseLab, dxCore, cxDBEditRepository, cxLocalization,
+// cxPropertiesStore;
 
 uses
   Windows, Messages, System.SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
@@ -62,8 +62,8 @@ const
   // Costanti di parametri per la versione LEVARCO
   // --------------------------------------------------------------------------
   LEVARCO_MODE = True;
-//  LEVARCO_MODE = False;
-//  LEVARCO_PASSWORD = True;
+  // LEVARCO_MODE = False;
+  // LEVARCO_PASSWORD = True;
   LEVARCO_PASSWORD = False;
   LEVARCO_ABSOLUTE_LOCK_DATE = '30/04/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
   // --------------------------------------------------------------------------
@@ -1331,7 +1331,7 @@ type
     function LockedDatabase: Boolean;
     function EliminaTagHtml(StrIn: String): String;
     procedure NuovoDocFisc(NextTipoDocumento, Registro: String; Cliente, Pratica: Longint; DataPratica: String; Mode, Copies: Integer;
-  SoloRighiDelCliente, SoloRighiDellaPratica: Boolean; DataNuovoDocumento: TDate = 0; ACausale: String = ''); // Personale
+      SoloRighiDelCliente, SoloRighiDellaPratica: Boolean; DataNuovoDocumento: TDate = 0; ACausale: String = ''); // Personale
     procedure ShowWait(Sezione, Messaggio: String);
     procedure CloseWait;
     procedure CodGruppoToDescrizione(Codice1, Codice2, Codice3, Codice4, Codice5, Codice6: String; EditComponent: TEdit);
@@ -1587,7 +1587,7 @@ type
 
   private
     { Private declarations }
-    FModoRistrutturazioneArchivi: boolean;
+    FModoRistrutturazioneArchivi: Boolean;
     // Thread per i messaggi Hint fatti da me e altri usi
     ThreadLevante: LevThread;
     fRepository_Param: TRepositoryFile;
@@ -1659,7 +1659,7 @@ type
     procedure InitializeEditRepositoryProperties;
     procedure BuildCurrencyDisplayFormat;
     procedure BuildMarginePercDisplayFormat;
-    procedure SetModoRistrutturazioneArchivi(const Value: boolean);
+    procedure SetModoRistrutturazioneArchivi(const Value: Boolean);
   public
     { Public declarations }
     // Array che contiene i dati inseriti nella chiave hardware.
@@ -1698,8 +1698,8 @@ type
 
     // Variabili che contengono i percorsi dove si trovano rispettivamente gli archivi
     // condivisi sul server e quelli privati della stazione.
-    CurrDir, ArcDir, AziendaCorrente, SystemDir, CartellaTmp, VolSerNum, GenDBFile, ArcDBFile, ArcBaseDir, TemaDir, HintsDir, ImpGridsDir,
-      ImportFiltersDir, ExportFiltersDir, PuzzleDir, ReportDir, LoghiDir, BullzipDir, BullzipDir2, CommonAppDataDir, CommonAppDataLevanteDir, UserAppDataDir,
+    CurrDir, ArcDir, AziendaCorrente, SystemDir, CartellaTmp, VolSerNum, GenDBFile, ArcDBFile, ArcBaseDir, TemaDir, HintsDir, ImpGridsDir, ImportFiltersDir,
+      ExportFiltersDir, PuzzleDir, ReportDir, LoghiDir, BullzipDir, BullzipDir2, CommonAppDataDir, CommonAppDataLevanteDir, UserAppDataDir,
       UserAppDataLevanteDir, DesktopDir: String;
 
     // Questo flag usato per la scansione con TWAIN indice se vi è una scansione in corso e serve
@@ -2078,12 +2078,12 @@ type
     procedure SetCodiceUtenteBySecurityIdOrByParams;
 
     procedure GridEdit(tv: TcxGridDBTableView; SetEdit: Boolean); overload;
-    procedure GridEdit(btv: TcxGridDBBandedTableView; SetEdit: Boolean); overload;
+    procedure GridEdit(BTV: TcxGridDBBandedTableView; SetEdit: Boolean); overload;
 
     function NewQuery: TIB_Cursor;
     function NewQueryLevGen: TIB_Cursor;
 
-    property ModoRistrutturazioneArchivi: boolean read FModoRistrutturazioneArchivi write SetModoRistrutturazioneArchivi;
+    property ModoRistrutturazioneArchivi: Boolean read FModoRistrutturazioneArchivi write SetModoRistrutturazioneArchivi;
   end;
 
 var
@@ -2323,15 +2323,16 @@ end;
 // Procedure che esegue il polling
 procedure TDM1.Allegati_EseguiPollingAlarm;
 begin
-// NB: Disabilito gli allarmi perchè a volte mi danno degli AV e credo siano loro
-Exit;
+  // NB: Disabilito gli allarmi perchè a volte mi danno degli AV e credo siano loro
+  Exit;
   // Senza questo controllo (preso dal sorgente del componente) all'uscita del programma (cliccando sulla X
   // in alto a dx della finestra, non con l'uscita normale) mi dava un errore.
   { NB: Prima di XE2 era così ma non andava più
     //  if (not SP_AllegatiAlarm.CheckTransaction(True))
     //  and not(( csLoading in SP_AllegatiAlarm.ComponentState ) or ( csDestroying in SP_AllegatiAlarm.ComponentState ) or ( csFixups  in SP_AllegatiAlarm.ComponentState ))
   }
-  if (csFreeNotification in SP_AllegatiAlarm.ComponentState) or (csLoading in SP_AllegatiAlarm.ComponentState) or (csDestroying in SP_AllegatiAlarm.ComponentState) or (csFixups in SP_AllegatiAlarm.ComponentState) then
+  if (csFreeNotification in SP_AllegatiAlarm.ComponentState) or (csLoading in SP_AllegatiAlarm.ComponentState) or
+    (csDestroying in SP_AllegatiAlarm.ComponentState) or (csFixups in SP_AllegatiAlarm.ComponentState) then
     Exit;
   // Apre la stored procedure
   SP_AllegatiAlarm.Open;
@@ -3178,6 +3179,7 @@ function TDM1.GetFirebirdRootDir: String;
       Registry.Free;
     end;
   end;
+
 begin
   Result := GetFirebirdRootDirFromParamsIniFile;
   if Result = '' then
@@ -4276,8 +4278,8 @@ var
 begin
   ShowWait('Levante', 'Duplicazione documento');
   try
-    LParameters := Format('"DUPLICATE" %s %d %d %d "%s" "%s" "%s" "%s" "%s"', [ATipoDocumento, AIDDocumento, AIDSoggetto, AIDPratica, ServerAddress, ArcDBFile, IBUser, IBPswd,
-      DM1.PuzzleDir]);
+    LParameters := Format('"DUPLICATE" %s %d %d %d "%s" "%s" "%s" "%s" "%s"', [ATipoDocumento, AIDDocumento, AIDSoggetto, AIDPratica, ServerAddress, ArcDBFile,
+      IBUser, IBPswd, DM1.PuzzleDir]);
     DM1.WinExec(LDE_ExeFilePath, LParameters);
     Sleep(3000);
   finally
@@ -4505,6 +4507,7 @@ procedure TDM1.SetCodiceUtenteBySecurityIdOrByParams;
       P.Free;
     end;
   end;
+
 begin
   if LEVARCO_PASSWORD then
     SetCodiceUtenteBySecurityID
@@ -5285,19 +5288,19 @@ end;
 
 // Procedura che calcola il codice a barre degli articoli del gruppo arcobaleno
 // dopo il caricamento del file dell'anagrafica articoli
-procedure TDM1.GridEdit(btv: TcxGridDBBandedTableView; SetEdit: Boolean);
+procedure TDM1.GridEdit(BTV: TcxGridDBBandedTableView; SetEdit: Boolean);
 begin
   // In base al parametro ricevuto mette la griglia del corpo documento
   // in modalità di editing oppure no
-  btv.OptionsData.Appending := SetEdit;
-  btv.OptionsData.Deleting := SetEdit;
-  btv.OptionsData.Editing := SetEdit;
-  btv.OptionsData.Inserting := SetEdit;
+  BTV.OptionsData.Appending := SetEdit;
+  BTV.OptionsData.Deleting := SetEdit;
+  BTV.OptionsData.Editing := SetEdit;
+  BTV.OptionsData.Inserting := SetEdit;
   // Se siamo in modifica attiva il DragDrop
   if SetEdit then
-    btv.DragMode := dmManual
+    BTV.DragMode := dmManual
   else
-    btv.DragMode := dmAutomatic;
+    BTV.DragMode := dmAutomatic;
 end;
 
 // Controlla se ci sono degli articoli nel listino marcati come appartentnei al listino
@@ -8871,8 +8874,10 @@ begin
     PreventiviOrdiniForm.QryDocumentoSEGNOOPERAZIONE.AsString := Uppercase(LO.ReadString(NextTipoDocumento, 'AzioneMagazzino', '='));
     PreventiviOrdiniForm.QryDocumentoSEGNOOPERAZIONECANTIERE.AsString := Uppercase(LO.ReadString(NextTipoDocumento, 'AzioneCantiere', '='));
     // Carica la causale di default del documento
+    // 13/05/2021 Mauri: eliminato l'uppercase perchè altrimenti non trovava la causale
     if ACausale.IsEmpty then
-      PreventiviOrdiniForm.QryDocumentoCausale.Value := Uppercase(LO.ReadString(NextTipoDocumento, 'CausaleDefault', ''))
+//      PreventiviOrdiniForm.QryDocumentoCausale.Value := Uppercase(LO.ReadString(NextTipoDocumento, 'CausaleDefault', ''))
+      PreventiviOrdiniForm.QryDocumentoCausale.Value := LO.ReadString(NextTipoDocumento, 'CausaleDefault', '')
     else
       PreventiviOrdiniForm.QryDocumentoCausale.Value := ACausale;
     PreventiviOrdiniForm.QryDocumentoCausaleCantiere.Value := Uppercase(LO.ReadString(NextTipoDocumento, 'CausaleCantiereDefault', ''));
@@ -9816,26 +9821,26 @@ begin
 
   // gli utenti.
   // Mauri 29/06/2020: Ora ho eliminato la CoverDir, il DGPrgVer non c'è più sostituito
-  //  da un apposito campo nel LEVGEN.GDB e, rimane il file "Param_AllUser" che però
-  //  qui sposto nella "UserAppDataLevanteDir". In questo modo non serve più accedere
-  //  alla cartella pubblica del programma e ci togliamo di mezzo tutti i problemi successi
-  //  recentemente.
+  // da un apposito campo nel LEVGEN.GDB e, rimane il file "Param_AllUser" che però
+  // qui sposto nella "UserAppDataLevanteDir". In questo modo non serve più accedere
+  // alla cartella pubblica del programma e ci togliamo di mezzo tutti i problemi successi
+  // recentemente.
   CommonAppDataLevanteDir := UserAppDataLevanteDir;
-//  CommonAppDataDir := SlashFinale(GetCommonAppdataFolder);
-//  CommonAppDataLevanteDir := SlashFinale(CommonAppDataDir + 'Levante\');
-//  if not DirectoryExists(CommonAppDataLevanteDir) then
-//    CreateDir(CommonAppDataLevanteDir);
+  // CommonAppDataDir := SlashFinale(GetCommonAppdataFolder);
+  // CommonAppDataLevanteDir := SlashFinale(CommonAppDataDir + 'Levante\');
+  // if not DirectoryExists(CommonAppDataLevanteDir) then
+  // CreateDir(CommonAppDataLevanteDir);
 
-    // Se non esistono crea le cartelle 'Upload' e 'Download' che serviranno per la sincronizzazione degli archivi
-    UploadDir := UserAppDataLevanteDir + 'Upload';
-    UploadDir := SlashFinale(UploadDir);
-    if not DirectoryExists(UploadDir) then
-      CreateDir(UploadDir);
+  // Se non esistono crea le cartelle 'Upload' e 'Download' che serviranno per la sincronizzazione degli archivi
+  UploadDir := UserAppDataLevanteDir + 'Upload';
+  UploadDir := SlashFinale(UploadDir);
+  if not DirectoryExists(UploadDir) then
+    CreateDir(UploadDir);
 
-    DownloadDir := UserAppDataLevanteDir + 'Download';
-    DownloadDir := SlashFinale(DownloadDir);
-    if not DirectoryExists(DownloadDir) then
-      CreateDir(DownloadDir);
+  DownloadDir := UserAppDataLevanteDir + 'Download';
+  DownloadDir := SlashFinale(DownloadDir);
+  if not DirectoryExists(DownloadDir) then
+    CreateDir(DownloadDir);
 
   // Carica il percorso del desktop
   DesktopDir := SlashFinale(GetDesktopFolder);
@@ -10306,10 +10311,10 @@ begin
   if not DirectoryExists(ExportFiltersDir) then
     CreateDir(ExportFiltersDir);
 
-//  // Imposta la variabile che contiene il percorso dei files della cover
-//  CoverDir := SlashFinale(CommonAppDataLevanteDir + 'cover');
-//  if not DirectoryExists(CoverDir) then
-//    CreateDir(CoverDir);
+  // // Imposta la variabile che contiene il percorso dei files della cover
+  // CoverDir := SlashFinale(CommonAppDataLevanteDir + 'cover');
+  // if not DirectoryExists(CoverDir) then
+  // CreateDir(CoverDir);
 
   // Imposta la variabile che contiene il percorso dei files del tema di visualizzazione e carica il tema stesso
   TemaDir := SlashFinale(CurrDir + 'tema');
@@ -10528,12 +10533,13 @@ begin
   Freemem(Port, 255);
   aPrinter.Free;
 end;
-procedure TDM1.SetModoRistrutturazioneArchivi(const Value: boolean);
+
+procedure TDM1.SetModoRistrutturazioneArchivi(const Value: Boolean);
 begin
   // NB: Questa proprietà una volta messa a True non può più essere riportata a false
   // NB: Solo il server puà entrare in modalità di ristrutturazione
   FModoRistrutturazioneArchivi := (FModoRistrutturazioneArchivi or Value) and IsServer;
-//  FModoRistrutturazioneArchivi := True; // Per test sulla ristrutturazione
+  // FModoRistrutturazioneArchivi := True; // Per test sulla ristrutturazione
 end;
 
 // -----------------------------------------------------------------------------
@@ -10594,7 +10600,7 @@ begin
       end;
     end;
     FindClose(SearchRec);
-//    Session.PrivateDir := CartellaTmp; // Commentata perchè tanto sembrava relativa al BDE
+    // Session.PrivateDir := CartellaTmp; // Commentata perchè tanto sembrava relativa al BDE
   end;
 end;
 
@@ -11974,7 +11980,7 @@ begin
 end;
 
 procedure TDM1.SelezionaArticolo(CodArt, Descrizione: String; AddMode: TAddArtMode; const AQta: Double; const ACodicePratica: Integer = 0;
-      const ADataPratica: TDateTime = 0);
+  const ADataPratica: TDateTime = 0);
 begin
   DM1.Attendere;
   try
@@ -14184,7 +14190,6 @@ begin
 
         // Salva il valore del flag IMportExport
         PrecImportExportValue := QryIn.FieldByName('SELEZIONATO').AsString;
-
 
         // Costruisce il valore (eventuale) dell'EXTRARIF con cui esportare gli eventuali
         // dati relativi ei SubSogg
@@ -17816,8 +17821,8 @@ begin
     S1.Execute;
     // ------------------------------------------------------------------------
     // CREAZIONE VISTA SOGG_LIST_VIEW
-    //    Vista che fornisce il primo step di dati per il GC
-    //    ed esattamente i dati grezzi dei righi.
+    // Vista che fornisce il primo step di dati per il GC
+    // ed esattamente i dati grezzi dei righi.
     // ------------------------------------------------------------------------
     // Imposta la query che ricava l'elenco delle viste e la apre
     DM1.ShowWait('', 'Creazione vista: SOGG_LIST_VIEW');
@@ -18372,7 +18377,7 @@ begin
     if not LDBGeneraleAlreadyConnected then
       ConnettiDatabase(DBGenerale, ServerAddress, GenDBFile, IBUser, IBPswd);
     // Verifica la versione del db e imposta la modalità di ristrutturazione se necessario
-    ModoRistrutturazioneArchivi := (TLevDBVersionFactory.NewDBVersionCheck.GetDBVer < MainForm.PrgVersion) or MainForm.CLI_Param_Ristrutturazione;
+    ModoRistrutturazioneArchivi := (TLevDBVersionFactory.NewDBVersionCheck.GetDbVer < MainForm.PrgVersion) or MainForm.CLI_Param_Ristrutturazione;
     // Se è in ristrutturazione...
     if ModoRistrutturazioneArchivi then
     begin
@@ -18471,8 +18476,8 @@ begin
       if LockedDatabase then
       begin
         Messaggi('ATTENZIONE !!!', 'L''accesso all''azienda ''' + AziendaCorrente +
-          ''' è BLOCCATO per manutenzione.'#13#13'Si prega di riprovare fra pochi minuti.'#13#13'Il programma si chiuderà automaticamente.', 'NB: Se il problema persiste chiamare il centro di assistenza.',
-          [mbOk], 0, nil);
+          ''' è BLOCCATO per manutenzione.'#13#13'Si prega di riprovare fra pochi minuti.'#13#13'Il programma si chiuderà automaticamente.',
+          'NB: Se il problema persiste chiamare il centro di assistenza.', [mbOk], 0, nil);
         Exit;
       end;
       // Entra nella parte di controllo delle tabelle ed eventuale ristrutturazione (Se flag Ristruttura = True)
@@ -18515,7 +18520,6 @@ begin
           // NB: SOLO SE SIAMO IN RITRTUTTURAZIONE
           ConversioneGiacenzeMagazzinoParte1;
         end;
-
 
         // Rimuove tutte le viste presenti nel database in modo da togliere tutti i vincoli
         EliminaViste;
@@ -18694,7 +18698,7 @@ begin
           DM1.ShowWait('Levante', 'Defaultizzazione natura IVA (aliquote IVA)');
           DM2.DefaultizzaNaturaIVA_FE;
           // Documenti: converte il campo che indica se la fattura è in SPlitPayment, che prima era un checkbox,
-          //  per renderlo adatto al nuovo combobox
+          // per renderlo adatto al nuovo combobox
           DM1.ShowWait('Levante', 'Conversione esibilità IVA nei documenti');
           DM2.ConvertiCampoEsibilitaIVAneiDocumenti;
         end;
@@ -18769,7 +18773,7 @@ begin
 
       // Per introduzione fattura elettronica 1.6.1:
       // Disabilita le aliquote IVA con le vecchie NaturaIVA N2, N3 e N6 non più
-      //  utilizzabili dal 01/01/2021 (quindi le disabiliterà a partire da questo giorno)
+      // utilizzabili dal 01/01/2021 (quindi le disabiliterà a partire da questo giorno)
       DM1.ShowWait('Levante', 'Verifica Nature IVA...');
       DM2.DisabilitaVecchieNatureIVA_1_6_1;
 
@@ -18783,7 +18787,7 @@ begin
       ApriTabella(TablePratiche, ModoRistrutturazioneArchivi);
       ApriTabella(TableTesti, ModoRistrutturazioneArchivi);
       ApriTabella(TableConformita, ModoRistrutturazioneArchivi);
-      ApriTabella(TableCausaliLookup, False);  // La ristrutturazione avviene già altrove
+      ApriTabella(TableCausaliLookup, False); // La ristrutturazione avviene già altrove
       ApriTabella(DM2.TableLookupPA_RegimeFiscale, ModoRistrutturazioneArchivi);
       ApriTabella(DM2.TableLookupPA_SocioUnico, ModoRistrutturazioneArchivi);
       ApriTabella(DM2.TableLookupPA_StatoLiquidazione, ModoRistrutturazioneArchivi);
@@ -18826,7 +18830,7 @@ begin
       // Se non siamo in ristrutturazione attiva il timer per il polling
       // relativo agli allegati con allarme scaduto
       // NB: Disattivo gli allarmi sugli allegati (PostIt) perchè davano alcuni AV (penso)
-//      Allegati_Alarm_EnableTimerPolling((not ApriSoloPercorsiAziende) and (not ModoRistrutturazioneArchivi));
+      // Allegati_Alarm_EnableTimerPolling((not ApriSoloPercorsiAziende) and (not ModoRistrutturazioneArchivi));
 
       // Controlla ed eventualmente elimina i righi orfani presenti
       // NB: Spostato al momento della ristrutturazione degli archivi per motivi prestazionali
@@ -20128,10 +20132,10 @@ begin
     Abort;
   // 2° conferma con raccomandazioni
   LMessage := 'A T T E N Z I O N E !!!'#13#13'L''operazione potrebbe causare problemi se l''aliquota IVA è presente in documenti emessi in precedenza.'#13#13 +
-    'I documenti potrebbero non essere più accessibili.'#13#13 +
-    'CONSULTARE IL SERVIZIO DI ASSISTENZA prima di proseguire.'#13#13 +
+    'I documenti potrebbero non essere più accessibili.'#13#13 + 'CONSULTARE IL SERVIZIO DI ASSISTENZA prima di proseguire.'#13#13 +
     'Se vuoi proseguire ugualmente digita "ignora le raccomandazioni", poi clicca su "Conferma".';
-  if not TConfirmForm.ConfirmationRequest(Format('Elimina aliquota IVA %s, "%s"', [TableAliquoteIVACodiceIVA.AsString, TableAliquoteIVADescrizioneIVA.AsString]), LMessage, 'ignora le raccomandazioni', 800, 450) then
+  if not TConfirmForm.ConfirmationRequest(Format('Elimina aliquota IVA %s, "%s"', [TableAliquoteIVACODICEIVA.AsString, TableAliquoteIVADESCRIZIONEIVA.AsString]
+    ), LMessage, 'ignora le raccomandazioni', 800, 450) then
     Abort;
 end;
 
