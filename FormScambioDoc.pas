@@ -930,9 +930,12 @@ begin
       //  e se la dimensione ritornata non è nulla (-1) significa che il file esiste (almeno credo)
       //  altrimenti assumo che il file non esiste e sollevo un'eccezione
       DM1.ShowWait('', 'Check if file exist...');
-      if IdFTP1.Size(NomeFile) = -1 then raise Exception.Create('Nome del file di importazione non corretto o file non trovato.');
+      if IdFTP1.Size(NomeFile) = -1 then
+        raise Exception.Create('Nome del file di importazione non corretto o file non trovato.');
       // Esegue il Download del file del documento dal server
+      DM1.ShowWait('', 'Set transfer type to ftBinary');
       IdFTP1.TransferType := ftBinary;
+      DM1.ShowWait('', 'Download the file');
       IdFTP1.Get(NomeFile, DM1.CartellaTmp+NomeFile, True);
       // Importa il documento appena scaricato
       DM1.ShowWait('', 'Loading from document exchange file...');
