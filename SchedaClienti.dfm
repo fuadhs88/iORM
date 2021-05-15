@@ -365,7 +365,7 @@ object ClientiForm: TClientiForm
         Top = 0
         Width = 793
         Height = 581
-        ActivePage = TabArticoli
+        ActivePage = TabClienti
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1314,12 +1314,12 @@ object ClientiForm: TClientiForm
                       OptionsBehavior.DragScrolling = False
                       OptionsBehavior.BestFitMaxRecordCount = 50
                       OptionsBehavior.ColumnHeaderHints = False
+                      OptionsBehavior.EditMode = emInplaceEditForm
                       OptionsBehavior.ExpandMasterRowOnDblClick = False
                       OptionsCustomize.ColumnFiltering = False
                       OptionsCustomize.ColumnHiding = True
                       OptionsCustomize.ColumnHidingOnGrouping = False
                       OptionsData.DeletingConfirmation = False
-                      OptionsData.Editing = False
                       OptionsData.Inserting = False
                       OptionsSelection.CellSelect = False
                       OptionsSelection.InvertSelect = False
@@ -1903,6 +1903,21 @@ object ClientiForm: TClientiForm
                         Visible = False
                         HeaderAlignmentHorz = taCenter
                         Width = 100
+                      end
+                      object tvRubricaSITOINTERNET: TcxGridDBColumn
+                        Caption = 'Collegamento'
+                        DataBinding.FieldName = 'SITOINTERNET'
+                        PropertiesClassName = 'TcxButtonEditProperties'
+                        Properties.Buttons = <
+                          item
+                            Default = True
+                            Kind = bkEllipsis
+                          end>
+                        Properties.IncrementalSearch = False
+                        Properties.OnButtonClick = tvRubricaSITOINTERNETPropertiesButtonClick
+                        HeaderAlignmentHorz = taCenter
+                        Options.ShowEditButtons = isebAlways
+                        Width = 200
                       end
                     end
                     object tvSoggCant: TcxGridDBTableView
@@ -30626,6 +30641,10 @@ object ClientiForm: TClientiForm
       FieldName = 'TIPOPERSONAEXT'
       Size = 10
     end
+    object QrySoggettiSITOINTERNET: TStringField
+      FieldName = 'SITOINTERNET'
+      Size = 500
+    end
   end
   object SourceSoggetti: TDataSource
     AutoEdit = False
@@ -31775,8 +31794,8 @@ object ClientiForm: TClientiForm
       ''
       'FROM ARTICOLI A'
       'LEFT JOIN MAGAZZINI M ON M.CODICEARTICOLO = A.CODICEARTICOLO')
-    Left = 629
-    Top = 481
+    Left = 605
+    Top = 217
     object QryArticoliCODICEARTICOLO: TStringField
       FieldName = 'CODICEARTICOLO'
       Required = True
@@ -31968,8 +31987,8 @@ object ClientiForm: TClientiForm
   object SourceArticoli: TDataSource
     AutoEdit = False
     DataSet = QryArticoli
-    Left = 658
-    Top = 481
+    Left = 634
+    Top = 217
   end
   object dxPrinter: TdxComponentPrinter
     CurrentLink = GridDocLink
@@ -32055,7 +32074,7 @@ object ClientiForm: TClientiForm
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 44326.416490335650000000
+      ReportDocument.CreationDate = 44331.440802650460000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'A.D.A. giornale di magazzino'
       OptionsFormatting.SuppressContentColoration = True
@@ -32495,7 +32514,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Levante - Agenda'
-      ReportDocument.CreationDate = 44326.416490335650000000
+      ReportDocument.CreationDate = 44331.440802835650000000
       OptionsFormatting.UseNativeStyles = True
       PrintRange.TimePrintFrom = 0.291666666666666700
       PrintRange.TimePrintTo = 0.875000000000000000
@@ -32558,7 +32577,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Statistiche ore dipendenti'
-      ReportDocument.CreationDate = 44326.416490509260000000
+      ReportDocument.CreationDate = 44331.440802835650000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'Rapporto ADA dipendenti'
       OptionsFormatting.SuppressContentColoration = True
@@ -32619,7 +32638,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Rapporto ADA spese varie'
-      ReportDocument.CreationDate = 44326.416490509260000000
+      ReportDocument.CreationDate = 44331.440802835650000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'Rapporto ADA spese'
       OptionsFormatting.SuppressContentColoration = True
@@ -32695,7 +32714,7 @@ object ClientiForm: TClientiForm
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 44326.416490509260000000
+      ReportDocument.CreationDate = 44331.440802835650000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'A.D.A. documenti'
       OptionsFormatting.SuppressContentColoration = True
@@ -32724,7 +32743,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'ADA scadenze '
-      ReportDocument.CreationDate = 44326.416490509260000000
+      ReportDocument.CreationDate = 44331.440802835650000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'A.D.A. scadenze'
       OptionsFormatting.SuppressContentColoration = True
@@ -32754,7 +32773,7 @@ object ClientiForm: TClientiForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Elenco documenti'
-      ReportDocument.CreationDate = 44326.416490509260000000
+      ReportDocument.CreationDate = 44331.440802835650000000
       ReportTitle.Mode = tmNone
       ReportTitle.Text = 'Elenco documenti'
       TimeFormat = 0
@@ -32770,8 +32789,8 @@ object ClientiForm: TClientiForm
   end
   object MenuArticoli: TPopupMenu
     OnPopup = MenuArticoliPopup
-    Left = 687
-    Top = 481
+    Left = 663
+    Top = 217
     object MIArticolo: TMenuItem
       Caption = 'Articolo'
       OnClick = MIArticoloClick
@@ -33381,8 +33400,8 @@ object ClientiForm: TClientiForm
       ''
       'WHERE LF.CODICEARTICOLO = :CODICEARTICOLO'
       '')
-    Left = 629
-    Top = 518
+    Left = 605
+    Top = 254
     object QryArtListFornCODICEFORNITORE: TIntegerField
       FieldName = 'CODICEFORNITORE'
       Origin = 'LISTFORN.CODICEFORNITORE'
@@ -33440,8 +33459,8 @@ object ClientiForm: TClientiForm
   object SourceArtListForn: TDataSource
     AutoEdit = False
     DataSet = QryArtListForn
-    Left = 658
-    Top = 518
+    Left = 634
+    Top = 254
   end
   object QryTotDoc: TIBOQuery
     IB_Connection = DM1.DBAzienda
@@ -34555,15 +34574,15 @@ object ClientiForm: TClientiForm
     IB_Connection = DM1.DBAzienda
     AutoCommit = True
     Isolation = tiCommitted
-    Left = 600
-    Top = 481
+    Left = 576
+    Top = 217
   end
   object TransArtListForn: TIB_Transaction
     IB_Connection = DM1.DBAzienda
     AutoCommit = True
     Isolation = tiCommitted
-    Left = 600
-    Top = 518
+    Left = 576
+    Top = 254
   end
   object TransGM: TIB_Transaction
     IB_Connection = DM1.DBAzienda
@@ -34667,8 +34686,8 @@ object ClientiForm: TClientiForm
     IB_Connection = DM1.DBAzienda
     AutoCommit = True
     Isolation = tiCommitted
-    Left = 600
-    Top = 547
+    Left = 576
+    Top = 283
   end
   object QryArtMag: TIBOQuery
     Params = <
@@ -34706,8 +34725,8 @@ object ClientiForm: TClientiForm
         ' ORDINATO'
       '      , CAST(:P_CODART AS VARCHAR(25)) AS CODICEARTICOLO'
       'FROM ANAGMAGA AM')
-    Left = 629
-    Top = 547
+    Left = 605
+    Top = 283
     object QryArtMagCODMAG: TIntegerField
       FieldName = 'CODMAG'
       Required = True
@@ -34742,8 +34761,8 @@ object ClientiForm: TClientiForm
   object SourceArtMag: TDataSource
     AutoEdit = False
     DataSet = QryArtMag
-    Left = 658
-    Top = 547
+    Left = 634
+    Top = 283
   end
   object TransSoggCant: TIB_Transaction
     IB_Connection = DM1.DBAzienda

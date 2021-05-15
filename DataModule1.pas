@@ -1324,8 +1324,11 @@ type
     procedure TableConformitaCLIENTEChange(Sender: TField);
     procedure TableContattiClienteChange(Sender: TField);
     procedure TableTestiCLIENTEChange(Sender: TField);
+
     procedure WinExec(FileName: String; Parameters: String = '');
     function WinExecAndWait32(FileName: String; Visibility: Integer): Cardinal;
+    procedure Explore(AToExplore: String);
+
     function LockDatabaseAccess: Boolean;
     procedure UnLockDatabaseAccess;
     function LockedDatabase: Boolean;
@@ -11599,6 +11602,21 @@ begin
   StartPos := Pos('{', Descrizione) + 1; // Altrimenti mi becca anche la parentesi graffa
   Count := Pos('}', Descrizione) - StartPos;
   Result := StrToInt(Copy(Descrizione, StartPos, Count));
+end;
+
+procedure TDM1.Explore(AToExplore: String);
+begin
+  AToExplore := AToExplore.Trim;
+
+  // Se è vuoto ovviamente non fa nulla
+  if AToExplore.IsEmpty then
+    Exit;
+
+  // Altrimenti se è un sito internet non lo riconosce e non avvia il browser
+  if AToExplore.StartsWith('www.', true) then
+    AToExplore := 'http://' + AToExplore;
+
+  WinExec('explorer.exe', AToExplore);
 end;
 
 function TDM1.ExpDocToDocType(Descrizione: String): String;

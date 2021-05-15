@@ -36,7 +36,7 @@ uses
   JvgSpeedButton, FrameChart,
   cxDBNavigator, cxCheckListBox, DDT.Interfaces, FatturaPA_DM, dxBarBuiltInMenu,
   dxDateRanges, dxScrollbarAnnotations, cxSchedulerAgendaView,
-  cxSchedulerRecurrence, cxSchedulerRibbonStyleEventEditor, cxCustomListBox;
+  cxSchedulerRecurrence, cxSchedulerRibbonStyleEventEditor, cxCustomListBox, cxButtonEdit;
 
 const
   // Constanti contentnei l'ID della colonna della griglia del giornale di magazzino
@@ -2850,6 +2850,8 @@ type
     tvScadRITARDOPAG: TcxGridDBColumn;
     QryGMDESCRIZIONESCHEDA: TStringField;
     tvGMDESCRIZIONESCHEDA: TcxGridDBColumn;
+    tvRubricaSITOINTERNET: TcxGridDBColumn;
+    QrySoggettiSITOINTERNET: TStringField;
     procedure RxSpeedButtonUscitaClick(Sender: TObject);
     procedure RxSpeedButtonEliminaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -3480,6 +3482,7 @@ type
     procedure Fatturachiamateappuntamentiinterventiselezionati2Click(Sender: TObject);
     procedure RxSpeedButtonFaxClick(Sender: TObject);
     procedure tvScadRITARDOPAGCustomDrawCell(Sender: TcxCustomGridTableView; ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure tvRubricaSITOINTERNETPropertiesButtonClick(Sender: TObject; AButtonIndex: Integer);
 
   private
     // Mantiene il collegamento alla WindowsProcedure originale della
@@ -24497,16 +24500,18 @@ procedure TClientiForm.tvRubricaMouseDown(Sender: TObject; Button: TMouseButton;
 var
   Site: TcxGridSite;
   HitTest: TcxCustomGridHitTest;
+  I: Integer;
+  R: TRect;
 begin
   // Verifica della posizione del mouse...
   Site := Sender as TcxGridSite;
   HitTest := Site.GridView.ViewInfo.GetHitTest(X, Y);
+
   // Se stiamo facendo click su una casella di dati normali (no group, no filter ecc.)
   // allora procede con la selezione del soggetto/cantiere/impianto altrimenti nulla.
   if (HitTest.HitTestCode = htCell) and (TcxGridRecordCellHitTest(HitTest).GridRecord.IsData) and
     (not(Site.GridView.Controller as TcxGridTableController).IsFilterRowFocused) then
   begin
-
     // =========================================================================
     // SELEZIONE SOGGETTO/PRATICA/IMPIANTO CORRENTE
     // -------------------------------------------------------------------------
@@ -24518,7 +24523,32 @@ begin
       ClientiForm.RxSpeedButtonVisualizzaClick(ClientiForm.RxSpeedButtonVisualizza);
     end;
     // =========================================================================
+  end;
 
+  // Se invece stiamo facendo click sul bottone del link al sito internet...
+  // Ho dovuto fare così perchè nonoostante la colonne "SItoInternet" avevve la "properties" settata su
+  //  "ButtonEdit" l'evento "OnButtonClick" non veniva eseguito perchè essendo la griglia in modalità di selezione dell'intera roga
+  //  (non è possibile selezionare una singola cella) e non in edit mode non veniva creato l'InPlaceEditor che è necessario
+  //  per il normale funzionamento dell'editor di questo tipo.
+  //  IN pratica questo codice rileva (HitText) le coordinate del click (MouseDown) per determinare poi se ricadono entro il TREct
+  //  relativo alla posizione del bottone che ci interessa e poi richiama manualmente l'evento e lo disegna come cliccato.
+  // NB: Codice preso dall'esempio del supporto DevExpress: https://supportcenter.devexpress.com/ticket/details/t971673/the-onbuttonclick-event-of-an-in-place-buttonedit-is-not-fired-when-view-optionsbehavior
+  if HitTest is TcxGridRecordCellHitTest then
+  begin
+    with TcxGridTableDataCellViewInfo(TcxGridRecordCellHitTest(HitTest).ViewInfo) do
+    begin
+      for I := 0 to Length(TcxCustomEditViewInfo(EditViewInfo).ButtonsInfo) - 1 do
+      begin
+        R :=  TcxCustomEditViewInfo(EditViewInfo).ButtonsInfo[I].Bounds;
+        if PtInRect(R, Point(X, Y)) then
+         begin
+           EditViewInfo.EditProperties.OnButtonClick(Sender,I);
+           EditViewInfo.ButtonsInfo[I].Data.State := ebsPressed;
+           (Sender as TcxGridSite).InvalidateRect(R,False);
+           Break;
+         end;
+      end;
+    end;
   end;
 end;
 
@@ -24615,6 +24645,16 @@ begin
   // Se arriva qui allora l'eventuale Hint deve essere chiuso
   DM2.ColumnHeaderHint_Close;
   // ===========================================================================
+end;
+
+procedure TClientiForm.tvRubricaSITOINTERNETPropertiesButtonClick(Sender: TObject; AButtonIndex: Integer);
+var
+  LToExplore: String;
+  DC: TcxCustomDataController;
+begin
+  DC := (Sender as TcxGridSite).GridView.DataController;
+  LToExplore := VarToStr( DC.Values[DC.FocusedRecordIndex, tvRubricaSITOINTERNET.Index] ).Trim;
+  DM1.Explore(LToExplore);
 end;
 
 procedure TClientiForm.tvSoggCantEXIST_SCADSOFFGetCellHint(Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;

@@ -1580,17 +1580,8 @@ begin
 end;
 
 procedure TAnagCliForm.BitBtnWWWClick(Sender: TObject);
-var
-   lpszFileExe : array[0..250] of AnsiChar;
-   ExecStr: String;
-   P:TMemIniFile;
 begin
-   // Apre il file dei parametri
-   P := TMemIniFile.Create(DM1.Repository_Param_User.FullLocalFileName);
-    ExecStr := P.ReadString('INTERNET', 'WebBrowser', 'c:\progra~1\intern~1\iexplore.exe') + ' ' + QrySoggSitoInternet.Value;
-   P.Free;
-   StrPCopy( lpszFileExe, ExecStr);
-   WinExec(lpszFileExe, SW_SHOW);
+  DM1.Explore(QrySoggSitoInternet.AsString);
 end;
 
 procedure TAnagCliForm.BitBtnBancaClick(Sender: TObject);
