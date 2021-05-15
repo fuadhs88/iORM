@@ -137,6 +137,8 @@ type
     QryAllegatiALL_ARTICOLO: TStringField;
     cvAllegatiALL_ARTICOLO: TcxGridDBCardViewRow;
     ZLB1: TZLBArchive;
+    cvAllegatiLINK: TcxGridDBCardViewRow;
+    QryAllegatiLINK: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure EseguiQuery(AutoOpenClose:Boolean=True);
     procedure AzzeraFiltri;
@@ -178,6 +180,7 @@ type
     procedure Modello1Click(Sender: TObject);
     procedure ExtFilesMenuPopup(Sender: TObject);
     procedure QryAllegatiAfterInsert(DataSet: TDataSet);
+    procedure cvAllegatiLINKPropertiesButtonClick(Sender: TObject; AButtonIndex: Integer);
   private
     // Mantiene il collegamento alla WindowsProcedure originale della
     originalPanelWindowProc : TWndMethod;
@@ -367,7 +370,8 @@ begin
     // FILTRI PER DOCUMENTO
     // -------------------------------------------------------------------------
     // Se si è scelto di visualizzare gli allegati relativi a un documento...
-    if sbFilterDocumento.Down then begin
+    if sbFilterDocumento.Down then
+    begin
       if WhereCond.Count > 0 then WhereCond.Add('OR');
       WhereCond.Add('(');
       WhereCond.Add('  A.TIPODOC IS NOT NULL');
@@ -468,11 +472,12 @@ begin
     QryAllegati.SQL.Add('SELECT A.NUMPROT, A.REVPROT, A.ANNOPROT, A.FULLPROT, A.TIPODOC, A.NUMDOC, A.REGDOC, A.DATADOC');
     QryAllegati.SQL.Add('      ,A.ALL_DOCUMENTO, A.CODSOGG, A.ALL_SOGGETTO, A.CODICEARTICOLO, A.ALL_ARTICOLO, A.CODPRAT, A.DATAPRAT, A.ALL_RIFPRATICA');
     QryAllegati.SQL.Add('      ,A.NOTE, A.FILE_EXT, A.FILE_NAME, A.FILE_BLOB_PRESENT, A.CREAZ_OPERATORE, A.CREAZ_DATAORA, A.TRACK_CREAZIONE, A.ULTMOD_OPERATORE, A.ULTMOD_DATAORA, A.TRACK_ULTIMAMODIFICA');
-    QryAllegati.SQL.Add('      ,A.DOC_SOGGETTO, A.DOC_RIFPRATICA, A.ALARM_DATAORA, A.ALARM_FATTO, A.PA_ALLEGA');
+    QryAllegati.SQL.Add('      ,A.DOC_SOGGETTO, A.DOC_RIFPRATICA, A.ALARM_DATAORA, A.ALARM_FATTO, A.PA_ALLEGA, A.LINK');
     QryAllegati.SQL.Add('FROM ALLEGATI_VIEW A');
 
     // Se presenti inserisce anche le clausole WHERE
-    if WhereCond.Count > 0 then begin
+    if WhereCond.Count > 0 then
+    begin
       QryAllegati.SQL.Add('WHERE');
       QryAllegati.SQL.AddStrings(WhereCond);
     end;
@@ -1545,6 +1550,16 @@ begin
   end;
 end;
 
+procedure TAllegatiForm.cvAllegatiLINKPropertiesButtonClick(Sender: TObject; AButtonIndex: Integer);
+var
+  LToExplore: String;
+  DC: TcxCustomDataController;
+begin
+  DC := cvAllegati.DataController;
+  LToExplore := VarToStr( DC.Values[DC.FocusedRecordIndex, cvAllegatiLINK.Index] ).Trim;
+  DM1.Explore(LToExplore);
+end;
+
 procedure TAllegatiForm.cvAllegatiFULLPROTGetCellHint(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
   ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
@@ -1684,17 +1699,20 @@ begin
   fSplitter.CloseSplitter;
   // Altrimenti in Win7 e Win Vista non si visualizzava correttamente (era invisibile).
   fSPlitter.NativeBackground := False;
-  fSplitter.PositionAfterOpen := 148;
+  fSplitter.PositionAfterOpen := 144; // precedente 148;
   // Se siamo in modalità ExtFile esce subito in modo da disabilitare
   //  la connessione delle dimensioni e della posizione alle form
   //  allegati precedenti.
-  if Self.Mode = amExtFile then Exit;
+  if Self.Mode = amExtFile then
+    Exit;
   // Se esisteva una FormAllegati precedente ne usa alcune proprietà
   //  del splitter per inizializzare quello della form attuale
   // NB: Imposta anche il filtro che visualizza gli alarcmi scaduti
-  if PrecSplitter <> nil then begin
+  if PrecSplitter <> nil then
+  begin
     fSplitter.PositionAfterOpen := PrecSplitter.PositionAfterOpen;
-    if PrecSplitter.State = ssOpened then begin
+    if PrecSplitter.State = ssOpened then
+    begin
       fSplitter.Control.Height := PrecSplitter.Control.Height;
       fSplitter.OpenSplitter;
     end;
@@ -1704,7 +1722,8 @@ begin
   end;
   // Assegna il gestore di evento onMoved se questo non è già
   //  speficicato
-  if not Assigned(fSplitter.OnMoved) then fSplitter.OnMoved := SplitterAllegatiMoved;
+  if not Assigned(fSplitter.OnMoved) then
+    fSplitter.OnMoved := SplitterAllegatiMoved;
 end;
 
 

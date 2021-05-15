@@ -1905,7 +1905,7 @@ object ClientiForm: TClientiForm
                         Width = 100
                       end
                       object tvRubricaSITOINTERNET: TcxGridDBColumn
-                        Caption = 'Collegamento'
+                        Caption = 'Link'
                         DataBinding.FieldName = 'SITOINTERNET'
                         PropertiesClassName = 'TcxButtonEditProperties'
                         Properties.Buttons = <

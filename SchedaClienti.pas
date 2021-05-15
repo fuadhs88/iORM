@@ -24533,10 +24533,13 @@ begin
   //  IN pratica questo codice rileva (HitText) le coordinate del click (MouseDown) per determinare poi se ricadono entro il TREct
   //  relativo alla posizione del bottone che ci interessa e poi richiama manualmente l'evento e lo disegna come cliccato.
   // NB: Codice preso dall'esempio del supporto DevExpress: https://supportcenter.devexpress.com/ticket/details/t971673/the-onbuttonclick-event-of-an-in-place-buttonedit-is-not-fired-when-view-optionsbehavior
-  if HitTest is TcxGridRecordCellHitTest then
+  // NB: Solo per l'elenco clienti
+  if (Site.GridView = tvRubrica) and (HitTest is TcxGridRecordCellHitTest) and (TcxGridRecordCellHitTest(HitTest).ViewInfo is TcxGridTableDataCellViewInfo) then
   begin
     with TcxGridTableDataCellViewInfo(TcxGridRecordCellHitTest(HitTest).ViewInfo) do
     begin
+//      if not (EditViewInfo is TcxCustomEditViewInfo) then
+//        Exit;
       for I := 0 to Length(TcxCustomEditViewInfo(EditViewInfo).ButtonsInfo) - 1 do
       begin
         R :=  TcxCustomEditViewInfo(EditViewInfo).ButtonsInfo[I].Bounds;

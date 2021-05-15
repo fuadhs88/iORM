@@ -456,7 +456,6 @@ object AllegatiForm: TAllegatiForm
       DataController.Summary.SummaryGroups = <>
       DataController.OnDataChanged = cvAllegatiDataControllerDataChanged
       OptionsBehavior.DragDropText = True
-      OptionsBehavior.ImmediateEditor = False
       OptionsCustomize.CardSizing = False
       OptionsCustomize.RowFiltering = False
       OptionsSelection.CardBorderSelection = False
@@ -509,11 +508,31 @@ object AllegatiForm: TAllegatiForm
         Caption = 'Oggetto'
         DataBinding.FieldName = 'NOTE'
         PropertiesClassName = 'TcxMemoProperties'
-        Properties.VisibleLineCount = 4
+        Properties.VisibleLineCount = 2
         Properties.WantReturns = False
         CaptionAlignmentHorz = taRightJustify
         Options.ShowCaption = False
         Position.BeginsLayer = False
+      end
+      object cvAllegatiLINK: TcxGridDBCardViewRow
+        Caption = 'Link:'
+        DataBinding.FieldName = 'LINK'
+        PropertiesClassName = 'TcxButtonEditProperties'
+        Properties.Buttons = <
+          item
+            Default = True
+            ImageIndex = 5
+            Kind = bkGlyph
+            Stretchable = False
+          end>
+        Properties.Images = cxImageList1
+        Properties.OnButtonClick = cvAllegatiLINKPropertiesButtonClick
+        Options.ShowEditButtons = isebAlways
+        Position.BeginsLayer = False
+        Styles.Content = DM1.cvEnContent
+        Styles.Caption = DM1.cvEnContent
+        Styles.CaptionRow = DM1.cvEnContent
+        Styles.CategoryRow = DM1.cvEnContent
       end
       object cvAllegatiCategory1: TcxGridDBCardViewRow
         PropertiesClassName = 'TcxButtonEditProperties'
@@ -819,6 +838,8 @@ object AllegatiForm: TAllegatiForm
       ''
       '        ,PA_ALLEGA = :PA_ALLEGA'
       ''
+      '        ,LINK = :LINK'
+      ''
       'WHERE'
       ''
       '        ANNOPROT = :OLD_ANNOPROT'
@@ -859,6 +880,8 @@ object AllegatiForm: TAllegatiForm
       '      ,ALARM_FATTO'
       ''
       '      ,PA_ALLEGA'
+      ''
+      '      ,LINK'
       '      )'
       'VALUES'
       '      ('
@@ -892,6 +915,8 @@ object AllegatiForm: TAllegatiForm
       '      ,:ALARM_FATTO'
       ''
       '      ,:PA_ALLEGA'
+      ''
+      '      ,:LINK'
       '      )'
       ''
       '')
@@ -1065,6 +1090,10 @@ object AllegatiForm: TAllegatiForm
     object QryAllegatiALL_ARTICOLO: TStringField
       FieldName = 'ALL_ARTICOLO'
       Size = 100
+    end
+    object QryAllegatiLINK: TStringField
+      FieldName = 'LINK'
+      Size = 500
     end
   end
   object SourceAllegati: TDataSource
@@ -1347,6 +1376,7 @@ object AllegatiForm: TAllegatiForm
   end
   object cxImageList1: TcxImageList
     SourceDPI = 96
+    DrawingStyle = dsTransparent
     FormatVersion = 1
     DesignInfo = 7340344
     ImageInfo = <
@@ -1534,6 +1564,37 @@ object AllegatiForm: TAllegatiForm
           0098000000040000000000000000000000000000000000000000000000000000
           00000000000000000000000000000000000000000011000000D8000000D90000
           0012000000000000000000000000000000000000000000000000}
+      end
+      item
+        ImageClass = 'TBitmap'
+        Image.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000C40E0000C40E00000000000000000000A8ECFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF00000000000078FFFF78FFFF78FFFF00
+          000000000078FFFF78FFFF78FFFF00000000000078FFFF78FFFF78FFFF78FFFF
+          00000000000078FFFF78FFFF78FFFF00000000000078FFFF78FFFF78FFFF0000
+          0000000078FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF
+          78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FF
+          FF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78
+          FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF78FFFF}
+        MaskColor = 11070719
       end>
   end
   object SaveDialog1: TSaveDialog

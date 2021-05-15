@@ -11615,8 +11615,15 @@ begin
   // Altrimenti se è un sito internet non lo riconosce e non avvia il browser
   if AToExplore.StartsWith('www.', true) then
     AToExplore := 'http://' + AToExplore;
-
   WinExec('explorer.exe', AToExplore);
+
+  // Solo estetico
+  DM1.ShowWait('Levante', 'Operazione in corso...');
+  try
+    Sleep(1500);
+  finally
+    DM1.CloseWait;
+  end;
 end;
 
 function TDM1.ExpDocToDocType(Descrizione: String): String;

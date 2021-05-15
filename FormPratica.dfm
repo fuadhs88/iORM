@@ -77,7 +77,7 @@ object PraticaForm: TPraticaForm
       ParentColor = False
       ParentFont = False
       TabOrder = 0
-      Properties.ActivePage = TabPratica
+      Properties.ActivePage = TabImpianto
       Properties.CustomButtons.Buttons = <>
       Properties.NavigatorPosition = npLeftBottom
       Properties.Style = 9
@@ -2101,7 +2101,7 @@ object PraticaForm: TPraticaForm
             end
             object PanelSoggetto: TPanel
               Left = 348
-              Top = 7
+              Top = 0
               Width = 314
               Height = 68
               BevelOuter = bvNone
@@ -9511,7 +9511,7 @@ object PraticaForm: TPraticaForm
               Color = clWhite
               TabOrder = 0
               object cbVediNotePrivateImpianto: TcxCheckBox
-                Left = -2
+                Left = -5
                 Top = -3
                 AutoSize = False
                 Caption = 'Vedi note private'

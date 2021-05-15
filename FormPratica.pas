@@ -2103,6 +2103,7 @@ type
     procedure SetNotePrivateImpianto_InEvidenza(const Value: Boolean);
     procedure ControllaEvidenziazioneNotePrivateImpianto;
     procedure ControlloMatricolaApparecchioEsistente;
+    procedure ImpostaCampiJolly(const Parent: TControl; const LO: TMemIniFile; const Sezione: String; SeparazioneVerticale: Integer; var YY: Integer);
   public
     { Public declarations }
     // Queste contengono i riferimenti al record da visualizzare/editare
@@ -2708,6 +2709,10 @@ begin
     else
       PanelNoteImpianto.Visible := False;
 
+    // ----- CAMPI JOLLY -----
+    ImpostaCampiJolly(ClientAreaImpianto, LO, Sezione, SeparazioneVerticale, YY);
+    // ------------------------------
+
     // PanelProprietarioImpianto
     if LO.ReadBool(Sezione, 'PanelProprietarioImpianto', True) then
     begin
@@ -2963,10 +2968,81 @@ begin
     // ------------------------------
 
     // ----- CAMPI JOLLY -----
+    ImpostaCampiJolly(ClientAreaPratica, LO, Sezione, SeparazioneVerticale, YY);
+    // ------------------------------
+
+    // PanelImmobileCantiere - UBICAZIONE CANTIERE
+    if LO.ReadBool(Sezione, 'PanelImmobileCantiere', True) then
+    begin
+      PanelImmobileCantiere.Top := YY;
+      PanelImmobileCantiere.Visible := True;
+      inc(YY, (PanelImmobileCantiere.Height + SeparazioneVerticale));
+    end
+    else
+      PanelImmobileCantiere.Visible := False;
+
+    // PanelCommittenteCantiere
+    if LO.ReadBool(Sezione, 'PanelCommittenteCantiere', True) then
+    begin
+      PanelCommittenteCantiere.Top := YY;
+      PanelCommittenteCantiere.Visible := True;
+      inc(YY, (PanelCommittenteCantiere.Height + SeparazioneVerticale));
+    end
+    else
+      PanelCommittenteCantiere.Visible := False;
+
+    // PanelProprietarioCantiere
+    if LO.ReadBool(Sezione, 'PanelProprietarioCantiere', True) then
+    begin
+      PanelProprietarioCantiere.Top := YY;
+      PanelProprietarioCantiere.Visible := True;
+      inc(YY, (PanelProprietarioCantiere.Height + SeparazioneVerticale));
+    end
+    else
+      PanelProprietarioCantiere.Visible := False;
+
+    // PanelSocGasCantiere
+    if LO.ReadBool(Sezione, 'PanelSocGasCantiere', True) then
+    begin
+      PanelSocGasCantiere.Top := YY;
+      PanelSocGasCantiere.Visible := True;
+      inc(YY, (PanelSocGasCantiere.Height + SeparazioneVerticale));
+    end
+    else
+      PanelSocGasCantiere.Visible := False;
+
+    // PanelSottocantieri
+    if LO.ReadBool(Sezione, 'PanelSottocantieri', True) then
+    begin
+      PanelSottocantieri.Top := YY;
+      PanelSottocantieri.Visible := True;
+      inc(YY, (PanelSottocantieri.Height + SeparazioneVerticale));
+    end
+    else
+      PanelSottocantieri.Visible := False;
+    // IMposta il range della scrollbar della Client Area
+    ClientAreaPratica.VertScrollBar.Range := YY;
+  finally
+    LO.Free;
+  end;
+end;
+
+// Imposta gli eventuali campi jolly
+procedure TPraticaForm.ImpostaCampiJolly(const Parent: TControl; const LO: TMemIniFile; const Sezione: String; SeparazioneVerticale: Integer; var YY: Integer);
+var
+  TmpInt, contatore: Integer;
+  YYY: Integer;
+  TmpStr, TitoloStr: String;
+  TmpLabel: TLabel;
+  TmpDBE: TControl;
+begin
+    // ----- CAMPI JOLLY -----
     if LO.ReadString(Sezione, 'Jolly1', '0') <> '0' then
     begin
       TmpInt := 1;
       YYY := -1;
+      // Pone il pannello su pratiche o impianti...
+      PanelCustom.SetParentComponent(Parent);
       // Cicla per tutte i 13 possibili campi jolly
       for contatore := 1 to 13 do
       begin
@@ -3033,61 +3109,6 @@ begin
     else
       PanelCustom.Visible := False;
     // ------------------------------
-
-    // PanelImmobileCantiere - UBICAZIONE CANTIERE
-    if LO.ReadBool(Sezione, 'PanelImmobileCantiere', True) then
-    begin
-      PanelImmobileCantiere.Top := YY;
-      PanelImmobileCantiere.Visible := True;
-      inc(YY, (PanelImmobileCantiere.Height + SeparazioneVerticale));
-    end
-    else
-      PanelImmobileCantiere.Visible := False;
-
-    // PanelCommittenteCantiere
-    if LO.ReadBool(Sezione, 'PanelCommittenteCantiere', True) then
-    begin
-      PanelCommittenteCantiere.Top := YY;
-      PanelCommittenteCantiere.Visible := True;
-      inc(YY, (PanelCommittenteCantiere.Height + SeparazioneVerticale));
-    end
-    else
-      PanelCommittenteCantiere.Visible := False;
-
-    // PanelProprietarioCantiere
-    if LO.ReadBool(Sezione, 'PanelProprietarioCantiere', True) then
-    begin
-      PanelProprietarioCantiere.Top := YY;
-      PanelProprietarioCantiere.Visible := True;
-      inc(YY, (PanelProprietarioCantiere.Height + SeparazioneVerticale));
-    end
-    else
-      PanelProprietarioCantiere.Visible := False;
-
-    // PanelSocGasCantiere
-    if LO.ReadBool(Sezione, 'PanelSocGasCantiere', True) then
-    begin
-      PanelSocGasCantiere.Top := YY;
-      PanelSocGasCantiere.Visible := True;
-      inc(YY, (PanelSocGasCantiere.Height + SeparazioneVerticale));
-    end
-    else
-      PanelSocGasCantiere.Visible := False;
-
-    // PanelSottocantieri
-    if LO.ReadBool(Sezione, 'PanelSottocantieri', True) then
-    begin
-      PanelSottocantieri.Top := YY;
-      PanelSottocantieri.Visible := True;
-      inc(YY, (PanelSottocantieri.Height + SeparazioneVerticale));
-    end
-    else
-      PanelSottocantieri.Visible := False;
-    // IMposta il range della scrollbar della Client Area
-    ClientAreaPratica.VertScrollBar.Range := YY;
-  finally
-    LO.Free;
-  end;
 end;
 
 // Questa procedura aggiorna i valori del pannello riassuntivo degli ultimi
