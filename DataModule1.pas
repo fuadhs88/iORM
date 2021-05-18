@@ -62,10 +62,10 @@ const
   // Costanti di parametri per la versione LEVARCO
   // --------------------------------------------------------------------------
   LEVARCO_MODE = True;
-  // LEVARCO_MODE = False;
-  // LEVARCO_PASSWORD = True;
+  //LEVARCO_MODE = False;
+  //LEVARCO_PASSWORD = True;
   LEVARCO_PASSWORD = False;
-  LEVARCO_ABSOLUTE_LOCK_DATE = '30/04/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
+  LEVARCO_ABSOLUTE_LOCK_DATE = '30/06/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
   // --------------------------------------------------------------------------
   // Costanti di parametri per la versione DEMO
   // --------------------------------------------------------------------------
