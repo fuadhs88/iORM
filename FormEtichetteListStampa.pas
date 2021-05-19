@@ -16,7 +16,7 @@ uses
   cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
   dxPScxPageControlProducer, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
   dxPScxSchedulerLnk, dxPScxPivotGridLnk, dxPScxEditorProducers,
-  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon;
+  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TEtichetteListStampaForm = class(TEtichetteBaseForm)
@@ -138,7 +138,8 @@ begin
       Qry.SQL.Add('SELECT L.* FROM ' + Tabella + ' L WHERE L.CODICESTAZIONE = ' + QuotedStr(DM1.CodiceUtente) + ' AND L.ID <= ' + IntToStr(FLastID));
       // Esegue la query tante volte per arrivare al numero di etichette desiderate
       //  per ogni elemento.
-      for I := 2 to Volte do Qry.ExecSQL;
+      for I := 2 to Volte do
+        Qry.ExecSQL;
    finally
       Qry.Free;
    end;
@@ -160,7 +161,8 @@ begin
          IDX_ETICHETTA_SOGGETTO: Tabella := 'LABSOGG';
       end;
       Qry.SQL.Add('INSERT INTO ' + Tabella + ' (CODICESTAZIONE, PROGRIGO) VALUES (' + QuotedStr(DM1.CodiceUtente) + ', -1)');
-      for i := 1 to Qt do Qry.ExecSql;
+      for i := 1 to Qt do
+        Qry.ExecSql;
    finally
       Qry.Free;
    end;

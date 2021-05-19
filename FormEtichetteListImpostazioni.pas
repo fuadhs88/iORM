@@ -17,7 +17,7 @@ uses
   dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
   dxPScxPageControlProducer, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
   dxPScxSchedulerLnk, dxPScxPivotGridLnk, dxPScxEditorProducers,
-  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon;
+  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TEtichetteListImpostazioniForm = class(TEtichetteBaseForm)
@@ -99,8 +99,10 @@ begin
   SBShowReport.Enabled := False;
   SBShowReportExternalSave.Enabled := False;
   // Defaultizzazione campi
-  if QFILEPATH.IsNull then QFILEPATH.Value := '';
-  if QTIPOFILE.IsNull then QTIPOFILE.Value := 'LABART';
+  if QFILEPATH.IsNull then
+    QFILEPATH.Value := '';
+  if QTIPOFILE.IsNull then
+    QTIPOFILE.Value := 'LABART';
 end;
 
 procedure TEtichetteListImpostazioniForm.RxSpeedModificaClick(Sender: TObject);

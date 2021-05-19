@@ -15,7 +15,8 @@ uses
   dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
   dxPScxPageControlProducer, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
   dxPScxSchedulerLnk, dxPScxPivotGridLnk, dxPScxEditorProducers,
-  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon;
+  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon, dxDateRanges, dxScrollbarAnnotations, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TEtichetteBaseForm = class(TLevanteFilterListAnagForm)
@@ -126,10 +127,13 @@ var
   Stream: TMemoryStream;
 begin
   // Campo vuoto, non è stato ancora salvato alcun report
-  if QCONTENUTO.IsNull then begin
+  if QCONTENUTO.IsNull then
+  begin
     frxReport1.Clear;
+  end
   // Se invece nel campo è contenuto qualcosa lo carica
-  end else begin
+  else
+  begin
     Stream := TMemoryStream.Create;
     try
       QCONTENUTO.SaveToStream(Stream);
@@ -137,7 +141,8 @@ begin
       frxReport1.LoadFromStream(Stream);
       // Se specificata una stampante predefinita la carica
       //  e fa in modo che non la chieda ogni volta
-      if (Trim(QPRINTER.AsString) <> '') then begin
+      if (Trim(QPRINTER.AsString) <> '') then
+      begin
         frxReport1.PrintOptions.Printer := QPRINTER.AsString;
         frxReport1.PrintOptions.ShowDialog := False;
       end;
@@ -166,8 +171,10 @@ procedure TEtichetteBaseForm.tvListTIPOFILEGetDataText(
   Sender: TcxCustomGridTableItem; ARecordIndex: Integer; var AText: string);
 begin
   inherited;
-  if      AText = 'LABART'  then AText := 'Etichette articoli'
-  else if AText = 'LABSOGG' then AText := 'Etichette soggetti';
+  if AText = 'LABART'  then
+    AText := 'Etichette articoli'
+  else if AText = 'LABSOGG' then
+    AText := 'Etichette soggetti';
 end;
 
 end.

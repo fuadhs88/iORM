@@ -1815,10 +1815,12 @@ begin
       Qry.ExecSQL;
       // -----------------------------------------------------------------------------------------------------------------------------------
       // Crea e avvia la form per la stampa delle etichette
-      DM2.StampaEtichettaSilent((MenuStampe.Tag = 0), DM1.TableProgressiviDEFAULTLABELOPERATOREFILENAME.AsString, DM1.DefaultLabelPrinterName);
+//      DM2.StampaEtichettaSilent((MenuStampe.Tag = 0), DM1.TableProgressiviDEFAULTLABELOPERATOREFILENAME.AsString, DM1.DefaultLabelPrinterName);
+      DM2.StampaEtichette(IDX_ETICHETTA_SOGGETTO);
    finally
       DM1.ChiudiAttendere;
-      if Assigned(Qry) then Qry.Free;
+      if Assigned(Qry) then
+        Qry.Free;
    end;
 end;
 

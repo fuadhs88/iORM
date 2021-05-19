@@ -5,6 +5,8 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
   inherited ClientArea: TScrollBox
     inherited PanelGriglia: TPanel
       inherited GridList: TcxGrid
+        ExplicitLeft = -1
+        ExplicitTop = -6
         inherited tvList: TcxGridDBTableView
           DataController.Options = [dcoCaseInsensitive, dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoGroupsAlwaysExpanded, dcoImmediatePost]
           FilterRow.Visible = False
@@ -14,16 +16,15 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
           Styles.Content = nil
           Styles.ContentEven = nil
           Styles.ContentOdd = nil
-          Styles.Selection = nil
           Styles.Footer = nil
           Styles.Group = nil
           Styles.GroupByBox = nil
           Styles.Header = nil
+          Styles.Selection = nil
           object tvListNOMEFILE: TcxGridDBColumn
             Caption = 'Nome'
             DataBinding.FieldName = 'NOMEFILE'
             PropertiesClassName = 'TcxTextEditProperties'
-            Properties.Alignment.Vert = taVCenter
             HeaderAlignmentHorz = taCenter
             Options.Filtering = False
             Width = 200
@@ -32,7 +33,6 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
             Caption = 'Percorso'
             DataBinding.FieldName = 'FILEPATH'
             PropertiesClassName = 'TcxTextEditProperties'
-            Properties.Alignment.Vert = taVCenter
             Visible = False
             HeaderAlignmentHorz = taCenter
             Options.Filtering = False
@@ -41,7 +41,6 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
             Caption = 'Tipo'
             DataBinding.FieldName = 'TIPOFILE'
             PropertiesClassName = 'TcxTextEditProperties'
-            Properties.Alignment.Vert = taVCenter
             Visible = False
             OnGetDataText = tvListTIPOFILEGetDataText
             GroupIndex = 0
@@ -53,7 +52,6 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
             Caption = 'Stampante'
             DataBinding.FieldName = 'PRINTER'
             PropertiesClassName = 'TcxTextEditProperties'
-            Properties.Alignment.Vert = taVCenter
             HeaderAlignmentHorz = taCenter
             Options.Filtering = False
           end
@@ -66,8 +64,11 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
       end
     end
   end
+  inherited ClientTopPanel: TbmpPanel
+    Color = clSilver
+    ParentBackground = False
+  end
   inherited Q: TIBOQuery
-    DatabaseName = 'c:\winproject\levantedev\levgen.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM REPOSITORY R'
       'WHERE R.NOMEFILE = :OLD_NOMEFILE '
@@ -134,13 +135,15 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
     end
   end
   inherited dxPrinter: TdxComponentPrinter
+    PixelsPerInch = 96
     inherited dxPrinterLink1: TdxGridReportLink
       ReportDocument.CreationDate = 42074.824749918980000000
+      PixelsPerInch = 96
       BuiltInReportLink = True
     end
   end
   object frxReport1: TfrxReport
-    Version = '4.13.1'
+    Version = '6.9.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -156,34 +159,29 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
       'end.')
     Left = 32
     Top = 360
-    Datasets = <
-      item
-        DataSet = frxDBDatasetArticoli
-        DataSetName = 'DatasetArticoli'
-      end>
+    Datasets = <>
     Variables = <>
     Style = <
       item
         Name = 'Title'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
       end
       item
         Name = 'Header'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
       end
       item
         Name = 'Group header'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -193,16 +191,15 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
       end
       item
         Name = 'Data'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
+        Frame.Typ = []
       end
       item
         Name = 'Group footer'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -212,7 +209,6 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
       end
       item
         Name = 'Header line'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -239,45 +235,48 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
         '0'
         '63,3333333333333'
         '126,666666666667')
+      Frame.Typ = []
+      MirrorMode = []
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
         Height = 83.149660000000000000
         Top = 18.897650000000000000
         Width = 239.370233333333200000
-        DataSet = frxDBDatasetArticoli
         DataSetName = 'DatasetArticoli'
         RowCount = 0
         object DatasetArticoliCODICEARTICOLO: TfrxMemoView
+          AllowVectorExport = True
           Left = 15.118120000000000000
           Top = 7.559059999999999000
           Width = 200.315090000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'CODICEARTICOLO'
-          DataSet = frxDBDatasetArticoli
           DataSetName = 'DatasetArticoli'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           Memo.UTF8W = (
             '[DatasetArticoli."CODICEARTICOLO"]')
           ParentFont = False
         end
         object DatasetArticoliDESCRIZIONE: TfrxMemoView
+          AllowVectorExport = True
           Left = 15.118120000000000000
           Top = 34.015770000000010000
           Width = 359.055350000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'DESCRIZIONE'
-          DataSet = frxDBDatasetArticoli
           DataSetName = 'DatasetArticoli'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           Memo.UTF8W = (
             '[DatasetArticoli."DESCRIZIONE"]')
           ParentFont = False
@@ -323,15 +322,10 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
     ColumnAttributes.Strings = (
       'LABSOGG.CODICESTAZIONE=REQUIRED'
       'LABSOGG.PROGRIGO=REQUIRED')
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     IB_Connection = DM1.DBAzienda
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
-    Unidirectional = True
     SQL.Strings = (
       'SELECT * FROM LABSOGG')
-    FieldOptions = []
     Left = 244
     Top = 336
     object QryLabSoggCODICESTAZIONE: TStringField
@@ -438,15 +432,10 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
       'LABSOGG.PROGRIGO=REQUIRED'
       'LABART.CODICESTAZIONE=REQUIRED'
       'LABART.PROGRIGO=REQUIRED')
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     IB_Connection = DM1.DBAzienda
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
-    Unidirectional = True
     SQL.Strings = (
       'SELECT * FROM LABART')
-    FieldOptions = []
     Left = 244
     Top = 384
     object QryLabArtCODICESTAZIONE: TStringField

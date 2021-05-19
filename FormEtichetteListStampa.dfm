@@ -13,11 +13,11 @@ inherited EtichetteListStampaForm: TEtichetteListStampaForm
           Styles.Content = nil
           Styles.ContentEven = nil
           Styles.ContentOdd = nil
-          Styles.Selection = nil
           Styles.Footer = nil
           Styles.Group = nil
           Styles.GroupByBox = nil
           Styles.Header = nil
+          Styles.Selection = nil
         end
       end
       inherited PanelFiltri: TPanel
@@ -6254,9 +6254,10 @@ inherited EtichetteListStampaForm: TEtichetteListStampaForm
     end
   end
   inherited dxPrinter: TdxComponentPrinter
+    PixelsPerInch = 96
     inherited dxPrinterLink1: TdxGridReportLink
       ReportDocument.CreationDate = 42074.832093668980000000
-      AssignedFormatValues = []
+      PixelsPerInch = 96
       BuiltInReportLink = True
     end
   end
@@ -6270,25 +6271,24 @@ inherited EtichetteListStampaForm: TEtichetteListStampaForm
     Style = <
       item
         Name = 'Title'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
       end
       item
         Name = 'Header'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
       end
       item
         Name = 'Group header'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -6298,16 +6298,15 @@ inherited EtichetteListStampaForm: TEtichetteListStampaForm
       end
       item
         Name = 'Data'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
+        Frame.Typ = []
       end
       item
         Name = 'Group footer'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -6317,7 +6316,6 @@ inherited EtichetteListStampaForm: TEtichetteListStampaForm
       end
       item
         Name = 'Header line'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -6326,17 +6324,5 @@ inherited EtichetteListStampaForm: TEtichetteListStampaForm
         Frame.Typ = [ftBottom]
         Frame.Width = 2.000000000000000000
       end>
-    inherited Page1: TfrxReportPage
-      inherited MasterData1: TfrxMasterData
-        inherited DatasetArticoliCODICEARTICOLO: TfrxMemoView
-          Memo.UTF8W = (
-            '[DatasetArticoli."CODICEARTICOLO"]')
-        end
-        inherited DatasetArticoliDESCRIZIONE: TfrxMemoView
-          Memo.UTF8W = (
-            '[DatasetArticoli."DESCRIZIONE"]')
-        end
-      end
-    end
   end
 end

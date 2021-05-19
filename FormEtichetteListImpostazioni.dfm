@@ -6215,6 +6215,30 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
         ParentFont = False
         Transparent = True
       end
+      object cxDBRadioGroup1: TcxDBRadioGroup
+        Left = 168
+        Top = 61
+        DataBinding.DataField = 'TIPOFILE'
+        DataBinding.DataSource = DS
+        Properties.Columns = 2
+        Properties.ImmediatePost = True
+        Properties.Items = <
+          item
+            Caption = 'Articoli'
+            Value = 'LABART'
+          end
+          item
+            Caption = 'Soggetti'
+            Value = 'LABSOGG'
+          end>
+        Style.Edges = []
+        Style.LookAndFeel.NativeStyle = False
+        Style.TransparentBorder = True
+        StyleDisabled.LookAndFeel.NativeStyle = False
+        TabOrder = 2
+        Height = 36
+        Width = 202
+      end
       object RichEdit1: TRichEdit
         Tag = -1
         Left = 83
@@ -6236,6 +6260,7 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
+        Zoom = 100
       end
       object dbeNome: TDBEdit
         Left = 178
@@ -6256,32 +6281,6 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
         ParentCtl3D = False
         ParentFont = False
         TabOrder = 0
-      end
-      object cxDBRadioGroup1: TcxDBRadioGroup
-        Left = 168
-        Top = 75
-        DataBinding.DataField = 'TIPOFILE'
-        DataBinding.DataSource = DS
-        Properties.Columns = 2
-        Properties.ImmediatePost = True
-        Properties.Items = <
-          item
-            Caption = 'Articoli'
-            Value = 'LABART'
-          end
-          item
-            Caption = 'Soggetti'
-            Value = 'LABSOGG'
-          end>
-        Style.Edges = []
-        Style.LookAndFeel.NativeStyle = False
-        Style.TransparentBorder = True
-        StyleDisabled.LookAndFeel.NativeStyle = False
-        StyleFocused.LookAndFeel.NativeStyle = False
-        StyleHot.LookAndFeel.NativeStyle = False
-        TabOrder = 2
-        Height = 21
-        Width = 202
       end
       object dbePrinter: TcxDBComboBox
         Left = 177
@@ -6318,11 +6317,11 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
           Styles.Content = nil
           Styles.ContentEven = nil
           Styles.ContentOdd = nil
-          Styles.Selection = nil
           Styles.Footer = nil
           Styles.Group = nil
           Styles.GroupByBox = nil
           Styles.Header = nil
+          Styles.Selection = nil
         end
       end
     end
@@ -6359,8 +6358,10 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
     AfterInsert = QAfterInsert
   end
   inherited dxPrinter: TdxComponentPrinter
+    PixelsPerInch = 96
     inherited dxPrinterLink1: TdxGridReportLink
       ReportDocument.CreationDate = 42074.824881030090000000
+      PixelsPerInch = 96
       BuiltInReportLink = True
     end
   end
@@ -6374,25 +6375,24 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
     Style = <
       item
         Name = 'Title'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
       end
       item
         Name = 'Header'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
       end
       item
         Name = 'Group header'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -6402,16 +6402,15 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
       end
       item
         Name = 'Data'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
+        Frame.Typ = []
       end
       item
         Name = 'Group footer'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -6421,7 +6420,6 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
       end
       item
         Name = 'Header line'
-        Color = clNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -6430,18 +6428,6 @@ inherited EtichetteListImpostazioniForm: TEtichetteListImpostazioniForm
         Frame.Typ = [ftBottom]
         Frame.Width = 2.000000000000000000
       end>
-    inherited Page1: TfrxReportPage
-      inherited MasterData1: TfrxMasterData
-        inherited DatasetArticoliCODICEARTICOLO: TfrxMemoView
-          Memo.UTF8W = (
-            '[DatasetArticoli."CODICEARTICOLO"]')
-        end
-        inherited DatasetArticoliDESCRIZIONE: TfrxMemoView
-          Memo.UTF8W = (
-            '[DatasetArticoli."DESCRIZIONE"]')
-        end
-      end
-    end
   end
   inherited frxDesigner1: TfrxDesigner
     OnSaveReport = frxDesigner1SaveReport
