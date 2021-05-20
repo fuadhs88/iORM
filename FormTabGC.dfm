@@ -35,7 +35,6 @@ inherited TabGCForm: TTabGCForm
       ParentBackground = False
       TabOrder = 0
       OnResize = PanelGCFiltriResize
-      ExplicitTop = 346
       object SubPanelGCFiltri: TPanel
         Left = 0
         Top = 12
@@ -2897,7 +2896,6 @@ inherited TabGCForm: TTabGCForm
       Properties.TabPosition = tpBottom
       LookAndFeel.NativeStyle = True
       OnPageChanging = cxPageControlGCPageChanging
-      ExplicitHeight = 357
       ClientRectBottom = 319
       ClientRectRight = 684
       ClientRectTop = 0
@@ -2906,7 +2904,6 @@ inherited TabGCForm: TTabGCForm
         Color = clWhite
         ImageIndex = 1
         ParentColor = False
-        ExplicitHeight = 336
         DesignSize = (
           684
           319)
@@ -4849,7 +4846,6 @@ inherited TabGCForm: TTabGCForm
           Color = clWhite
           ParentBackground = False
           TabOrder = 3
-          ExplicitHeight = 119
           DesignSize = (
             684
             102)
@@ -4872,7 +4868,6 @@ inherited TabGCForm: TTabGCForm
             LookAndFeel.NativeStyle = False
             RootLevelOptions.DetailFrameColor = clBlack
             RootLevelOptions.DetailFrameWidth = 1
-            ExplicitHeight = 119
             object btvGC: TcxGridDBBandedTableView
               DragMode = dmAutomatic
               OnDblClick = btvGCDblClick
@@ -8727,7 +8722,6 @@ inherited TabGCForm: TTabGCForm
         Caption = 'ADA'
         ImageIndex = 2
         TabVisible = False
-        ExplicitHeight = 336
         object PivotGridGC: TcxDBPivotGrid
           Left = 0
           Top = 0
@@ -8739,7 +8733,6 @@ inherited TabGCForm: TTabGCForm
           Styles.StyleSheet = DM1.GosOrePivotGridStyleSheet
           TabOrder = 0
           OnCustomization = PivotGridGCCustomization
-          ExplicitHeight = 336
           object cxDBPivotGrid1CODICEARTICOLO: TcxDBPivotGridField
             AreaIndex = 0
             DataBinding.FieldName = 'CODICEARTICOLO'
@@ -8829,7 +8822,6 @@ inherited TabGCForm: TTabGCForm
       object TabGCCharts: TcxTabSheet
         Caption = 'Grafico'
         ImageIndex = 1
-        ExplicitHeight = 336
       end
     end
   end
@@ -10266,8 +10258,8 @@ inherited TabGCForm: TTabGCForm
     OnCustomDrawPageHeader = dxPrinterCustomDrawPageHeader
     OnEndGenerateReport = dxPrinterEndGenerateReport
     OnStartGenerateReport = dxPrinterStartGenerateReport
-    Left = 384
-    Top = 240
+    Left = 336
+    Top = 224
     PixelsPerInch = 96
     object GridGCLink: TdxGridReportLink
       Active = True
@@ -10296,7 +10288,7 @@ inherited TabGCForm: TTabGCForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Giornale di Cantiere'
-      ReportDocument.CreationDate = 44313.401397025460000000
+      ReportDocument.CreationDate = 44335.818034571760000000
       ReportTitle.Font.Charset = ANSI_CHARSET
       ReportTitle.Font.Color = clBlack
       ReportTitle.Font.Height = -12

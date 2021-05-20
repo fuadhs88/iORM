@@ -8359,9 +8359,11 @@ var
   LEditProperties: TcxCustomEditProperties;
 begin
   inherited;
+  // Inizializzazione
   ADone := True;
   AScale := Sender.RealScaleFactor div 2;
   AFont := TFont.Create;
+  AmpiezzaArrotondamentoBordi := (AnItem.BoundsRect.Bottom - AnItem.BoundsRect.Top) div 2;
   // RIcava le edit properties sia che sia valorizata la properties che la RepositoryItem
   if Assigned(AColumn.Properties) then
     LEditProperties := AColumn.Properties
@@ -8403,6 +8405,7 @@ begin
           then Sender.DrawGraphic(ACanvas, R, R, ImageListForPrint, 1, nil, True, True, clWhite)
         else if ARecord.Values[btvGCRighiGC_PRESENTEINCOMMESSA.Index] = 'T'
           then Sender.DrawGraphic(ACanvas, R, R, ImageListForPrint, 2, nil, True, True, clWhite);
+
       // Se invece è una cella con un testo normale...
       end else begin
         AFont.Assign(AnItem.Font);
@@ -8445,36 +8448,36 @@ begin
       end;
       // BORDO DX
       if AColumn.IsRight then begin
-         R.Left   := AnItem.BoundsRect.Right;
-         R.Top    := AnItem.BoundsRect.Top;
-         R.Right  := AnItem.BoundsRect.Right;
-         R.Bottom := AnItem.BoundsRect.Bottom;
+         R.Left   := AnItem.BoundsRect.Right - 1;
+         R.Top    := AnItem.BoundsRect.Top - AmpiezzaArrotondamentoBordi;
+         R.Right  := AnItem.BoundsRect.Right - 1;
+         R.Bottom := AnItem.BoundsRect.Bottom + AmpiezzaArrotondamentoBordi;
          Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
       end;
       // BORDO SX
       if AColumn.IsLeft then begin
          R.Left   := AnItem.BoundsRect.Left;
-         R.Top    := AnItem.BoundsRect.Top;
+         R.Top    := AnItem.BoundsRect.Top - AmpiezzaArrotondamentoBordi;
          R.Right  := AnItem.BoundsRect.Left;
-         R.Bottom := AnItem.BoundsRect.Bottom;
+         R.Bottom := AnItem.BoundsRect.Bottom + AmpiezzaArrotondamentoBordi;
          Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
       end;
       // BORDO INFERIORE
       if TcxCustomGridRecordByMauri(ARecord).GetIsUltimoRecordDelGruppo then begin
-         R.Left   := AnItem.BoundsRect.Left;
-         R.Top    := AnItem.BoundsRect.Bottom; // - AScale;
-         R.Right  := AnItem.BoundsRect.Right;
-         R.Bottom := AnItem.BoundsRect.Bottom; // - AScale;
+         R.Left   := AnItem.BoundsRect.Left - AmpiezzaArrotondamentoBordi;
+         R.Top    := AnItem.BoundsRect.Bottom;
+         R.Right  := AnItem.BoundsRect.Right + AmpiezzaArrotondamentoBordi;
+         R.Bottom := AnItem.BoundsRect.Bottom;
          Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
       end;
+
     // =========================================================================
     // Se invece non è una cella normale ma è un GroupHeader
     // -------------------------------------------------------------------------
     end else begin
       // Inizializzazione
-      AText := ARecord.DisplayTexts[AColumn.Index];
-      ATextPrecLevels := GetPrintFooterTitle(ARecord, ARecord.Level, True);
-      AmpiezzaArrotondamentoBordi := 10 * AScale;
+      AText := ' ' + ARecord.DisplayTexts[AColumn.Index] + ' ';
+      ATextPrecLevels := ' ' + GetPrintFooterTitle(ARecord, ARecord.Level, True) + ' ';
       // Se è una colonna del tracking, rielabora il testo da stampare
       //  NB: Prima aggiunge la sequenza di caratteri " : " altrimenti non funziona bene
       if Pos('TRACK_', CurrFieldName) > 0 then begin
@@ -8482,53 +8485,49 @@ begin
         AText := Trim(ElaboraDescrizioneTracking(AText, True, ARecord));
       end;
       // Determinazione della larghezza totale del testo
-      Self.Canvas.Font.Name := 'Arial';
-      Self.Canvas.Font.Size := 8;
-      Self.Canvas.Font.Style := GetGroupTextStyle(ARecord.Level);
-      LarghezzaTestoCurrLev := Self.Canvas.TextWidth(AText) * AScale;
-      AltezzaTotaleTesto    := Self.Canvas.TextHeight(AText) * AScale;
-      Self.Canvas.Font.Size := 5;
-      Self.Canvas.Font.Style := Self.Canvas.Font.Style + [fsItalic];
-      LarghezzaTestoPrecLev := Self.Canvas.TextWidth(ATextPrecLevels) * AScale;
-      // Fattore di correzione perchè altrimenti a volte tronca le ultime lettere e allora aggiungo il 10% alla lunghezza del testo
-      if Trim(AText) <> '' then Inc(LarghezzaTestoCurrLev, Round(LarghezzaTestoCurrLev/10));
-      if Trim(ATextPrecLevels) <> '' then Inc(LarghezzaTestoPrecLev, Round(LarghezzaTestoPrecLev/10));
+      ACanvas.Font.Name := 'Arial';
+      ACanvas.Font.Style := GetGroupTextStyle(ARecord.Level);
+      dxPSScaleFont(ACanvas.Font, 8, GridGCLink.Renderer.UnitsPerInch);
+      LarghezzaTestoCurrLev := ACanvas.TextWidth(AText);
+      AltezzaTotaleTesto := ACanvas.TextHeight(AText);
+      ACanvas.Font.Style := ACanvas.Font.Style + [fsItalic];
+      dxPSScaleFont(ACanvas.Font, 5, GridGCLink.Renderer.UnitsPerInch);
+      LarghezzaTestoPrecLev := ACanvas.TextWidth(ATextPrecLevels);
       // Otteniamo la larghezza totale dei testi
       LarghezzaTotaleTesto := LarghezzaTestoCurrLev + LarghezzaTestoPrecLev;
+
       // Nel Caso sia il primo gruppo e non è espanso visualizza anche una linea orizzontale a tutta larghezza
       // Se è il primo livello e non è espanso traccia anche la linea orizzontale fino al margine destro
       if (ARecord.Level = 0) and ((not ARecord.Expanded) or (AView.GroupedItemCount > 1)) then begin
         R.Left    := AnItem.BoundsRect.Left;
-        R.Top     := AnItem.BoundsRect.Bottom - Round((AltezzaTotaleTesto - (AScale * 2)) / 2) - (2 * AScale);
+        R.Top     := AnItem.BoundsRect.Bottom - (AltezzaTotaleTesto div 2);
         R.Right   := AnItem.BoundsRect.Right;
         R.Bottom  := R.Top;
         Sender.DrawRectangle(ACanvas, R, clBlue, $00FFDFDF, TdxPSSolidFillPattern, clBlue);
       end;
       // Modifica del Bounds Rect per il posizionamento del frame
       R.Left    := AnItem.BoundsRect.Left;
-      R.Top     := AnItem.BoundsRect.Bottom - AltezzaTotaleTesto - (AScale * 2);
-      R.Right   := AnItem.BoundsRect.Left + LarghezzaTotaleTesto + (AmpiezzaArrotondamentoBordi * 2);
+      R.Top     := AnItem.BoundsRect.Bottom - AltezzaTotaleTesto;
+      R.Right   := AnItem.BoundsRect.Left + LarghezzaTotaleTesto;
       R.Bottom  := AnItem.BoundsRect.Bottom;
       // Se l'ultimo livello fa sparire gli arrotondamenti inferiori
-      if (ARecord.Level = (AView.GroupedItemCount -1)) and (ARecord.Expanded) then R.Bottom := R.Bottom + AltezzaTotaleTesto;
+      if (ARecord.Level = (AView.GroupedItemCount -1)) and (ARecord.Expanded) then
+        R.Bottom := R.Bottom + AltezzaTotaleTesto;
       // Traccia il contorno
       Sender.DrawRoundRect(ACanvas, R, AmpiezzaArrotondamentoBordi, AmpiezzaArrotondamentoBordi, $00FFDFDF, $00FFDFDF, TdxPSSolidFillPattern, clBlue);
-      // Modifica del Bounds Rect per il posizionamento del Testo
-      R.Left    := R.Left + AmpiezzaArrotondamentoBordi;
-      R.Right   := R.Left + LarghezzaTestoCurrLev;
-      R.Top     := R.Top + AScale;
-      R.Bottom  := AnItem.BoundsRect.Bottom - AScale;
+
+      // Modifica del Bounds Rect per il posizionamento del Testo del livello attuale
+      R.Bottom  := AnItem.BoundsRect.Bottom;  // Ripristina il limite inferiore
       AFont.Name  := 'Arial';
       AFont.Color := clBlue;
-      AFont.Size  := 8 * AScale;
       AFont.Style := GetGroupTextStyle(ARecord.Level);
-      Sender.drawText(aCanvas, R, 0, AText, AFont, $00FFDFDF, taLeft, taTop, True, False, False);
-      R.Left    := R.Right;
-      R.Right   := R.Left + LarghezzaTestoPrecLev + Round(AmpiezzaArrotondamentoBordi / 2);
-      R.Top     := R.Top + Round(4 * AScale);
-      AFont.Size  := 5 * AScale;
+      dxPSScaleFont(AFont, 8, GridGCLink.Renderer.UnitsPerInch);
+      Sender.drawText(aCanvas, R, 0, AText, AFont, clNone, taLeft, taBottom, False, False, False);
+      // Stampa del testo del livello precedente
       AFont.Style := AFont.Style + [fsItalic];
-      Sender.drawText(aCanvas, R, 0, ATextPrecLevels, AFont, $00FFDFDF, taRight, taTop, True, False, False);
+      dxPSScaleFont(AFont, 5, GridGCLink.Renderer.UnitsPerInch);
+      Sender.drawText(aCanvas, R, 0, ATextPrecLevels, AFont, clNone, taRight, taBottom, False, False, False);
+
       // Se l'ultimo livello traccia la linea inferiore
       if (ARecord.Level = (AView.GroupedItemCount -1)) and (ARecord.Expanded) then begin
         R.Left    := AnItem.BoundsRect.Left;
@@ -8557,19 +8556,17 @@ var
   ARect: TRect;
   AFont: TFont;
   AText: String;
-  AScale: Integer;
   RealCellHeight: Integer;
 begin
   inherited;
   // Inizializzazione
   ADone := True;
-  AScale := Sender.RealScaleFactor div 2;
   RealCellHeight := AnItem.BoundsRect.Bottom - AnItem.BoundsRect.Top;
   AFont := TFont.Create;
   try
     AFont.Assign(AnItem.Font);
     AFont.Name := 'Arial';
-    AFont.Size := 6 * AScale;
+    dxPSScaleFont(ACanvas.Font, 6, GridGCLink.Renderer.UnitsPerInch);
     AFont.Style := [];
     AFont.Color := clBlue;
     AText := AnItem.Text;
@@ -8580,11 +8577,11 @@ begin
     ARect.Bottom  := AnItem.BoundsRect.Bottom + RealCellHeight;  // Fa in modo che vada proprio fuori in modo da non disegnare il bordo inferiore
     Sender.DrawRoundRect(ACanvas, ARect, RealCellHeight, RealCellHeight, $00FFDFDF, $00FFDFDF, TdxPSSolidFillPattern, clBlue);
     // Tracciamento testo
-    ARect.Left    := AnItem.BoundsRect.Left     + RealCellHeight;
-    ARect.Top     := AnItem.BoundsRect.Top      + (1 * AScale);
-    ARect.Right   := AnItem.BoundsRect.Right    - RealCellHeight;
-    ARect.Bottom  := AnItem.BoundsRect.Bottom   - (1 * AScale);
-    Sender.drawText(ACAnvas, ARect, 0, AText, AFont, $00FFDFDF, taCenterX, taCenterY, True, False, False);
+    ARect.Left    := AnItem.BoundsRect.Left + RealCellHeight;
+    ARect.Top     := AnItem.BoundsRect.Top + 1;
+    ARect.Right   := AnItem.BoundsRect.Right - RealCellHeight;
+    ARect.Bottom  := AnItem.BoundsRect.Bottom - 1;
+    Sender.drawText(ACAnvas, ARect, 0, AText, AFont, clNone, taCenterX, taCenterY, False, False, False);
   finally
     AFont.Free;
   end;
@@ -8616,18 +8613,18 @@ procedure TTabGCForm.GridGCLinkCustomDrawHeaderCell(
 var
   AText: String;
   R: TRect;
-  AFont: TFont;
   AScale: Integer;
+  AFont: TFont;
 begin
   inherited;
   // Inizializzazione
-  ADone := True;
   AScale := Sender.RealScaleFactor div 2;
+  ADone := True;
   AFont := TFont.Create;
   try
     AFont.Assign(AnItem.Font);
     AFont.Name := 'Arial';
-    AFont.Size := 6 * AScale;
+    dxPSScaleFont(ACanvas.Font, 6, GridGCLink.Renderer.UnitsPerInch);
     AFont.Style := [];
     AFont.Color := clBlue;
     AText := AnItem.Text;
@@ -8637,12 +8634,12 @@ begin
     R.Top     := AnItem.BoundsRect.Top;
     R.Bottom  := AnItem.BoundsRect.Bottom;
     Sender.DrawRectangle(ACanvas, R, $00FFDFDF, $00FFDFDF, TdxPSSolidFillPattern, $00FFDFDF);
-    Sender.drawText(ACAnvas, R, 0, AText, AFont, $00FFDFDF, taCenterX, taCenterY, True, False, False);
+    Sender.drawText(ACAnvas, R, 0, AText, AFont, clNone, taCenterX, taCenterY, False, False, False);
     // BORDO DX
     if AColumn.IsRight then begin
-      R.Left   := AnItem.BoundsRect.Right;
+      R.Left   := AnItem.BoundsRect.Right - 1;
       R.Top    := AnItem.BoundsRect.Top;
-      R.Right  := AnItem.BoundsRect.Right;
+      R.Right  := AnItem.BoundsRect.Right - 1;
       R.Bottom := AnItem.BoundsRect.Bottom;
       Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
     end;
@@ -8655,15 +8652,15 @@ begin
       Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
     end;
     // BORDO INFERIORE
-    R.Left   := AnItem.BoundsRect.Left;
+    R.Left   := AnItem.BoundsRect.Left - AScale;
     R.Top    := AnItem.BoundsRect.Bottom;
-    R.Right  := AnItem.BoundsRect.Right;
+    R.Right  := AnItem.BoundsRect.Right + AScale;
     R.Bottom := AnItem.BoundsRect.Bottom;
     Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
     // BORDO SUPERIORE
-    R.Left   := AnItem.BoundsRect.Left;
+    R.Left   := AnItem.BoundsRect.Left - AScale;
     R.Top    := AnItem.BoundsRect.Top;
-    R.Right  := AnItem.BoundsRect.Right;
+    R.Right  := AnItem.BoundsRect.Right + AScale;
     R.Bottom := AnItem.BoundsRect.Top;
     Sender.DrawRectangle(ACanvas, R, clBlue, clWhite, TdxPSSolidFillPattern, clBlue);
   finally
