@@ -1,7 +1,7 @@
 [MacroList]
 
 [Params]
-AsciiFile=C:\ProvaCaronte\Listino - Copia.csv
+AsciiFile=C:\Users\Mauri\AppData\Roaming\Levante\Download\AnagArt.txt
 AsciiDecimalSeparat=,
 DBDecimalSeparat=.
 AsciiThousandsSeparat=.
@@ -31,12 +31,6 @@ A_Marca=FieldType:STRING;		FieldLength:20;
 A_UM=FieldType:STRING;			FieldLength:2;
 A_CodiceIva=FieldType:STRING;		FieldLength:20;
 A_PrezzoLordo=FieldType:NUMBER;
-A_Sconto1=FieldType:NUMBER;
-A_Sconto2=FieldType:NUMBER;
-A_Sconto3=FieldType:NUMBER;
-A_Sconto4=FieldType:NUMBER;
-A_PrezzoNetto=FieldType:NUMBER;
-A_DataValidita=FieldType:DATE;
 
 [DbFieldList]
 CODICEARTICOLO=Value:<A_CodiceArticolo>;		IsKeyField:YES;
@@ -48,6 +42,7 @@ CODICEIVA=Value:1;
 ABILITAMOVMAG=Value:'T';
 SINCHRO=Value:'U';
 JOLLY10=Value:'PLACUCCI';
+FORNITORE=Value:'PLACUCCI';
 PREZZODILISTINO=Value:<A_PrezzoLordo>;
 PREZZODILISTINOIVACOMP=Value:<A_PrezzoLordo> * 1.22;
 FLAGAPPENAIMPORTATO=Value:'A';

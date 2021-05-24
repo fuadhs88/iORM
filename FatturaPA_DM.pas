@@ -1153,9 +1153,10 @@ begin
   SetRequiredValueStr('Nazione', DM1.TableDatiAziendaNAZIONESIGLA, 2, 2);
 
   // Header.CedentePrestatore.IscrizioneREA
-  CurrentNode := FFatturaPA.FatturaElettronicaHeader.CedentePrestatore.IscrizioneREA;
-  if SetValueStr('Ufficio', DM1.TableDatiAziendaREA_UFFICIO, 2, 2) then
+  if not DM1.TableDatiAziendaREA_UFFICIO.AsString.trim.IsEmpty then
   begin
+    CurrentNode := FFatturaPA.FatturaElettronicaHeader.CedentePrestatore.IscrizioneREA;
+    SetRequiredValueStr('Ufficio', DM1.TableDatiAziendaREA_UFFICIO, 2, 2);
     SetRequiredValue('NumeroREA', DM1.TableDatiAziendaREA_NUMERO, 20);
     SetValue('CapitaleSociale', DM1.TableDatiAziendaREA_CAPITALESOCIALE, 2);
     // NB: Nonostante debba essere lungo almeno 4 caratteri non ho usato il SetValueStr perchè in realtà è un valore numerico
@@ -1164,10 +1165,13 @@ begin
   end;
 
   // Header.CedentePrestatore.Contatti
-  CurrentNode := FFatturaPA.FatturaElettronicaHeader.CedentePrestatore.Contatti;
-  SetValueStr('Telefono', DM1.TableDatiAziendaTELEFONO, 12, 5);
-  SetValueStr('Fax', DM1.TableDatiAziendaFAX, 12, 5);
-  SetValueStr('Email', DM1.TableDatiAziendaEMAIL, 256, 7);
+  if not (DM1.TableDatiAziendaTELEFONO.AsString.Trim.IsEmpty and DM1.TableDatiAziendaFAX.AsString.Trim.IsEmpty and DM1.TableDatiAziendaEMAIL.AsString.Trim.IsEmpty) then
+  begin
+    CurrentNode := FFatturaPA.FatturaElettronicaHeader.CedentePrestatore.Contatti;
+    SetValueStr('Telefono', DM1.TableDatiAziendaTELEFONO, 12, 5);
+    SetValueStr('Fax', DM1.TableDatiAziendaFAX, 12, 5);
+    SetValueStr('Email', DM1.TableDatiAziendaEMAIL, 256, 7);
+  end;
 
   // Header.CedentePrestatore
   CurrentNode := FFatturaPA.FatturaElettronicaHeader.CedentePrestatore;

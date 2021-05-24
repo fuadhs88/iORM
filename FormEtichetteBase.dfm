@@ -5,8 +5,6 @@ inherited EtichetteBaseForm: TEtichetteBaseForm
   inherited ClientArea: TScrollBox
     inherited PanelGriglia: TPanel
       inherited GridList: TcxGrid
-        ExplicitLeft = -1
-        ExplicitTop = -6
         inherited tvList: TcxGridDBTableView
           DataController.Options = [dcoCaseInsensitive, dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoGroupsAlwaysExpanded, dcoImmediatePost]
           FilterRow.Visible = False
