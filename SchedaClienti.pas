@@ -20299,8 +20299,7 @@ begin
   // Filtri
   if ClientiForm.PraticaCorrente <> '' then
   begin
-    DM1.AddSQL(QueryPrimanota, 'AND', '((Pratica = ' + ClientiForm.PraticaCorrente + ') OR (Pratica2 = ' + ClientiForm.PraticaCorrente + ') OR (Pratica3 = ' +
-      ClientiForm.PraticaCorrente + '))');
+    DM1.AddSQL(QueryPrimanota, 'AND', '((Pratica = ' + ClientiForm.PraticaCorrente + ' AND DATAPRATICA1='''+ClientiForm.DataPraticaCorrenteSQL+''') OR (Pratica2 = ' + ClientiForm.PraticaCorrente + ' AND P.DATAPRATICA2='''+ClientiForm.DataPraticaCorrenteSQL+''') OR (Pratica3 = ' + ClientiForm.PraticaCorrente + ' AND P.DATAPRATICA3='''+ClientiForm.DataPraticaCorrenteSQL+'''))');
   end
   else
   begin
@@ -20311,6 +20310,8 @@ begin
   if PrmSearchKey.Text <> '' then
   begin
     DM1.AddSQL(QueryPrimanota, 'AND', '(');
+    DM1.AggiungiRicercaCampo(QueryPrimanota.SQL, 'C.RAGIONESOCIALE', PrmSearchKey.Text, False);
+    QueryPrimanota.SQL.Add('OR');
     DM1.AggiungiRicercaCampo(QueryPrimanota.SQL, 'P.DESCRIZIONE', PrmSearchKey.Text, False);
     QueryPrimanota.SQL.Add('OR');
     DM1.AggiungiRicercaCampo(QueryPrimanota.SQL, 'P.NOTE', PrmSearchKey.Text, False);
