@@ -10288,7 +10288,7 @@ inherited TabGCForm: TTabGCForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Giornale di Cantiere'
-      ReportDocument.CreationDate = 44335.818034571760000000
+      ReportDocument.CreationDate = 44365.435528599530000000
       ReportTitle.Font.Charset = ANSI_CHARSET
       ReportTitle.Font.Color = clBlack
       ReportTitle.Font.Height = -12

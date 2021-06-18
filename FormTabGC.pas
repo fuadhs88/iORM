@@ -1249,7 +1249,7 @@ uses SchedaClienti, main,
   FormGruppi, FormAnagArt, FormRappGiorn, SchedaPreventiviOrdini,
   cxGridExportLink, cxExportPivotGridLink, SchedaArticoli1, StrUtils,
   FormDipendenti, FormLevanteListAnag, cxGridDBDataDefinitions, Math,
-  Types, FormQtaArticoloGC, IniFiles, DataModuleStyles;
+  Types, FormQtaArticoloGC, IniFiles, DataModuleStyles, FormImpegni;
 
 {$R *.dfm}
 
@@ -10102,6 +10102,27 @@ begin
       end;
       // Altrimenti se un altro tipo di documento...
     end
+    else
+    // Se è un Intervento...
+    //  NB: Nel caso dell'interventonon è stato possibile fare la localizzazione e il posizionamento  automatico
+    //       del rigo (sull'intervento) dove si trova l'articolo selezionato sul GC.
+    if DocType = 'Intervento' then
+    begin
+      if DM1.ModCtrl(MOD_CONTATTI) > 0 then
+      begin
+        DM1.ShowWait('Levante', 'Apertura documento...');
+        try
+          Application.CreateForm(TImpegnoForm, ImpegnoForm);
+          ImpegnoForm.Parent := MainForm;
+          ImpegnoForm.CurrentID := DocNum;
+          ImpegnoForm.Tag := 1;
+          ImpegnoForm.Show;
+        finally
+          DM1.CloseWait;
+        end;
+      end;
+    end
+    // Altrimenti se un altro tipo di documento...
     else
     begin
       DM1.ShowWait('Levante', 'Apertura documento...');
