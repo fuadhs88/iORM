@@ -3286,10 +3286,24 @@ begin
   // NB: Se invece siamo in creazione di un nuovo impegno allora carica solo gli apparecchi NON dismessi (ovviamente essendo in
   //      creazione di un nuovo impegno non ci sono ancora, a questo punto,   alcuna OP quindi non posso basarmi su di esse
   //      come faccio in caso di apertura di un impegno già esistente.
-   case Tag of
-     1: QryPratApp.SQL.Add('AND EXISTS (SELECT OPI.ID FROM OPIMPEGNO OPI WHERE OPI.IDIMPEGNO = ' + StrID + ' AND OPI.IDAPPARECCHIOPRAT = PA.ID)');
-     2: QryPratApp.SQL.Add('AND COALESCE(PA.DISMESSO,''F'') <> ''T''');
-   end;
+  // NB: 18/06/2021: Per evitare il problema che, soprattutto per chiamate e appuntamenti quando c'erano degli apparecchi senza OP
+  //      poi sparivano (gli apparecchi) quando si chiudevano e riaprivano (gli impegni) causando anche il fatto che se poi stampavo
+  //      il foglio di lavoro questi apparecchi non c'erano più (Idrotech ma anche altri) ho fatto la modifica qui sotto cioè il fatto
+  //      di far sparire gli apparecchi senza OP sopo per gli interventi. RIcordo che questo meccanismo di far vedere solo gli apparecchi
+  //      con OP era stato fatto per evitare che eventuali apparecchi dismessi non rompessero le scatole nel nuovi documenti ma fossero
+  //      ancora visibili nei vecchi (cioè quando ancora tali apparecchi non erano stati dismessi)
+// --- OLD CODE ---
+//  case Tag of
+//   1: begin
+//     QryPratApp.SQL.Add('AND EXISTS (SELECT OPI.ID FROM OPIMPEGNO OPI WHERE OPI.IDIMPEGNO = ' + StrID + ' AND OPI.IDAPPARECCHIOPRAT = PA.ID)');
+//   end;
+//   2: QryPratApp.SQL.Add('AND COALESCE(PA.DISMESSO,''F'') <> ''T''');
+//  end;
+// --- OLD CODE ---
+  if (Tag = 1) and (QryImpTIPOIMPEGNO.AsString = 'Intervento') then
+    QryPratApp.SQL.Add('AND EXISTS (SELECT OPI.ID FROM OPIMPEGNO OPI WHERE OPI.IDIMPEGNO = ' + StrID + ' AND OPI.IDAPPARECCHIOPRAT = PA.ID)')
+  else
+   QryPratApp.SQL.Add('AND COALESCE(PA.DISMESSO,''F'') <> ''T''');
   // Imposta ed apre la query
   if not QryPratApp.Prepared then QryPratApp.Prepare;
   QryPratApp.ParamByName('P_IDPRATICA').AsInteger := QryImpIDPRATICA.AsInteger;

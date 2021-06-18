@@ -2962,7 +2962,7 @@ object AgendaSlideForm: TAgendaSlideForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Levante - Agenda'
-      ReportDocument.CreationDate = 44298.486001921290000000
+      ReportDocument.CreationDate = 44365.633980393520000000
       OptionsFormatting.UseNativeStyles = True
       PrintRange.TimePrintFrom = 0.291666666666666700
       PrintRange.TimePrintTo = 0.875000000000000000
