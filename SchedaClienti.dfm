@@ -38,8 +38,8 @@ object ClientiForm: TClientiForm
     Height = 22
   end
   object ClientTopPanel: TbmpPanel
-    Left = 0
-    Top = 0
+    Left = -1
+    Top = -6
     Width = 745
     Height = 68
     Alignment = taLeftJustify
@@ -365,7 +365,7 @@ object ClientiForm: TClientiForm
         Top = 0
         Width = 793
         Height = 581
-        ActivePage = TabPrimanota
+        ActivePage = TabDocumenti
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1915,6 +1915,7 @@ object ClientiForm: TClientiForm
                           end>
                         Properties.IncrementalSearch = False
                         Properties.OnButtonClick = tvRubricaSITOINTERNETPropertiesButtonClick
+                        Visible = False
                         HeaderAlignmentHorz = taCenter
                         Options.ShowEditButtons = isebAlways
                         Width = 200
@@ -6135,6 +6136,32 @@ object ClientiForm: TClientiForm
                     object tvDocDATIVETTORE: TcxGridDBColumn
                       Caption = 'Dati vettore'
                       DataBinding.FieldName = 'DATIVETTORE'
+                      Visible = False
+                      HeaderAlignmentHorz = taCenter
+                      Width = 150
+                    end
+                    object tvDocTIPOINTERVENTO: TcxGridDBColumn
+                      Caption = 'Tipo intervento'
+                      DataBinding.FieldName = 'TIPOINTERVENTO'
+                      PropertiesClassName = 'TcxCheckComboBoxProperties'
+                      Properties.ShowEmptyText = False
+                      Properties.EditValueFormat = cvfCaptions
+                      Properties.Items = <
+                        item
+                          Description = 'Collaudo'
+                        end
+                        item
+                          Description = 'Prima accensione'
+                        end
+                        item
+                          Description = 'Manutenzione'
+                        end
+                        item
+                          Description = 'Prova combustione'
+                        end
+                        item
+                          Description = 'Guasto'
+                        end>
                       Visible = False
                       HeaderAlignmentHorz = taCenter
                       Width = 150
@@ -22168,6 +22195,7 @@ object ClientiForm: TClientiForm
                       DataBinding.FieldName = 'TIPOINTERVENTO'
                       PropertiesClassName = 'TcxCheckComboBoxProperties'
                       Properties.EmptySelectionText = '- - -'
+                      Properties.ShowEmptyText = False
                       Properties.EditValueFormat = cvfCaptions
                       Properties.Items = <
                         item
@@ -31067,6 +31095,10 @@ object ClientiForm: TClientiForm
     object QryDocDATIVETTORE: TStringField
       FieldName = 'DATIVETTORE'
       Size = 50
+    end
+    object QryDocTIPOINTERVENTO: TStringField
+      FieldName = 'TIPOINTERVENTO'
+      Size = 100
     end
   end
   object SourceDoc: TDataSource

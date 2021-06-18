@@ -2852,6 +2852,8 @@ type
     tvGMDESCRIZIONESCHEDA: TcxGridDBColumn;
     tvRubricaSITOINTERNET: TcxGridDBColumn;
     QrySoggettiSITOINTERNET: TStringField;
+    QryDocTIPOINTERVENTO: TStringField;
+    tvDocTIPOINTERVENTO: TcxGridDBColumn;
     procedure RxSpeedButtonUscitaClick(Sender: TObject);
     procedure RxSpeedButtonEliminaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
