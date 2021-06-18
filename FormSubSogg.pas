@@ -10,7 +10,7 @@ uses
   cxGridLevel, cxGridCardView, cxGridCustomTableView, cxGridTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, IB_Components,
   IBODataset, bmpPanel, StdCtrls, Mask, DBCtrls, ExtCtrls, Buttons,
-  cxLookAndFeels, cxLookAndFeelPainters, cxNavigator, cxGridCustomLayoutView;
+  cxLookAndFeels, cxLookAndFeelPainters, cxNavigator, cxGridCustomLayoutView, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TSubSoggForm = class(TForm)

@@ -242,6 +242,7 @@ object SubSoggForm: TSubSoggForm
       object tvDiBa: TcxGridTableView
         DragMode = dmAutomatic
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -552,8 +553,8 @@ object SubSoggForm: TSubSoggForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 64
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -571,8 +572,8 @@ object SubSoggForm: TSubSoggForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 90
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -591,8 +592,8 @@ object SubSoggForm: TSubSoggForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 90
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -611,8 +612,8 @@ object SubSoggForm: TSubSoggForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 90
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -1030,6 +1031,7 @@ object SubSoggForm: TSubSoggForm
       end
       object cvTot: TcxGridCardView
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -1126,6 +1128,7 @@ object SubSoggForm: TSubSoggForm
       end
       object tvOre: TcxGridTableView
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -1427,6 +1430,7 @@ object SubSoggForm: TSubSoggForm
         OnDblClick = tvListDblClick
         OnKeyUp = tvListKeyUp
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.DataSource = SourceSubSogg
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
@@ -1486,7 +1490,8 @@ object SubSoggForm: TSubSoggForm
     Height = 68
     Alignment = taLeftJustify
     BevelOuter = bvNone
-    Color = clGray
+    Color = clSilver
+    ParentBackground = False
     TabOrder = 1
     object RxSpeedButtonUscita: TSpeedButton
       Left = 2
@@ -1717,8 +1722,6 @@ object SubSoggForm: TSubSoggForm
     end
   end
   object QuerySubSogg: TIBOQuery
-    CachedUpdates = True
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'delete from subsogg'
       'where'
@@ -1748,15 +1751,12 @@ object SubSoggForm: TSubSoggForm
         ' :Sinchro)'
       '')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QuerySubSoggBeforePost
     SQL.Strings = (
       'SELECT *'
       'FROM SUBSOGG'
       '')
-    FieldOptions = []
     Left = 586
     Top = 2
     object QuerySubSoggCodice: TIntegerField
