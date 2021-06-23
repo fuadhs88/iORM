@@ -9101,7 +9101,7 @@ object ImpegnoForm: TImpegnoForm
             end
             object dbeNaturaGiuridica: TcxDBRadioGroup
               Left = 48
-              Top = 13
+              Top = 1
               Cursor = crHandPoint
               DataBinding.DataField = 'NATURAGIURIDICARESPIMP'
               DataBinding.DataSource = SourceAss
@@ -9127,7 +9127,7 @@ object ImpegnoForm: TImpegnoForm
               Style.Font.Style = []
               Style.IsFontAssigned = True
               TabOrder = 0
-              Height = 41
+              Height = 52
               Width = 75
             end
             object eRagSocRespImp: TDBEdit

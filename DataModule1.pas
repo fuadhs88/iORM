@@ -7234,7 +7234,6 @@ begin
     // layout dell'agenda stessa
     if Scheduler.Tag = 0 then
     begin
-      DM1.RipristinaAgendaDevExpress(Scheduler, '');
       // Apre il file con le impostazioni di visualizzazione
       P := TMemIniFile.Create(DM1.Repository_Layouts.FullLocalFileName);
       try
@@ -7246,6 +7245,8 @@ begin
       finally
         P.Free;
       end;
+      // Ripristina una eve tuale vista
+      DM1.RipristinaAgendaDevExpress(Scheduler, '');
       // Procedure che carica i nome dei tecnici nel TabControl a fianco dell'agenda
       // per la selezione dei tecnici visibili
       if Assigned(ClientiForm.AgendaForm) then
