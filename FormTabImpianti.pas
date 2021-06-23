@@ -1101,6 +1101,9 @@ begin
   inherited;
   if not (DM1.ModCtrl(MOD_CONTATTI) > 1) then
     raise Exception.Create('Operazione non permessa per questo utente!');
+  // Solo un documento alla volta
+  if btvAssistenze.Controller.SelectedRecordCount > 1 then
+    raise Exception.Create('E'' possibile eliminare un solo impianto/contratto alla volta!');
   // Chiede conferma per l'eliminazione
   if not TConfirmForm.ConfirmationRequest(
     Format('Elimina %s', [QryAssDESCRIZIONE.AsString]),

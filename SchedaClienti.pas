@@ -20050,6 +20050,9 @@ procedure TClientiForm.QryPraticheBeforeDelete(DataSet: TDataSet);
 begin
   if not(DM1.ModCtrl(MOD_PRATICHE) > 1) then
     raise Exception.Create('Operazione non permessa per questo utente!');
+  // Solo un documento alla volta
+  if tvPrat.Controller.SelectedRecordCount > 1 then
+    raise Exception.Create('E'' possibile eliminare un sola pratica/cantiere alla volta!');
   // Chiede conferma per l'eliminazione
   if not TConfirmForm.ConfirmationRequest(Format('Elimina %s', [QryPraticheDESCRIZIONE.AsString]),
     Format('Per confermare digita "elimina %s", poi clicca sul bottone "Conferma".', [QryPraticheDESCRIZIONE.AsString]),
@@ -20088,6 +20091,9 @@ var
 begin
   if not(DM1.ModCtrl(MOD_CLIENTI) > 1) then
     raise Exception.Create('Operazione non permessa per questo utente!');
+  // Solo un documento alla volta
+  if tvRubrica.Controller.SelectedRecordCount > 1 then
+    raise Exception.Create('E'' possibile eliminare un solo soggetto alla volta!');
   // Chiede conferma per l'eliminazione del soggetto
   if not TConfirmForm.ConfirmationRequest(Format('Elimina %s', [QrySoggettiCLIENTEFORNITORE.AsString]),
     Format('Per confermare digita "elimina %s", poi clicca sul bottone "Conferma".', [QrySoggettiRAGIONESOCIALE.AsString]),

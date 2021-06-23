@@ -117,6 +117,7 @@ inherited TabImpiantiForm: TTabImpiantiForm
             OptionsCustomize.BandsQuickCustomization = True
             OptionsData.DeletingConfirmation = False
             OptionsSelection.CellSelect = False
+            OptionsSelection.MultiSelect = True
             OptionsView.FocusRect = False
             OptionsView.GridLineColor = 13882323
             OptionsView.GridLines = glNone
@@ -5415,7 +5416,7 @@ inherited TabImpiantiForm: TTabImpiantiForm
       PrinterPage.ScaleFactor = 80
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 44303.860660034720000000
+      ReportDocument.CreationDate = 44370.399127615740000000
       ReportDocument.Creator = 'Mauri Fly'
       ReportTitle.Font.Charset = ANSI_CHARSET
       ReportTitle.Font.Color = clWindowText
