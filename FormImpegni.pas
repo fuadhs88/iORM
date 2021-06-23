@@ -1296,6 +1296,9 @@ type
 
     fAbilitaStampaTagAppuntamento: Boolean;
 
+    // Flags che indicano quali elementi della aprte "Interventi precedenti" caricare o meno
+    Precedenti_RelazioneIntervento, Precedenti_AnalisiFumi, Precedenti_OperazioniPianificate, Precedenti_RighiDocumento, Precedenti_OsservazioniAllegato: Boolean;
+
     // Flag che indica se il documento deve chiedere una conferma prima del
     //  salvataggio del documento
     fConfermaSenzaConferma: Boolean;
@@ -1854,6 +1857,12 @@ begin
      // Apre il file che contiene i layouts di stampa e visualizzazione dei documenti.
      LO := TMemIniFile.Create(DM1.Repository_Layouts.FullLocalFileName);
      try
+       // Carica i flags elativi a quali parti del interventi precedenti caricare o meno
+       Precedenti_RelazioneIntervento := LO.Readbool(Sezione, 'Precedenti_RelazioneIntervento', True);
+       Precedenti_AnalisiFumi := LO.Readbool(Sezione, 'Precedenti_AnalisiFumi', True);
+       Precedenti_OperazioniPianificate := LO.Readbool(Sezione, 'Precedenti_OperazioniPianificate', True);
+       Precedenti_RighiDocumento := LO.Readbool(Sezione, 'Precedenti_RighiDocumento', True);
+       Precedenti_OsservazioniAllegato := LO.Readbool(Sezione, 'Precedenti_OsservazioniAllegato', True);
        // Parametri che determina se l'ID dell'impegno è progressivo o meno e se
        //  , in caso fosse progressivo, deve avere un preambolo con l'anno prima del
        //  numero (es: 190001 per il primo impegno del 2019)
@@ -3320,23 +3329,40 @@ begin
   // Prima chiude la query se è già aperta
   if QryIntPrec.Active then
     Exit;
+  // Filtri (parametri) per decidere quali elementi dello storico caricare oppure no
+  if not Precedenti_RelazioneIntervento then
+    QryIntPrec.SQL.Insert(QryIntPrec.SQL.Count-2, 'AND UIV.TIPORECORD <> ''10-RELAZIONE INTERVENTO''');
+  if not Precedenti_AnalisiFumi then
+    QryIntPrec.SQL.Insert(QryIntPrec.SQL.Count-2, 'AND UIV.TIPORECORD <> ''15-ANALISI FUMI ALLEGATO''');
+  if not Precedenti_OperazioniPianificate then
+    QryIntPrec.SQL.Insert(QryIntPrec.SQL.Count-2, 'AND UIV.TIPORECORD <> ''20-OPERAZIONE PIANIFICATA''');
+  if not Precedenti_RighiDocumento then
+    QryIntPrec.SQL.Insert(QryIntPrec.SQL.Count-2, 'AND UIV.TIPORECORD <> ''30-RIGO DOCUMENTO''');
+  if not Precedenti_OsservazioniAllegato then
+    QryIntPrec.SQL.Insert(QryIntPrec.SQL.Count-2, 'AND UIV.TIPORECORD <> ''40-OSSERVAZIONI ALLEGATO''');
   // IMposta ed apre la query che contiene l'elenco degli ultimi 3 interventi effettuato
   //  sullo stesso impianto
-  if not QryIntPrec.Prepared then QryIntPrec.Prepare;
-  // Se il documento da parte di una pratica (impianto) imposta i parametri in modo che trovi tutti
-  //  gli interventi realtivi allo stesso impianto anc e se di soggetti diversi (magari è cambiato il proprietario dell'impianto).
-  if (not QryImpPRATICA.IsNull) and (QryImpPRATICA.AsInteger <> 0) then begin
+  if not QryIntPrec.Prepared then
+    QryIntPrec.Prepare;
+  // Se il documento fa parte di una pratica (impianto) imposta i parametri in modo che trovi tutti
+  //  gli interventi realtivi allo stesso impianto anche se di soggetti diversi (magari è cambiato il proprietario dell'impianto).
+  if (not QryImpPRATICA.IsNull) and (QryImpPRATICA.AsInteger <> 0) then
+  begin
     QryIntPrec.Params.ParamByName('P_CLIENTE').AsInteger    := 0;
     QryIntPrec.Params.ParamByName('P_PRATICA').AsInteger    := QryImpPRATICA.Value;
     QryIntPrec.Params.ParamByName('P_DATAPRATICA').AsDate   := QryImpDATAPRATICA1.Value;
+  end
   // Se invece il documento ha solo il soggetto cerca tutti gli interventi precedenti relativi al solo soggetto
   //  senza ovviamente considerare l'impianto in quanto non c'è.
-  end else if ((QryImpPRATICA.IsNull) or (QryImpPRATICA.AsInteger = 0)) and ((not QryImpCLIENTE.IsNull) and (QryImpCLIENTE.AsInteger <> 0)) then begin
+  else
+  if ((QryImpPRATICA.IsNull) or (QryImpPRATICA.AsInteger = 0)) and ((not QryImpCLIENTE.IsNull) and (QryImpCLIENTE.AsInteger <> 0)) then begin
     QryIntPrec.Params.ParamByName('P_CLIENTE').AsInteger    := QryImpCLIENTE.Value;
     QryIntPrec.Params.ParamByName('P_PRATICA').AsInteger    := -999999;
     QryIntPrec.Params.ParamByName('P_DATAPRATICA').AsDate   := QryImpDATAPRATICA1.Value;
+  end
   // Se invece il documento non ha ne l'impianto ne il soggetto fa in modo che non trovi niente
-  end else begin
+  else
+  begin
     QryIntPrec.Params.ParamByName('P_CLIENTE').AsInteger    := -999999;
     QryIntPrec.Params.ParamByName('P_PRATICA').AsInteger    := -999999;
     QryIntPrec.Params.ParamByName('P_DATAPRATICA').AsDate   := StrToDate('01/01/1900');
