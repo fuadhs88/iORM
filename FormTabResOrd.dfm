@@ -1576,7 +1576,7 @@ inherited TagResOrdForm: TTagResOrdForm
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Giornale di Cantiere'
-      ReportDocument.CreationDate = 44305.805576284720000000
+      ReportDocument.CreationDate = 44371.609432210650000000
       ReportTitle.Font.Charset = ANSI_CHARSET
       ReportTitle.Font.Color = clBlack
       ReportTitle.Font.Height = -13

@@ -765,38 +765,38 @@ var
   TmpStr:String;
 begin
   inherited;
-//  CdsDocDispCalcFields(DataSet);
-//
-//  // ===========================================================================
-//  // Calcola la disponibilità o meno dell'intero documento del rigo
-//  // ---------------------------------------------------------------------------
-//  if not CdsDocDisp.Active then Exit;
-//  CdsDocDisp.Filter := 'NUMDOC = ' + CdsResOrdNUMDOC.AsString + ' AND DATADOC = ''' + FormatDateTime('dd/mm/yyyy', CdsResOrdDATADOC.AsDateTime) + '''';
-//  CdsDocDisp.Filtered := True;
-//  DocDisp := False;
-//  CdsDocDisp.First;
-//  while (not DocDisp) and (not CdsDocDisp.Eof) do begin
-//    if not CdsDocDisp.FieldByName('DISPONIBILE').IsNull then DocDisp := CdsDocDisp.FieldByName('DISPONIBILE').Value;
-//    CdsDocDisp.Next;
-//  end;
-//  CdsResOrdDOCDISP.Value := DocDisp;
-//  // ===========================================================================
-//
-//  // ===========================================================================
-//  // Calcola il campo che sarà usato per il raggruppamento e per fare in modo
-//  //  che gli ordini disponibili appaiano per primi
-//  // ---------------------------------------------------------------------------
-//  CdsResOrdFORGROUP.Clear;
-//  if (not CdsResOrdNUMDOC.IsNull) and (not CdsResOrdDATADOC.IsNull) then begin
-//    // Costruisce su una variabile il valore del campo mettento come primo carattere
-//    //  'T' o 'F' in base alla disponibilità del documento e poi la data in formato
-//    //  inverso in modo da essere giusto per l'ordinamento e infine il numero del documento
-//    //  alineato a dx a 10 caratteri
-//    if DocDisp then TmpStr := 'T-' else TmpStr := 'F-';
-//    TmpStr := TmpStr + FormatDateTime('yyyymmdd', CdsResOrdDATADOC.AsDateTime) + '-' + DM1.PadR(CdsResOrdNUMDOC.AsString, '0', 10);
-//    CdsResOrdFORGROUP.Value := TmpStr;
-//  end;
-//  // ===========================================================================
+  CdsDocDispCalcFields(DataSet);
+
+  // ===========================================================================
+  // Calcola la disponibilità o meno dell'intero documento del rigo
+  // ---------------------------------------------------------------------------
+  if not CdsDocDisp.Active then Exit;
+  CdsDocDisp.Filter := 'NUMDOC = ' + CdsResOrdNUMDOC.AsString + ' AND DATADOC = ''' + FormatDateTime('dd/mm/yyyy', CdsResOrdDATADOC.AsDateTime) + '''';
+  CdsDocDisp.Filtered := True;
+  DocDisp := False;
+  CdsDocDisp.First;
+  while (not DocDisp) and (not CdsDocDisp.Eof) do begin
+    if not CdsDocDisp.FieldByName('DISPONIBILE').IsNull then DocDisp := CdsDocDisp.FieldByName('DISPONIBILE').Value;
+    CdsDocDisp.Next;
+  end;
+  CdsResOrdDOCDISP.Value := DocDisp;
+  // ===========================================================================
+
+  // ===========================================================================
+  // Calcola il campo che sarà usato per il raggruppamento e per fare in modo
+  //  che gli ordini disponibili appaiano per primi
+  // ---------------------------------------------------------------------------
+  CdsResOrdFORGROUP.Clear;
+  if (not CdsResOrdNUMDOC.IsNull) and (not CdsResOrdDATADOC.IsNull) then begin
+    // Costruisce su una variabile il valore del campo mettento come primo carattere
+    //  'T' o 'F' in base alla disponibilità del documento e poi la data in formato
+    //  inverso in modo da essere giusto per l'ordinamento e infine il numero del documento
+    //  alineato a dx a 10 caratteri
+    if DocDisp then TmpStr := 'T-' else TmpStr := 'F-';
+    TmpStr := TmpStr + FormatDateTime('yyyymmdd', CdsResOrdDATADOC.AsDateTime) + '-' + DM1.PadR(CdsResOrdNUMDOC.AsString, '0', 10);
+    CdsResOrdFORGROUP.Value := TmpStr;
+  end;
+  // ===========================================================================
 end;
 
 procedure TTagResOrdForm.btvResOrdQTAGetDisplayText(
@@ -855,7 +855,7 @@ begin
   // Carica i valori di alcuni combo box dei filtri prima che il
   //  ClientDataSet venga filtrato
   CaricaItemsDestinazione;
-  CaricaItemsOperatore;ShowMessage('6');
+  CaricaItemsOperatore;
   // ===========================================================================
   // FILTRI
   // ---------------------------------------------------------------------------
