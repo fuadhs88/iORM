@@ -1048,14 +1048,19 @@ procedure TFatturaPA.Compila_DocumentiCorrelati(const DocumentiCorrelatiTypeList
 var
   I: Integer;
   DC: TcxCustomDataController;
+  LTipoDocCorrelato: String;
+  LIDDocCorrelato: String;
+  LFattureCollegateCount: Integer;
 begin
+  LFattureCollegateCount := 0;
   DC := Documento.TableViewDocCorr.DataController;
   // Cicla per tutti i documenti correlati e se ne trova del tipo specificato
   // li aggiunge al tracciato.
   for I := 0 to DC.RecordCount - 1 do
   begin
-    if (VarToStr(DC.Values[I, Documento.TableViewDocCorr_Tipo.Index]) <> ATipoDocumento) or
-      (Trim(VarToStr(DC.Values[I, Documento.TableViewDocCorr_IDDoc.Index])) = '') then
+    LTipoDocCorrelato := Trim(VarToStr(DC.Values[I, Documento.TableViewDocCorr_Tipo.Index]));
+    LIDDocCorrelato := Trim(VarToStr(DC.Values[I, Documento.TableViewDocCorr_IDDoc.Index]));
+    if (LTipoDocCorrelato <> ATipoDocumento) or (LIDDocCorrelato = '') then
       Continue;
     // Aggiunge il nodo per il documento correlato corrente
     CurrentNode := DocumentiCorrelatiTypeList.Add;
@@ -1069,7 +1074,14 @@ begin
     SetValue('NumItem', DC.Values[I, Documento.TableViewDocCorr_NumItem.Index], 20);
     SetValue('CodiceCUP', DC.Values[I, Documento.TableViewDocCorr_CUP.Index], 15);
     SetValue('CodiceCIG', DC.Values[I, Documento.TableViewDocCorr_CIG.Index], 15);
+    // Incrementa il contatore di riferimenti a fatture correlate (se stiamo trattado fatture correlate)
+    if (LTipoDocCorrelato = 'Fattura collegata') and (LIDDocCorrelato <> '') then
+      inc(LFattureCollegateCount);
   end;
+  // Nel caso di una nota di credito verifica la presenza di riferimento ad almeno una fattura
+  // e se non c'è avvisa l'utente o lo blocca (da decidere)
+  if (Documento.QryDocumentoTIPODOCUMENTO.AsString = 'Nota_accre') and (ATipoDocumento = 'Fattura collegata') and (LFattureCollegateCount = 0) then
+   raise exception.Create('Non hai inserito alcun riferimento alla fattura correlata.');
 end;
 
 procedure TFatturaPA.Compila_Header;

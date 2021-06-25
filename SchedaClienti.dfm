@@ -365,7 +365,7 @@ object ClientiForm: TClientiForm
         Top = 0
         Width = 793
         Height = 581
-        ActivePage = TabImpegni
+        ActivePage = TabClienti
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -417,9 +417,6 @@ object ClientiForm: TClientiForm
             object TabClientiElenco: TcxTabSheet
               Caption = '   Elenco   '
               ImageIndex = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelRubrica: TPanel
                 Left = 0
                 Top = 0
@@ -3062,9 +3059,6 @@ object ClientiForm: TClientiForm
             object TabClientiMappa: TcxTabSheet
               Caption = '   Mappa   '
               ImageIndex = 4
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
             end
           end
         end
@@ -5139,8 +5133,6 @@ object ClientiForm: TClientiForm
               object TabSheetDocGrid: TcxTabSheet
                 Caption = 'Elenco'
                 ImageIndex = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 DesignSize = (
                   785
                   169)
@@ -6412,8 +6404,6 @@ object ClientiForm: TClientiForm
               object TabSheetDocADA: TcxTabSheet
                 Caption = 'ADA'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridDoc: TcxDBPivotGrid
                   Left = 0
                   Top = 25
@@ -6862,8 +6852,6 @@ object ClientiForm: TClientiForm
               object TabSheetDocCharts: TcxTabSheet
                 Caption = 'Grafici'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
               end
             end
           end
@@ -10134,8 +10122,6 @@ object ClientiForm: TClientiForm
               object TabGMGrid: TcxTabSheet
                 Caption = 'Elenco'
                 ImageIndex = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 DesignSize = (
                   785
                   232)
@@ -11125,8 +11111,6 @@ object ClientiForm: TClientiForm
               object TabGMADA: TcxTabSheet
                 Caption = 'ADA'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridGM: TcxDBPivotGrid
                   Left = 0
                   Top = 25
@@ -11553,8 +11537,6 @@ object ClientiForm: TClientiForm
               object TabGMGrafici: TcxTabSheet
                 Caption = 'Grafici'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
               end
             end
           end
@@ -14462,9 +14444,6 @@ object ClientiForm: TClientiForm
             object TabPraticheMappa: TcxTabSheet
               Caption = '   Mappa   '
               ImageIndex = 4
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
             end
           end
         end
@@ -15805,8 +15784,6 @@ object ClientiForm: TClientiForm
                 Color = clWhite
                 ImageIndex = 1
                 ParentColor = False
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 DesignSize = (
                   785
                   305)
@@ -16716,8 +16693,6 @@ object ClientiForm: TClientiForm
                 Caption = 'ADA'
                 ImageIndex = 2
                 TabVisible = False
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridGC: TcxDBPivotGrid
                   Left = 0
                   Top = 0
@@ -16817,8 +16792,6 @@ object ClientiForm: TClientiForm
               object TabScadADA: TcxTabSheet
                 Caption = 'ADA'
                 ImageIndex = 2
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object PivotGridScad: TcxDBPivotGrid
                   Left = 0
                   Top = 25
@@ -17171,8 +17144,6 @@ object ClientiForm: TClientiForm
               object TabScadCharts: TcxTabSheet
                 Caption = 'Grafici'
                 ImageIndex = 1
-                ExplicitWidth = 0
-                ExplicitHeight = 0
               end
             end
           end
@@ -23549,9 +23520,6 @@ object ClientiForm: TClientiForm
             object TabImpegniMappa: TcxTabSheet
               Caption = '   Mappa   '
               ImageIndex = 4
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
             end
           end
         end
@@ -23682,9 +23650,6 @@ object ClientiForm: TClientiForm
             object TabManodopera: TcxTabSheet
               Caption = ' Manodopera '
               ImageIndex = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelGOS: TPanel
                 Left = 0
                 Top = 0
@@ -25478,8 +25443,6 @@ object ClientiForm: TClientiForm
                   object TabGOSOreElenco: TcxTabSheet
                     Caption = 'Elenco'
                     ImageIndex = 0
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     DesignSize = (
                       685
                       285)
@@ -26283,8 +26246,6 @@ object ClientiForm: TClientiForm
                   object TabGosOreAda: TcxTabSheet
                     Caption = 'ADA'
                     ImageIndex = 2
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     object GosOrePivot: TcxDBPivotGrid
                       Left = 0
                       Top = 0
@@ -26569,8 +26530,6 @@ object ClientiForm: TClientiForm
                     Caption = 'Grafici'
                     Enabled = False
                     ImageIndex = 2
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     object GridChartOre: TcxGrid
                       Left = 0
                       Top = 0
@@ -26712,9 +26671,6 @@ object ClientiForm: TClientiForm
             object TabSpese: TcxTabSheet
               Caption = ' Altre spese '
               ImageIndex = 1
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PanelGosSpese: TPanel
                 Left = 0
                 Top = 0
@@ -28642,8 +28598,6 @@ object ClientiForm: TClientiForm
                   object TabGOSSpeseElenco: TcxTabSheet
                     Caption = 'Elenco'
                     ImageIndex = 0
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     DesignSize = (
                       685
                       285)
@@ -29156,8 +29110,6 @@ object ClientiForm: TClientiForm
                   object TabGosSpeseAda: TcxTabSheet
                     Caption = 'ADA'
                     ImageIndex = 2
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     object GosSpesePivot: TcxDBPivotGrid
                       Left = 0
                       Top = 0
@@ -29316,8 +29268,6 @@ object ClientiForm: TClientiForm
                     Caption = 'Grafici'
                     Enabled = False
                     ImageIndex = 2
-                    ExplicitWidth = 0
-                    ExplicitHeight = 0
                     object GridChartSpese: TcxGrid
                       Left = 0
                       Top = 0
