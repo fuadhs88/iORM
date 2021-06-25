@@ -2976,10 +2976,10 @@ begin
   NomeApplicazione := NomeApplicazione + 'n';
   NomeApplicazione := NomeApplicazione + 't';
   NomeApplicazione := NomeApplicazione + 'e';
-  VersioneApplicazione := '4.11.170 R6';
+  VersioneApplicazione := '4.11.171 R1';
   // ===========================================================================================
   // Impostazione della versione attuale del programma  (esempio 4.11.056 R1 = 4110561)
-  PrgVersion := 4111706;
+  PrgVersion := 4111711;
   PrgVersionNoBuild := PrgVersion div 10000; // Versione del programma senza il numero di build
   // ===========================================================================================
 
