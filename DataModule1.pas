@@ -18606,6 +18606,7 @@ begin
         ControllaTabella('MAGAZZINI_TEMP', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
         ControllaTabella('LISTFORN', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
         ControllaTabella('CLIENTI', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
+        ControllaTabella('CLIENTI_INSOLUTI_EXT', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
         ControllaTabella('SUBSOGG', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
         ControllaTabella('PRATICHE', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
         ControllaTabella('TESTI', ArcDBFile, DBAzienda, ModoRistrutturazioneArchivi);
