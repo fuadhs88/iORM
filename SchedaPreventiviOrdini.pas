@@ -5266,7 +5266,7 @@ begin
       // Sposta il focus sul record in elaborazione
       MDC.FocusedRecordIndex := i;
       // Se il rigo attuale è selezionato oppure se siamo in modalità "tutti i righi"...
-      if TcxGridDataController(MDC).GridView.Controller.FocusedRecord.Selected or not SoloRighiSelezionati then
+      if (not SoloRighiSelezionati) or TcxGridDataController(MDC).GridView.Controller.FocusedRecord.Selected then
       begin
         // Se il rigo attuale è un rigo composto, aggiorna i prezzi dei sottorighi dei rigo corrente
         // NB: Fintantoche la DIBA non è multilivello non effettua il controllo ma assume automaticamente
@@ -5277,8 +5277,8 @@ begin
           AggiornaPrezziDocumento(MDC.GetDetailDataController(i, RELATION_IDX_SOTTORIGHI_NORMALI), False);
           // RIcalcola i totali dei rigo principale
           CalcolaTotaliSottorighi(MDC, i);
-          // Se invece il rigo attuale è un rigo normale (Non composto)...
         end
+        // Se invece il rigo attuale è un rigo normale (Non composto)...
         else
         begin
           CodArt := Trim(DM1.NoNullStringValue(MDC, i, tvCorpoCODICEARTICOLO.Index));
