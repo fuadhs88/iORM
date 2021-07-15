@@ -65,13 +65,13 @@ const
 //  LEVARCO_MODE = False;
 //  LEVARCO_PASSWORD = True;
   LEVARCO_PASSWORD = False;
-  LEVARCO_ABSOLUTE_LOCK_DATE = '30/06/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
+  LEVARCO_ABSOLUTE_LOCK_DATE = '31/07/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
   // --------------------------------------------------------------------------
   // Costanti di parametri per la versione DEMO
   // --------------------------------------------------------------------------
   D_MODE = False;
   DEMO_DAYS = 60;
-  DEMO_ABSOLUTE_LOCK_DATE = '30/06/2011';
+  DEMO_ABSOLUTE_LOCK_DATE = '31/07/2011';
   DEMO_FIRST_RUN_USER_ID = '00000';
   // --------------------------------------------------------------------------
   // Costanti per la protezione dei vari moduli (Indice del carattere per l'attivazione o meno del tipo di documento nella chiave hardware)
