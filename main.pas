@@ -2611,6 +2611,9 @@ begin
     QueryExpDoc.SQL.Add('WHERE STATION_ID = ' + DM1.CodiceUtente + ' AND TIPODOCUMENTO = ''ARTICOLO''');
     // --------------------------------------------------------------------------
 
+    // Ordinamento per data
+    QueryExpDoc.SQL.Add('ORDER BY 4, 3, 2, 1');
+
     QueryExpDoc.Open;
     // Cicla per tutta la query e carica le item nella ListView
     QueryExpDoc.First;
