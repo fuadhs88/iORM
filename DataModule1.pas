@@ -1456,8 +1456,6 @@ type
     procedure SetStatoDocumentoDopoFatturazione(TipoDoc, RegDoc: String; NumDoc: Integer; DataDoc: TDate);
     procedure SetStatoDocumentoDopoEstrattoConto(TipoDoc, RegDoc: String; NumDoc: Integer; DataDoc: TDate);
     procedure SetStatoNuovoDocumento(DS: TDataSet; NuovoStato: String);
-    procedure Set_RifDoc_CorrispettivoNonPagato_Chiuso(TipoDoc, RegDoc: String; NumDoc: Integer; DataDoc: TDate; Silent: Boolean;
-      RifDoc_CorrispNoPag: String = 'NP');
     procedure SetRegistroDocumento(TipoDoc, RegDoc: String; NumDoc: Longint; DataDoc: TDate; NuovoRegistro: String);
     procedure SetRegistroRappGiorn(RegDoc: String; NumDoc: Integer; DataDoc: TDate; NuovoRegistro: String);
     procedure SetConsegnatoDocumento(TipoDoc, RegDoc: String; NumDoc: Integer; DataDoc: TDate);
@@ -5105,74 +5103,6 @@ begin
     Q.ExecSQL;
   finally
     Q.Free;
-  end;
-end;
-
-// Questa procedura setta il documento specificato come "RifDoc_COrrispettivoNonPagatoChiuso"
-procedure TDM1.Set_RifDoc_CorrispettivoNonPagato_Chiuso(TipoDoc, RegDoc: String; NumDoc: Longint; DataDoc: TDate; Silent: Boolean;
-  RifDoc_CorrispNoPag: String = 'NP');
-var
-  Q: TIB_Cursor;
-begin
-  try
-    // Inizializzazione
-    Q := TIB_Cursor.Create(nil);
-    Q.DatabaseName := DM1.ArcDBFile;
-    Q.IB_Connection := DM1.DBAzienda;
-    // -------------------------------------------------------------------------
-    // Se è già stato specificata l'informazione nel parametro apposito non è necessario eseguire la query
-    if RifDoc_CorrispNoPag = 'NP' then
-    begin
-      // Query che verifica se il documento specificato è marcato come "RifDoc_CorrispettivoNonPagato"
-      // NB: Se non lo è esce, se era già marcato come "Chiuso" avvisa l'utente della cosa e di controllare.
-      Q.SQL.Add('SELECT T.RIFDOC_CORRISPNOPAG FROM PRVORDCL T');
-      Q.SQL.Add('WHERE T.TIPODOCUMENTO = ' + QuotedStr(TipoDoc));
-      Q.SQL.Add('  AND T.REGISTRO = ' + QuotedStr(RegDoc));
-      Q.SQL.Add('  AND T.NUMORDPREV = ' + IntToStr(NumDoc));
-      Q.SQL.Add('  AND T.DATADOCUMENTO = ' + QuotedStr(FormatDateTime('mm/dd/yyyy', DataDoc)));
-      Q.Open;
-      // Se non trova il documento esce subito
-      if Q.Eof then
-        Exit;
-      // Per comodità
-      RifDoc_CorrispNoPag := Trim(Q.Fields[0].AsString);
-      Q.Close;
-    end;
-    // Se il documento non è marcato come RifDoc_CorrispettivoNonPagato esce subito
-    if (RifDoc_CorrispNoPag = '') OR (RifDoc_CorrispNoPag = 'F') then
-      Exit
-      // Se invece è già stato chiuso come RifDoc_COrrispNoPag avvisa l'utente e gli suggerisce di
-      // verificare la cosa perchè il documento risulta già chiuso sotto questo aspetto.
-    else if (RifDoc_CorrispNoPag = 'C') then
-    begin
-      if not Silent then
-        DM1.Messaggi('Levante', 'ATTENZIONE!'#13#13'Sto marcando il documento (' + TipoDoc + ' n. ' + IntToStr(NumDoc) + RegDoc + ' del ' +
-          FormatDateTime('dd/mm/yyyy', DataDoc) +
-          ') come "Corrispettivo non pagato chiuso" ma mi risulta già chiuso precedentemente.'#13#13'TI CONSIGLIO DI CONTROLLARE SE CI SONO STATI ERRORI !!!',
-          '', [mbOk], 0, nil);
-      Exit;
-    end;
-    // -------------------------------------------------------------------------
-    // Eventuale conferma dell'operatore
-    if not Silent then
-    begin
-      if DM1.Messaggi('Levante', 'CONFERMA'#13#13'Marcare il documento ' + TipoDoc + ' n. ' + IntToStr(NumDoc) + RegDoc + ' del ' + FormatDateTime('dd/mm/yyyy',
-        DataDoc) + ' come "Corrispettivo non pagato chiuso"?', '', [mbYes, mbNo], 0, nil) <> mrYes then
-        Exit;
-    end;
-    // -------------------------------------------------------------------------
-    // Query che
-    Q.SQL.Clear;
-    Q.SQL.Add('UPDATE PRVORDCL T SET T.RIFDOC_CORRISPNOPAG = ' + QuotedStr('C'));
-    Q.SQL.Add('WHERE T.TIPODOCUMENTO = ' + QuotedStr(TipoDoc));
-    Q.SQL.Add('  AND T.REGISTRO = ' + QuotedStr(RegDoc));
-    Q.SQL.Add('  AND T.NUMORDPREV = ' + IntToStr(NumDoc));
-    Q.SQL.Add('  AND T.DATADOCUMENTO = ' + QuotedStr(FormatDateTime('mm/dd/yyyy', DataDoc)));
-    Q.ExecSQL;
-    // Pulizie finali
-  finally
-    if Assigned(Q) then
-      Q.Free;
   end;
 end;
 

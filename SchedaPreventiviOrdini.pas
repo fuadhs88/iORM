@@ -1864,7 +1864,8 @@ type
     // In pratica posso decidere questa cosa o meno separatamente per la Fattura e anche per
     // l'estratto conto.
     // NB: Per la fattura è True per default mentre per l'estratto conto è False
-    DocImportati_SetFatturato, DocImportati_SetStatoDopoFattura, DocImportati_SetStatoDopoEstrattoConto, DocImportati_SetCorrispNoPagChiuso: Boolean;
+    DocImportati_SetFatturato, DocImportati_SetStatoDopoFattura, DocImportati_SetStatoDopoEstrattoConto: Boolean;
+    DocImportati_SetCorrispNoPagChiuso, DocImportati_SostituisciRifDoc: Boolean;
 
     // Flag che abilita o meno, alla conferma del documento, la richiesta
     // di creazione automatica delle scadenza
@@ -1990,6 +1991,7 @@ type
     function CreazioneAggiornamentoScadenzeDocumento: Boolean;
 //    function GetRDAFromImpegni: String;  // NB: HO lasciato anche il codice commentato
     function CalcolaQtaDaEvadere(const DC: TcxCustomDataController; const ARecIdx: Integer): Double;
+    procedure Set_RifDoc_CorrispettivoNonPagato_Chiuso(TipoDoc, RegDoc: String; NumDoc: Longint; DataDoc: TDate; Silent: Boolean; RifDoc_CorrispNoPag: String = 'NP');
   public
     { Public declarations }
     DocIvaDefault: TDocIVADefault;
@@ -5987,9 +5989,9 @@ begin
     // Se impostato e se il documento importato è marcato come con riferimento a documento
     // (Ric.Fisc) con corrispettivo non pagato, marca il documento importato come
     // CNP chiuso.
-    if DocImportati_SetCorrispNoPagChiuso then
+    if DocImportati_SetCorrispNoPagChiuso or DocImportati_SostituisciRifDoc then
     begin
-      DM1.Set_RifDoc_CorrispettivoNonPagato_Chiuso(fImportedDocumentsArray[i].TipoDoc, fImportedDocumentsArray[i].RegDoc, fImportedDocumentsArray[i].NumDoc,
+      Set_RifDoc_CorrispettivoNonPagato_Chiuso(fImportedDocumentsArray[i].TipoDoc, fImportedDocumentsArray[i].RegDoc, fImportedDocumentsArray[i].NumDoc,
         fImportedDocumentsArray[i].DataDoc, (Self.Tag = MODE_FATTURAZIONE_DIFFERITA), fImportedDocumentsArray[i].RifDoc_CorrispNoPag);
     end;
   end;
@@ -9430,9 +9432,15 @@ begin
     // con CNP marca iil documento importato come con CNP chiuso.
     // (Lo stato vero e proprio lo prende dal tipo di documento importato)
     if (Sezione = 'Fattura') or (Sezione = 'Ricev.fisc') or (Sezione = 'Fatt.R.F.') then
-      DocImportati_SetCorrispNoPagChiuso := LO.ReadBool(Sezione, 'DocImportati_SetCorrispNoPagChiuso', True)
-    else
+    begin
       DocImportati_SetCorrispNoPagChiuso := LO.ReadBool(Sezione, 'DocImportati_SetCorrispNoPagChiuso', False);
+      DocImportati_SostituisciRifDoc := LO.ReadBool(Sezione, 'DocImportati_SostituisciRifDoc', True);
+    end
+    else
+    begin
+      DocImportati_SetCorrispNoPagChiuso := LO.ReadBool(Sezione, 'DocImportati_SetCorrispNoPagChiuso', False);
+      DocImportati_SostituisciRifDoc := LO.ReadBool(Sezione, 'DocImportati_SostituisciRifDoc', False);
+    end;
     // =======================================================================
 
     // Flag che indica se è abilita la gestione delle versioni multiple di uno stesso documento
@@ -21208,6 +21216,85 @@ end;
 
 // =============================================================================
 
+
+// Questa procedura setta il documento specificato come "RifDoc_COrrispettivoNonPagatoChiuso"
+procedure TPreventiviOrdiniForm.Set_RifDoc_CorrispettivoNonPagato_Chiuso(TipoDoc, RegDoc: String; NumDoc: Longint; DataDoc: TDate; Silent: Boolean;
+  RifDoc_CorrispNoPag: String = 'NP');
+var
+  Q: TIB_Cursor;
+begin
+  try
+    // Inizializzazione
+    Q := TIB_Cursor.Create(nil);
+    Q.DatabaseName := DM1.ArcDBFile;
+    Q.IB_Connection := DM1.DBAzienda;
+    // -------------------------------------------------------------------------
+    // Se è già stato specificata l'informazione nel parametro apposito non è necessario eseguire la query
+    if RifDoc_CorrispNoPag = 'NP' then
+    begin
+      // Query che verifica se il documento specificato è marcato come "RifDoc_CorrispettivoNonPagato"
+      // NB: Se non lo è esce, se era già marcato come "Chiuso" avvisa l'utente della cosa e di controllare.
+      Q.SQL.Add('SELECT T.RIFDOC_CORRISPNOPAG FROM PRVORDCL T');
+      Q.SQL.Add('WHERE T.TIPODOCUMENTO = ' + QuotedStr(TipoDoc));
+      Q.SQL.Add('  AND T.REGISTRO = ' + QuotedStr(RegDoc));
+      Q.SQL.Add('  AND T.NUMORDPREV = ' + IntToStr(NumDoc));
+      Q.SQL.Add('  AND T.DATADOCUMENTO = ' + QuotedStr(FormatDateTime('mm/dd/yyyy', DataDoc)));
+      Q.Open;
+      // Se non trova il documento esce subito
+      if Q.Eof then
+        Exit;
+      // Per comodità
+      RifDoc_CorrispNoPag := Trim(Q.Fields[0].AsString);
+      Q.Close;
+    end;
+    // Se il documento non è marcato come RifDoc_CorrispettivoNonPagato esce subito
+    if (RifDoc_CorrispNoPag = '') OR (RifDoc_CorrispNoPag = 'F') then
+      Exit
+      // Se invece è già stato chiuso come RifDoc_COrrispNoPag avvisa l'utente e gli suggerisce di
+      // verificare la cosa perchè il documento risulta già chiuso sotto questo aspetto.
+    else if (RifDoc_CorrispNoPag = 'C') then
+    begin
+      if not Silent then
+        DM1.Messaggi('Levante', 'ATTENZIONE!'#13#13'Sto marcando il documento (' + TipoDoc + ' n. ' + IntToStr(NumDoc) + RegDoc + ' del ' +
+          FormatDateTime('dd/mm/yyyy', DataDoc) +
+          ') come "Corrispettivo non pagato chiuso" ma mi risulta già chiuso precedentemente.'#13#13'TI CONSIGLIO DI CONTROLLARE SE CI SONO STATI ERRORI !!!',
+          '', [mbOk], 0, nil);
+      Exit;
+    end;
+    // -------------------------------------------------------------------------
+    // Query che marca il documento come con corrispettivo non pagato CHIUSO
+    if DocImportati_SetCorrispNoPagChiuso then
+    begin
+      Q.SQL.Clear;
+      Q.SQL.Add('UPDATE PRVORDCL T SET T.RIFDOC_CORRISPNOPAG = ' + QuotedStr('C'));
+      Q.SQL.Add('WHERE T.TIPODOCUMENTO = ' + QuotedStr(TipoDoc));
+      Q.SQL.Add('  AND T.REGISTRO = ' + QuotedStr(RegDoc));
+      Q.SQL.Add('  AND T.NUMORDPREV = ' + IntToStr(NumDoc));
+      Q.SQL.Add('  AND T.DATADOCUMENTO = ' + QuotedStr(FormatDateTime('mm/dd/yyyy', DataDoc)));
+      Q.ExecSQL;
+    end;
+    // Query che sostituisce i campi RifDoc con il documento attuale (in pratica nei CNP la fattura prende il posto del rif. allo scontrino)
+    if DocImportati_SostituisciRifDoc then
+    begin
+      Q.SQL.Clear;
+      Q.SQL.Add('UPDATE PRVORDCL T SET');
+      Q.SQL.Add('  RIFDOC_TIPO = ' + QryDocumentoTIPODOCUMENTO.AsString.QuotedString);
+      Q.SQL.Add(', RIFDOC_NUM = ' + QryDocumentoNUMORDPREV.AsString);
+      Q.SQL.Add(', RIFDOC_REG = ' + QryDocumentoREGISTRO.AsString.QuotedString);
+      Q.SQL.Add(', RIFDOC_DATA = ' + FormatDateTime('mm/dd/yyyy', QryDocumentoDATADOCUMENTO.AsDateTime).QuotedString);
+      Q.SQL.Add('WHERE T.TIPODOCUMENTO = ' + TipoDoc.QuotedString);
+      Q.SQL.Add('  AND T.REGISTRO = ' + RegDoc.QuotedString);
+      Q.SQL.Add('  AND T.NUMORDPREV = ' + NumDoc.ToString);
+      Q.SQL.Add('  AND T.DATADOCUMENTO = ' + FormatDateTime('mm/dd/yyyy', DataDoc).QuotedString);
+      Q.ExecSQL;
+    end;
+    // Pulizie finali
+  finally
+    if Assigned(Q) then
+      Q.Free;
+  end;
+end;
+
 { TSectionGrouped }
 
 class procedure TSectionGrouped.CheckRow(const DC: TcxCustomDataController; const Idx: Integer);
@@ -21233,5 +21320,6 @@ begin
   FGrouped := False;
   FPrevious := STARTVALUE;
 end;
+
 
 end.
