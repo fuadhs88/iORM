@@ -301,6 +301,43 @@ procedure TPagamRiscForm.BitBtnConfermaPagamentoClick(Sender: TObject);
 var
    Qry:TIBOQuery;
    ImportoPag:Double;
+   procedure SetCorrispNoPagChiuso;
+   var
+     LScadTipoDoc, LScadRegDoc: String;
+     LScadNumDoc: Integer;
+     LScadDataDoc: TDateTime;
+   begin
+     if Qry.Active then
+       Qry.Close;
+     // Recupera i dati del documento a cui la scadenza fa riserimento
+     Qry.SQL.Clear;
+     Qry.SQL.Add('SELECT S.TIPODOC, S.REGISTRO, S.NUMDOC, S.DATADOC FROM SCADENZ S WHERE');
+     Qry.SQL.Add('S.TIPO = ' + TipoScadenza.QuotedString);
+     Qry.SQL.Add('AND S.CODICE = ' + CodiceScadenza.ToString);
+     Qry.SQL.Add('AND S.DATASCADENZA = ' + FormatDateTime('mm/dd/yyyy', DataScadenza).QuotedString);
+     Qry.Open;
+     if Qry.Eof then
+       Exit;
+     LScadTipoDoc := Qry.FieldByName('TIPODOC').AsString.Trim;
+     LScadRegDoc := Qry.FieldByName('REGISTRO').AsString;
+     LScadNumDoc := Qry.FieldByName('NUMDOC').AsInteger;
+     LScadDataDoc := Qry.FieldByName('DATADOC').AsDateTime;
+     Qry.Close;
+     // Se la scadenza non fa riferimento ad alcun documento esce
+     if LScadTipoDoc.IsEmpty then
+       Exit;
+     // Imposta il documento che è stato riepilogato dalla fattura (l'intervento con il CNP) a CNP chiuso
+     //  se questo documento c'è e se la somma da pagare di tutte le scadenze della stessa fattura della scadenza attuale
+     //  è uguale a zero
+     Qry.SQL.Clear;
+     Qry.SQL.Add('UPDATE PRVORDCL T SET T.RIFDOC_CORRISPNOPAG = ''C''');
+     Qry.SQL.Add('WHERE T.RIFDOC_TIPO = ' + LScadTipoDoc.QuotedString);
+     Qry.SQL.Add('AND T.RIFDOC_REG = ' + LScadRegDoc.QuotedString);
+     Qry.SQL.Add('AND T.RIFDOC_NUM = ' + LScadNumDoc.ToString);
+     Qry.SQL.Add('AND T.RIFDOC_DATA = ' + FormatDateTime('mm/dd/yyyy', LScadDataDoc).QuotedString);
+     Qry.SQL.Add(Format('AND (SELECT OUTVAR FROM DOC_SCADENZE_AMOUNT(''%s'', ''%s'', %d, ''%s'')) = 0', [LScadTipoDoc, LScadRegDoc, LScadNumDoc, FormatDateTime('mm/dd/yyyy', LScadDataDoc)]));
+     Qry.ExecSQL;
+   end;
 begin
    // Se il saldo non è 0 avvisa...
    if CESaldo.Value > 0 then begin
@@ -330,7 +367,8 @@ begin
          // Totale Pagato
          ImportoPag := CECassa.Value + CEFuori1.Value + CEAbbuono.Value;
          // Il Totale pagato non può essere > dell'importo della scadenza
-         if ImportoPag > Importo then ImportoPag := Importo;
+         if ImportoPag > Importo then
+           ImportoPag := Importo;
          Qry.SQL.Add('UPDATE SCADENZ SET');
          Qry.SQL.Add('  IMPORTOPAGATO=IMPORTOPAGATO+' + DM1.VirgolaPunto(ImportoPag));
          Qry.SQL.Add(' ,DATAPAGAMENTO=''' + FormatDateTime('mm/dd/yyyy', StrToDate(DEData.EditText)) + '''');
@@ -399,6 +437,10 @@ begin
            // ----- Fine Costruzione corpo query ----------------------------------------------------------------
            Qry.ExecSQL;
          end;
+         // Se la scadenza è relativa a una fattura che a sua volta ha chiuso un Corrispettivo Non Pagato (Intervento)
+         //  provvede a marcare l'intervento come "Corrispettivo non pagato CHIUSO" ma solo se la somma del residuo da pagare
+         //  per la fattura è uguale a zero
+         SetCorrispNoPagChiuso;
       end;
    finally
       // Distrugge la query

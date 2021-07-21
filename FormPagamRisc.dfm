@@ -27,7 +27,8 @@ object PagamRiscForm: TPagamRiscForm
     Height = 68
     Alignment = taLeftJustify
     BevelOuter = bvNone
-    Color = clGray
+    Color = clSilver
+    ParentBackground = False
     TabOrder = 0
     object RxSpeedButtonResetQuery: TSpeedButton
       Left = 312
@@ -307,6 +308,7 @@ object PagamRiscForm: TPagamRiscForm
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
+        Zoom = 100
       end
       object Panel1: TPanel
         Left = 340
@@ -482,6 +484,7 @@ object PagamRiscForm: TPagamRiscForm
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
+        Zoom = 100
       end
       object PanelRicevutaBancaria: TPanel
         Left = 577
@@ -692,6 +695,7 @@ object PagamRiscForm: TPagamRiscForm
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
+        Zoom = 100
       end
       object ENoteCassa: TEdit
         Left = 110

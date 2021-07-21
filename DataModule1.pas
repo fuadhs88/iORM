@@ -16563,6 +16563,15 @@ begin
       Q1.ExecSQL;
     end;
 
+    // Elimina stored procedure DOC_SCADENZE_AMOUNT
+    DM1.ShowWait('', 'Rimozione stored procedure: DOC_SCADENZE_AMOUNT');
+    if StoredProcedureExists('DOC_SCADENZE_AMOUNT') then
+    begin
+      Q1.SQL.Clear;
+      Q1.SQL.Add('DROP PROCEDURE DOC_SCADENZE_AMOUNT');
+      Q1.ExecSQL;
+    end;
+
     // Elimina UDF GUID_GEN
     DM1.ShowWait('', 'Rimozione UDF: GUID_GEN');
     if UDFExists('GENERA_GUID') then
@@ -16622,6 +16631,16 @@ begin
     // Forza la generazione dei GUID per i righi che ne sono sprovvisti
     DM1.ShowWait('', 'Genera GUID mancanti nei righi dei documenti...');
     GeneraGuidMancantiNeiRighi;
+    // ========================================================================
+
+    // ========================================================================
+    // CREAZIONE STORED PROCEDURE DOC_SCADENZE_AMOUNT
+    // ------------------------------------------------------------------------
+    // Stored Procedure che compone una descrizione contenente la descrizione dei primi righi di un documento
+    DM1.ShowWait('', 'Creazione stored procedure: DOC_SCADENZE_AMOUNT');
+    S1.SQL.Clear;
+    S1.SQL.LoadFromFile(CurrDir + 'PROC_DOC_SCADENZE_AMOUNT.SQL');
+    S1.Execute;
     // ========================================================================
 
     // ========================================================================
