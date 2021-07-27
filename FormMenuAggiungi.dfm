@@ -218,6 +218,7 @@ object MenuAggiungiForm: TMenuAggiungiForm
       SelectedLinkIndex = -1
       SmallImageIndex = 3
       TopVisibleLinkIndex = 0
+      OptionsExpansion.Expanded = False
       Links = <
         item
           Item = dxNavBarItem_ComSms

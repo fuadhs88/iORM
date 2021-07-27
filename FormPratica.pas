@@ -299,7 +299,6 @@ type
     Shape3: TShape;
     Shape4: TShape;
     Label33: TLabel;
-    DbeTipoImpianto: TDBEdit;
     dbeProxVisitaEntro: TcxDBDateEdit;
     ClientAreaPratica: TScrollBox;
     PanelProprietarioCantiere: TPanel;
@@ -1838,6 +1837,7 @@ type
     QryPratPRM_AUTOCLOSE_SOLOMANUT: TStringField;
     QryPratPRM_AUTOCLOSE_FATTURA: TStringField;
     QryPratPRM_AUTOCLOSE_SCAD: TStringField;
+    DbeTipoImpianto: TcxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);

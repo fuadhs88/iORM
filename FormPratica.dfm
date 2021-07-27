@@ -5013,7 +5013,7 @@ object PraticaForm: TPraticaForm
             end
             object Shape4: TShape
               Left = 0
-              Top = 13
+              Top = 14
               Width = 495
               Height = 117
               Brush.Color = 13822463
@@ -5154,7 +5154,7 @@ object PraticaForm: TPraticaForm
             end
             object Label350: TLabel
               Left = 215
-              Top = 87
+              Top = 86
               Width = 24
               Height = 12
               Caption = 'POD'
@@ -5217,28 +5217,6 @@ object PraticaForm: TPraticaForm
               TabOrder = 13
               Height = 18
               Width = 90
-            end
-            object DbeTipoImpianto: TDBEdit
-              Tag = -1
-              Left = 98
-              Top = 18
-              Width = 150
-              Height = 17
-              TabStop = False
-              AutoSize = False
-              Color = 16250871
-              Ctl3D = False
-              DataField = 'TIPOIMPIANTO'
-              DataSource = SourcePrat
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -9
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentCtl3D = False
-              ParentFont = False
-              ReadOnly = True
-              TabOrder = 0
             end
             object dbeProxVisitaEntro: TcxDBDateEdit
               Left = 517
@@ -5443,11 +5421,11 @@ object PraticaForm: TPraticaForm
               Height = 26
               BevelOuter = bvNone
               Color = 13822463
-              TabOrder = 1
+              TabOrder = 0
               TabStop = True
               object cxDBRadioGroup2: TcxDBRadioGroup
                 Left = -3
-                Top = 0
+                Top = 1
                 Alignment = alRightCenter
                 DataBinding.DataField = 'AUTONOMOCENTRALIZZATO'
                 DataBinding.DataSource = SourcePrat
@@ -5572,6 +5550,42 @@ object PraticaForm: TPraticaForm
               TabOrder = 7
               OnEnter = DescrizioneEnter
               OnExit = DescrizioneExit
+            end
+            object DbeTipoImpianto: TcxDBComboBox
+              Left = 97
+              Top = 18
+              AutoSize = False
+              DataBinding.DataField = 'TIPOIMPIANTO'
+              DataBinding.DataSource = SourcePrat
+              ParentFont = False
+              Properties.Alignment.Horz = taLeftJustify
+              Properties.DropDownListStyle = lsFixedList
+              Properties.ImmediatePost = True
+              Properties.Items.Strings = (
+                'Centrale termica'
+                'Riscaldamento'
+                'Climatizzazione'
+                'Refrigerazione'
+                'Generico')
+              Style.BorderColor = clBlack
+              Style.BorderStyle = ebsUltraFlat
+              Style.Font.Charset = ANSI_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -9
+              Style.Font.Name = 'Verdana'
+              Style.Font.Style = [fsBold]
+              Style.HotTrack = False
+              Style.LookAndFeel.NativeStyle = False
+              Style.ButtonTransparency = ebtNone
+              Style.IsFontAssigned = True
+              StyleDisabled.LookAndFeel.NativeStyle = False
+              StyleFocused.LookAndFeel.NativeStyle = False
+              StyleHot.LookAndFeel.NativeStyle = False
+              TabOrder = 1
+              OnEnter = DescrizioneEnter
+              OnExit = DescrizioneExit
+              Height = 19
+              Width = 152
             end
           end
           object PanelProprietarioImpianto: TPanel
@@ -9460,6 +9474,7 @@ object PraticaForm: TPraticaForm
               ParentColor = False
               ParentFont = False
               Transparent = False
+              ExplicitTop = 2
             end
             object dbeNote: TDBMemo
               Left = 6
