@@ -11,7 +11,7 @@ uses
   cxClasses, cxControls, cxGridCustomView, cxGrid, IB_Components,
   IBODataset, bmpPanel, StdCtrls, Mask, DBCtrls, ExtCtrls, Variants,
   Buttons, cxLookAndFeels, cxLookAndFeelPainters, cxNavigator,
-  cxGridCustomLayoutView;
+  cxGridCustomLayoutView, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TGruppiForm = class(TForm)
@@ -1799,7 +1799,8 @@ begin
              case LivelloAttivo of
                 1:begin
                    QryGruppo1.Edit;
-                   if QryGruppo1.FieldByName('CODICE1').IsNull then QryGruppo1.FieldByName('CODICE1').Value := DM1.NextCodice('GRUPPI', 'CODICE1', 999);
+                   if QryGruppo1.FieldByName('CODICE1').AsInteger <= 0 then
+                     QryGruppo1.FieldByName('CODICE1').Value := DM1.NextCodice('GRUPPI', 'CODICE1', 999);
                    // Defaultizza gli eventuali sconti nulli
                    ValoriDefault(QryGruppo1);
                    // Post
@@ -1809,7 +1810,8 @@ begin
                 end;
                 2:begin
                    QryGruppo2.Edit;
-                   if QryGruppo2.FieldByName('CODICE2').IsNull then QryGruppo2.FieldByName('CODICE2').Value := DM1.NextCodice('GRUPPI', 'CODICE2', 999);
+                   if QryGruppo2.FieldByName('CODICE2').AsInteger <= 0 then
+                     QryGruppo2.FieldByName('CODICE2').Value := DM1.NextCodice('GRUPPI', 'CODICE2', 999);
                    // Defaultizza gli eventuali sconti nulli
                    ValoriDefault(QryGruppo2);
                    // Post
@@ -1819,7 +1821,8 @@ begin
                 end;
                 3:begin
                    QryGruppo3.Edit;
-                   if QryGruppo3.FieldByName('CODICE3').IsNull then QryGruppo3.FieldByName('CODICE3').Value := DM1.NextCodice('GRUPPI', 'CODICE3', 999);
+                   if QryGruppo3.FieldByName('CODICE3').AsInteger <= 0 then
+                     QryGruppo3.FieldByName('CODICE3').Value := DM1.NextCodice('GRUPPI', 'CODICE3', 999);
                    // Defaultizza gli eventuali sconti nulli
                    ValoriDefault(QryGruppo3);
                    // Post
@@ -1829,7 +1832,8 @@ begin
                 end;
                 4:begin
                    QryGruppo4.Edit;
-                   if QryGruppo4.FieldByName('CODICE4').IsNull then QryGruppo4.FieldByName('CODICE4').Value := DM1.NextCodice('GRUPPI', 'CODICE4', 999);
+                   if QryGruppo4.FieldByName('CODICE4').AsInteger <= 0 then
+                     QryGruppo4.FieldByName('CODICE4').Value := DM1.NextCodice('GRUPPI', 'CODICE4', 999);
                    // Defaultizza gli eventuali sconti nulli
                    ValoriDefault(QryGruppo4);
                    // Post
@@ -1839,7 +1843,8 @@ begin
                 end;
                 5:begin
                    QryGruppo5.Edit;
-                   if QryGruppo5.FieldByName('CODICE5').IsNull then QryGruppo5.FieldByName('CODICE5').Value := DM1.NextCodice('GRUPPI', 'CODICE5', 999);
+                   if QryGruppo5.FieldByName('CODICE5').AsInteger <= 0 then
+                     QryGruppo5.FieldByName('CODICE5').Value := DM1.NextCodice('GRUPPI', 'CODICE5', 999);
                    // Defaultizza gli eventuali sconti nulli
                    ValoriDefault(QryGruppo5);
                    // Post
@@ -1849,7 +1854,8 @@ begin
                 end;
                 6:begin
                    QryGruppo6.Edit;
-                   if QryGruppo6.FieldByName('CODICE6').IsNull then QryGruppo6.FieldByName('CODICE6').Value := DM1.NextCodice('GRUPPI', 'CODICE6', 999);
+                   if QryGruppo6.FieldByName('CODICE6').AsInteger <= 0 then
+                     QryGruppo6.FieldByName('CODICE6').Value := DM1.NextCodice('GRUPPI', 'CODICE6', 999);
                    // Defaultizza gli eventuali sconti nulli
                    ValoriDefault(QryGruppo6);
                    // Post

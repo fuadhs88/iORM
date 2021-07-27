@@ -5446,8 +5446,8 @@ object PraticaForm: TPraticaForm
               TabOrder = 1
               TabStop = True
               object cxDBRadioGroup2: TcxDBRadioGroup
-                Left = -6
-                Top = -1
+                Left = -3
+                Top = 0
                 Alignment = alRightCenter
                 DataBinding.DataField = 'AUTONOMOCENTRALIZZATO'
                 DataBinding.DataSource = SourcePrat

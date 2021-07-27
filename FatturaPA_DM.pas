@@ -926,6 +926,11 @@ begin
   SetRequiredValueStr('TipoDocumento', Self.GetTipoDocumento, 4, 4);
   SetRequiredValue('Divisa', 'EUR', 3);
   SetRequiredValue('Data', Documento.QryDocumentoDATADOCUMENTO);
+
+  // Controlla che la data del documento non sia futura
+  if Documento.QryDocumentoDATADOCUMENTO.AsDateTime > Now then
+    raise Exception.Create('Non è possibile inviare fatture con data futura:'#13#13'Campo (Documento): "DATADOCUMENTO"'#13#13'Sezione (FE): "DatiGeneraliDocumento"'#13'Campo (FE): "Data"');
+
   SetRequiredValue('Numero', Self.GetNumeroDocumento, 20);
   // Body.DatiGenerali.DatiGeneraliDocumento.DatiRitenuta
   if Self.IsAssigned(Documento.QryDocumentoRITACCPERC) then

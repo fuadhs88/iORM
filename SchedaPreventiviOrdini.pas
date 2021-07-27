@@ -11601,6 +11601,9 @@ const
   IndexUM = 2;
   IndexQta = 3;
   IndexPrezzo = 4;
+  IndexSconto1 = 5;
+  IndexSconto2 = 6;
+  IndexSconto3 = 7;
 var
   Dlg: TOpenDialog;
   FF: TextFile; // Puntatore al file di testo da importare
@@ -11612,6 +11615,9 @@ var
   vUM: String;
   vQta: Double;
   VPrezzo: Double;
+  VSconto1: Double;
+  VSconto2: Double;
+  VSconto3: Double;
   DC: TcxCustomDataController;
   Row: Integer;
 begin
@@ -11658,18 +11664,51 @@ begin
         vCodiceArticolo := Trim(SL.Strings[IndexCodiceArticolo]);
         vDescrizione := Trim(SL.Strings[IndexDescrizione]);
         vUM := Trim(SL.Strings[IndexUM]);
+
         // Qta
         vQta := 0;
         CurrentStr := Trim(SL.Strings[IndexQta]);
         if CurrentStr <> '' then
           vQta := StrToFloat(StringReplace(CurrentStr, '.', '', []));
         // Elimina l'eventuale carattere '.' presente come separatore delle migliaia, per la virgola il caratttere è fisso a ','.
+
         // Prezzo
         VPrezzo := 0;
         CurrentStr := Trim(SL.Strings[IndexPrezzo]);
         if CurrentStr <> '' then
           VPrezzo := StrToFloat(StringReplace(CurrentStr, '.', '', []));
         // Elimina l'eventuale carattere '.' presente come separatore delle migliaia, per la virgola il caratttere è fisso a ','.
+
+        // Sconto 1 (se presente)
+        if SL.Count >= (IndexSconto1 + 1) then
+        begin
+          VSconto1 := 0;
+          CurrentStr := Trim(SL.Strings[IndexSconto1]);
+          if CurrentStr <> '' then
+            VSconto1 := StrToFloat(StringReplace(CurrentStr, '.', '', []));
+            // Elimina l'eventuale carattere '.' presente come separatore delle migliaia, per la virgola il caratttere è fisso a ','.
+        end;
+
+        // Sconto 2 (se presente)
+        if SL.Count >= (IndexSconto2 + 1) then
+        begin
+          VSconto2 := 0;
+          CurrentStr := Trim(SL.Strings[IndexSconto2]);
+          if CurrentStr <> '' then
+            VSconto2 := StrToFloat(StringReplace(CurrentStr, '.', '', []));
+            // Elimina l'eventuale carattere '.' presente come separatore delle migliaia, per la virgola il caratttere è fisso a ','.
+        end;
+
+        // Sconto 3 (se presente)
+        if SL.Count >= (IndexSconto3 + 1) then
+        begin
+          VSconto3 := 0;
+          CurrentStr := Trim(SL.Strings[IndexSconto3]);
+          if CurrentStr <> '' then
+            VSconto3 := StrToFloat(StringReplace(CurrentStr, '.', '', []));
+            // Elimina l'eventuale carattere '.' presente come separatore delle migliaia, per la virgola il caratttere è fisso a ','.
+        end;
+
         // Caricamento nuovo rigo
         Row := DC.AppendRecord;
         DC.Values[Row, tvCorpoCODICEMAGAZZINO.Index] := QryDocumentoCODICEMAGAZZINO.AsInteger;
@@ -11681,6 +11720,9 @@ begin
         DC.Values[Row, tvCorpoUNITADIMISURA.Index] := vUM;
         DC.Values[Row, tvCorpoQTA.Index] := vQta;
         DC.Values[Row, tvCorpoPREZZOUNITARIO.Index] := DM1.Arrotonda(VPrezzo, DM1.DecMicroPrz);
+        DC.Values[Row, tvCorpoSCONTORIGO.Index] := DM1.Arrotonda(VSconto1, 2);
+        DC.Values[Row, tvCorpoSCONTORIGO2.Index] := DM1.Arrotonda(VSconto2, 2);
+        DC.Values[Row, tvCorpoSCONTORIGO3.Index] := DM1.Arrotonda(VSconto3, 2);
         // Alituotq IVA
         AssegnaAliquotaIVA(DocIvaDefault.Codice, Row, DC);
         // Esegue il ricalcolo del rigo

@@ -1,4 +1,5 @@
 [MacroList]
+M_PrezzoLordo=Define:(<A_PrezzoLordo> / 10000000);
 
 [Params]
 AsciiFile=C:\Users\Mauri\AppData\Roaming\Levante\Download\AnagArt.txt
@@ -6,12 +7,12 @@ AsciiDecimalSeparat=,
 DBDecimalSeparat=.
 AsciiThousandsSeparat=.
 DBThousandsSeparat=
-AsciiDateFormat=AMG
+AsciiDateFormat=GMA
 DBDateFormat=MGA
-AsciiDateSeparat=
-DBDateSeparat=
-Separator=59
-FixedWidth=0
+AsciiDateSeparat=/
+DBDateSeparat=/
+Separator=9
+FixedWidth=1
 Destination=ARTICOLI
 NotifyCount=37
 SQLSection1=SQL_Progress_Default_Sconto_Acquisto_1
@@ -19,32 +20,52 @@ SQLSection2=SQL_Articoli_Default_ScontoAcquisto_1
 SQLSection3=NONE
 ExceptionProtected_SQLSection1=SQL_Articoli_Default_ScontoAcquisto_2
 ExceptionProtected_SQLSection2=SQL_Articoli_Default_ScontoAcquisto_3
-ExceptionProtected_SQLSection3=NONE
+ExceptionProtected_SQLSection3=SQL_Set_Data_Ultimo_Listino
+ExceptionProtected_SQLSection4=SQL_Set_Articolo_Obsoleto
+ExceptionProtected_SQLSection5=NONE
 
 [AsciiFieldList]
-A_CodiceArticolo=FieldType:STRING;	FieldLength:25;
+A_CodiceArticolo=FieldType:STRING;	FieldLength:13;
+A_Descrizione=FieldType:STRING;	FieldLength:45;
+A_UM=FieldType:STRING;	FieldLength:2;
+A_CodiceSettore=FieldType:STRING;	FieldLength:2;
+A_DescrSettore=FieldType:STRING;	FieldLength:25;
+A_CodiceGruppo1=FieldType:STRING;	FieldLength:4;		DefaultValue:-1;
+A_DescrGruppo1=FieldType:STRING;	FieldLength:25;
+A_CodiceGruppo2=FieldType:STRING;	FieldLength:4;		DefaultValue:-1;
+A_DescrGruppo2=FieldType:STRING;	FieldLength:25;
 A_CodiceArticoloForn=FieldType:STRING;	FieldLength:25;
-A_Descrizione=FieldType:STRING;		FieldLength:1000;
-A_CodiceSettore=FieldType:STRING;	FieldLength:20;
-A_CodiceGruppo1=FieldType:STRING;	FieldLength:20;		DefaultValue:-1;
-A_Marca=FieldType:STRING;		FieldLength:20;
-A_UM=FieldType:STRING;			FieldLength:2;
-A_CodiceIva=FieldType:STRING;		FieldLength:20;
-A_PrezzoLordo=FieldType:NUMBER;
+A_Marca=FieldType:STRING;	FieldLength:6;
+A_Libero1=FieldType:STRING;	FieldLength:4;
+A_TipoCfFornPri=FieldType:NUMBER;	FieldLength:1;
+A_CodCfFornPri=FieldType:NUMBER;	FieldLength:6;
+A_RagSocFornPri=FieldType:STRING;	FieldLength:35;		MAXLENGTH:20;
+A_PrezzoLordo=FieldType:NUMBER;	FieldLength:16;
+A_CodiceIva=FieldType:STRING;	FieldLength:2;
+A_CodiceArticoloEquival=FieldType:STRING;	FieldLength:25;
+A_DescrArticoloEquival=FieldType:STRING;	FieldLength:45;
+A_TipoCfCooperat=FieldType:NUMBER;	FieldLength:1;
+A_CodCfCooperat=FieldType:NUMBER;	FieldLength:6;
+A_UMArticoloEquival=FieldType:STRING;	FieldLength:2;
+A_MarcaArticoloEquival=FieldType:STRING;	FieldLength:6;
+A_Fine=FieldType:STRING;	FieldLength:1;
 
 [DbFieldList]
 CODICEARTICOLO=Value:<A_CodiceArticolo>;		IsKeyField:YES;
-CODICEFORNITORE=Value:<A_CodiceArticoloForn>;
 DESCRIZIONE=Value:<A_Descrizione>;
-MARCA=Value:<A_Marca>;
+MARCA=Value:<A_RagSocFornPri>;
 UNITADIMISURA=Value:<A_UM>;
 CODICEIVA=Value:1;
 ABILITAMOVMAG=Value:'T';
 SINCHRO=Value:'U';
-JOLLY10=Value:'PLACUCCI';
-FORNITORE=Value:'PLACUCCI';
-PREZZODILISTINO=Value:<A_PrezzoLordo>;
-PREZZODILISTINOIVACOMP=Value:<A_PrezzoLordo> * 1.22;
+JOLLY10=Value:'ARCO';
+PREZZODILISTINO=Value:#M_PrezzoLordo#;
+PREZZODILISTINOIVACOMP=Value:#M_PrezzoLordo# * 1.20;
+JOLLY6=Value:(CASE     WHEN (<A_CodiceGruppo1> = '-1' OR <A_CodiceGruppo1> = '-1  ') THEN NULL     ELSE (<A_CodiceGruppo1>)     END);
+JOLLY7=Value:(CASE     WHEN (<A_CodiceGruppo2> = '-1' OR <A_CodiceGruppo2> = '-1  ') THEN NULL     ELSE (<A_CodiceGruppo2>)     END);
+JOLLY8=Value:<A_DescrGruppo1>;
+JOLLY9=Value:<A_DescrGruppo2>;
+CODICEFORNITORE=Value:<A_CodiceArticoloForn>;
 FLAGAPPENAIMPORTATO=Value:'A';
 
 [SQL_Progress_Default_Sconto_Acquisto_1]
@@ -52,13 +73,21 @@ FLAGAPPENAIMPORTATO=Value:'A';
 
 [SQL_Articoli_Default_ScontoAcquisto_1]
 01=UPDATE ARTICOLI SET SCONTODIACQUISTO=(SELECT FIRST 1 SCONTOBASEACQ FROM PROGRESS)
-02=WHERE JOLLY10='PLACUCCI' AND FLAGAPPENAIMPORTATO = 'A' AND (SCONTODIACQUISTO IS NULL OR SCONTODIACQUISTO=0)
+02=WHERE JOLLY10='ARCO' AND FLAGAPPENAIMPORTATO = 'A' AND (SCONTODIACQUISTO IS NULL OR SCONTODIACQUISTO=0)
 
 [SQL_Articoli_Default_ScontoAcquisto_2]
 01=UPDATE ARTICOLI SET SCONTODIACQUISTO2=(SELECT FIRST 1 SCONTOBASEACQ2 FROM PROGRESS)
-02=WHERE JOLLY10='PLACUCCI' AND FLAGAPPENAIMPORTATO = 'A' AND (SCONTODIACQUISTO2 IS NULL OR SCONTODIACQUISTO2=0)
+02=WHERE JOLLY10='ARCO' AND FLAGAPPENAIMPORTATO = 'A' AND (SCONTODIACQUISTO2 IS NULL OR SCONTODIACQUISTO2=0)
 
 [SQL_Articoli_Default_ScontoAcquisto_3]
 01=UPDATE ARTICOLI SET SCONTODIACQUISTO3=(SELECT FIRST 1 SCONTOBASEACQ3 FROM PROGRESS)
-02=WHERE JOLLY10='PLACUCCI' AND FLAGAPPENAIMPORTATO = 'A' AND (SCONTODIACQUISTO3 IS NULL OR SCONTODIACQUISTO3=0)
+02=WHERE JOLLY10='ARCO' AND FLAGAPPENAIMPORTATO = 'A' AND (SCONTODIACQUISTO3 IS NULL OR SCONTODIACQUISTO3=0)
+
+[SQL_Set_Data_Ultimo_Listino]
+01=UPDATE ARTICOLI SET DATAULTMOD_LISTINO = CURRENT_TIMESTAMP
+02=WHERE JOLLY10='ARCO' AND FLAGAPPENAIMPORTATO = 'A'
+
+[SQL_Set_Articolo_Obsoleto]
+01=UPDATE ARTICOLI SET OBSOLETO = (CASE WHEN (FLAGAPPENAIMPORTATO='A') THEN 'F' ELSE 'T' END)
+02=WHERE JOLLY10='ARCO'
 

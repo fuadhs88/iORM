@@ -68,6 +68,7 @@ object GruppiForm: TGruppiForm
         object tvDiBa: TcxGridTableView
           DragMode = dmAutomatic
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -378,8 +379,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 64
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -397,8 +398,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -417,8 +418,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -437,8 +438,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -856,6 +857,7 @@ object GruppiForm: TGruppiForm
         end
         object cvTot: TcxGridCardView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -952,6 +954,7 @@ object GruppiForm: TGruppiForm
         end
         object tvOre: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -1252,6 +1255,7 @@ object GruppiForm: TGruppiForm
         object tvList1: TcxGridDBTableView
           OnDblClick = tvList1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = SourceGruppo1
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -1314,7 +1318,6 @@ object GruppiForm: TGruppiForm
           ParentFont = False
           Transparent = True
           Layout = tlCenter
-          ExplicitLeft = 0
           ExplicitWidth = 28
           ExplicitHeight = 22
         end
@@ -1454,7 +1457,7 @@ object GruppiForm: TGruppiForm
           AutoSize = False
           BorderStyle = bsNone
           Ctl3D = False
-          DataField = 'Codice1'
+          DataField = 'CODICE2'
           DataSource = SourceGruppo1
           Font.Charset = ANSI_CHARSET
           Font.Color = 11184810
@@ -1603,6 +1606,7 @@ object GruppiForm: TGruppiForm
         object cxGridTableView1: TcxGridTableView
           DragMode = dmAutomatic
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -1913,8 +1917,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 64
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -1932,8 +1936,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -1952,8 +1956,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -1972,8 +1976,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -2391,6 +2395,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridCardView1: TcxGridCardView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -2487,6 +2492,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridTableView2: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -2787,6 +2793,7 @@ object GruppiForm: TGruppiForm
         object tvList2: TcxGridDBTableView
           OnDblClick = tvList1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = SourceGruppo2
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -2848,7 +2855,6 @@ object GruppiForm: TGruppiForm
           ParentFont = False
           Transparent = True
           Layout = tlCenter
-          ExplicitLeft = 0
           ExplicitWidth = 28
           ExplicitHeight = 22
         end
@@ -2988,7 +2994,7 @@ object GruppiForm: TGruppiForm
           AutoSize = False
           BorderStyle = bsNone
           Ctl3D = False
-          DataField = 'Codice1'
+          DataField = 'CODICE2'
           DataSource = SourceGruppo2
           Font.Charset = ANSI_CHARSET
           Font.Color = 11184810
@@ -3131,6 +3137,7 @@ object GruppiForm: TGruppiForm
         object cxGridTableView3: TcxGridTableView
           DragMode = dmAutomatic
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -3441,8 +3448,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 64
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -3460,8 +3467,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -3480,8 +3487,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -3500,8 +3507,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -3919,6 +3926,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridCardView2: TcxGridCardView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -4015,6 +4023,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridTableView4: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -4315,6 +4324,7 @@ object GruppiForm: TGruppiForm
         object tvList3: TcxGridDBTableView
           OnDblClick = tvList1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = SourceGruppo3
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -4376,7 +4386,6 @@ object GruppiForm: TGruppiForm
           ParentFont = False
           Transparent = True
           Layout = tlCenter
-          ExplicitLeft = 0
           ExplicitWidth = 28
           ExplicitHeight = 22
         end
@@ -4516,7 +4525,7 @@ object GruppiForm: TGruppiForm
           AutoSize = False
           BorderStyle = bsNone
           Ctl3D = False
-          DataField = 'Codice1'
+          DataField = 'CODICE3'
           DataSource = SourceGruppo3
           Font.Charset = ANSI_CHARSET
           Font.Color = 11184810
@@ -4665,6 +4674,7 @@ object GruppiForm: TGruppiForm
         object cxGridTableView7: TcxGridTableView
           DragMode = dmAutomatic
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -4975,8 +4985,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 64
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -4994,8 +5004,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -5014,8 +5024,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -5034,8 +5044,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -5453,6 +5463,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridCardView4: TcxGridCardView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -5549,6 +5560,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridTableView8: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -5849,6 +5861,7 @@ object GruppiForm: TGruppiForm
         object tvList5: TcxGridDBTableView
           OnDblClick = tvList1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = SourceGruppo5
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -5910,7 +5923,6 @@ object GruppiForm: TGruppiForm
           ParentFont = False
           Transparent = True
           Layout = tlCenter
-          ExplicitLeft = 0
           ExplicitWidth = 28
           ExplicitHeight = 22
         end
@@ -6193,6 +6205,7 @@ object GruppiForm: TGruppiForm
         object cxGridTableView9: TcxGridTableView
           DragMode = dmAutomatic
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -6503,8 +6516,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 64
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -6522,8 +6535,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -6542,8 +6555,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -6562,8 +6575,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -6981,6 +6994,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridCardView5: TcxGridCardView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -7077,6 +7091,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridTableView10: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -7377,6 +7392,7 @@ object GruppiForm: TGruppiForm
         object tvList6: TcxGridDBTableView
           OnDblClick = tvList1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = SourceGruppo6
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -7438,7 +7454,6 @@ object GruppiForm: TGruppiForm
           ParentFont = False
           Transparent = True
           Layout = tlCenter
-          ExplicitLeft = 0
           ExplicitWidth = 28
           ExplicitHeight = 22
         end
@@ -7721,6 +7736,7 @@ object GruppiForm: TGruppiForm
         object cxGridTableView5: TcxGridTableView
           DragMode = dmAutomatic
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -8031,8 +8047,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 64
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -8050,8 +8066,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -8070,8 +8086,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -8090,8 +8106,8 @@ object GruppiForm: TGruppiForm
             HeaderAlignmentHorz = taCenter
             MinWidth = 90
             Options.Filtering = False
-            Options.FilteringMRUItemsList = False
             Options.IncSearch = False
+            Options.FilteringMRUItemsList = False
             Options.Grouping = False
             Options.HorzSizing = False
             Options.Moving = False
@@ -8509,6 +8525,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridCardView3: TcxGridCardView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -8605,6 +8622,7 @@ object GruppiForm: TGruppiForm
         end
         object cxGridTableView6: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -8905,6 +8923,7 @@ object GruppiForm: TGruppiForm
         object tvList4: TcxGridDBTableView
           OnDblClick = tvList1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = SourceGruppo4
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -8966,7 +8985,6 @@ object GruppiForm: TGruppiForm
           ParentFont = False
           Transparent = True
           Layout = tlCenter
-          ExplicitLeft = 0
           ExplicitWidth = 28
           ExplicitHeight = 22
         end
@@ -9216,7 +9234,8 @@ object GruppiForm: TGruppiForm
     Height = 68
     Alignment = taLeftJustify
     BevelOuter = bvNone
-    Color = clGray
+    Color = clSilver
+    ParentBackground = False
     TabOrder = 1
     object RxSpeedButtonResetQuery: TSpeedButton
       Left = 312
@@ -9442,7 +9461,6 @@ object GruppiForm: TGruppiForm
   end
   object QryGruppo1: TIBOQuery
     BufferSynchroFlags = [bsBeforeEdit, bsAfterEdit, bsAfterInsert]
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM GRUPPI'
       'WHERE'
@@ -9487,13 +9505,10 @@ object GruppiForm: TGruppiForm
         ':DESCRIZIONE, :SINCHRO, :DESCBREVE, :SCONTODIACQUISTO1, :SCONTOD' +
         'IACQUISTO2, :SCONTODIACQUISTO3)')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QryGruppo1BeforePost
     SQL.Strings = (
       'SELECT * FROM GRUPPI')
-    FieldOptions = []
     Left = 642
     Top = 90
     object QryGruppo1CODICE1: TIntegerField
@@ -9557,7 +9572,6 @@ object GruppiForm: TGruppiForm
   end
   object QryGruppo3: TIBOQuery
     BufferSynchroFlags = [bsBeforeEdit, bsAfterEdit, bsAfterInsert]
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM GRUPPI'
       'WHERE'
@@ -9602,14 +9616,11 @@ object GruppiForm: TGruppiForm
         ':DESCRIZIONE, :SINCHRO, :DESCBREVE, :SCONTODIACQUISTO1, :SCONTOD' +
         'IACQUISTO2, :SCONTODIACQUISTO3)')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QryGruppo1BeforePost
     SQL.Strings = (
       'SELECT * FROM GRUPPI'
       '')
-    FieldOptions = []
     Left = 642
     Top = 273
     object QryGruppo3CODICE1: TIntegerField
@@ -9673,7 +9684,6 @@ object GruppiForm: TGruppiForm
   end
   object QryGruppo2: TIBOQuery
     BufferSynchroFlags = [bsBeforeEdit, bsAfterEdit, bsAfterInsert]
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM GRUPPI'
       'WHERE'
@@ -9718,14 +9728,11 @@ object GruppiForm: TGruppiForm
         ':DESCRIZIONE, :SINCHRO, :DESCBREVE, :SCONTODIACQUISTO1, :SCONTOD' +
         'IACQUISTO2, :SCONTODIACQUISTO3)')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QryGruppo1BeforePost
     SQL.Strings = (
       'SELECT * FROM GRUPPI'
       '')
-    FieldOptions = []
     Left = 642
     Top = 181
     object QryGruppo2CODICE1: TIntegerField
@@ -9789,7 +9796,6 @@ object GruppiForm: TGruppiForm
   end
   object QryGruppo4: TIBOQuery
     BufferSynchroFlags = [bsBeforeEdit, bsAfterEdit, bsAfterInsert]
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM GRUPPI'
       'WHERE'
@@ -9834,14 +9840,11 @@ object GruppiForm: TGruppiForm
         ':DESCRIZIONE, :SINCHRO, :DESCBREVE, :SCONTODIACQUISTO1, :SCONTOD' +
         'IACQUISTO2, :SCONTODIACQUISTO3)')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QryGruppo1BeforePost
     SQL.Strings = (
       'SELECT * FROM GRUPPI'
       '')
-    FieldOptions = []
     Left = 642
     Top = 385
     object IntegerField1: TIntegerField
@@ -9905,7 +9908,6 @@ object GruppiForm: TGruppiForm
   end
   object QryGruppo5: TIBOQuery
     BufferSynchroFlags = [bsBeforeEdit, bsAfterEdit, bsAfterInsert]
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM GRUPPI'
       'WHERE'
@@ -9950,14 +9952,11 @@ object GruppiForm: TGruppiForm
         ':DESCRIZIONE, :SINCHRO, :DESCBREVE, :SCONTODIACQUISTO1, :SCONTOD' +
         'IACQUISTO2, :SCONTODIACQUISTO3)')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QryGruppo1BeforePost
     SQL.Strings = (
       'SELECT * FROM GRUPPI'
       '')
-    FieldOptions = []
     Left = 642
     Top = 481
     object IntegerField7: TIntegerField
@@ -10021,7 +10020,6 @@ object GruppiForm: TGruppiForm
   end
   object QryGruppo6: TIBOQuery
     BufferSynchroFlags = [bsBeforeEdit, bsAfterEdit, bsAfterInsert]
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     DeleteSQL.Strings = (
       'DELETE FROM GRUPPI'
       'WHERE'
@@ -10066,14 +10064,11 @@ object GruppiForm: TGruppiForm
         ':DESCRIZIONE, :SINCHRO, :DESCBREVE, :SCONTODIACQUISTO1, :SCONTOD' +
         'IACQUISTO2, :SCONTODIACQUISTO3)')
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     BeforePost = QryGruppo1BeforePost
     SQL.Strings = (
       'SELECT * FROM GRUPPI'
       '')
-    FieldOptions = []
     Left = 642
     Top = 585
     object IntegerField13: TIntegerField
