@@ -569,6 +569,10 @@ type
     QrySoggREGIMEFISCALESIGLA: TStringField;
     cxDBLookupComboBox2: TcxDBLookupComboBox;
     Label63: TLabel;
+    PopupMenuAzzeraBanca: TPopupMenu;
+    AzzeraBanca1: TMenuItem;
+    PopupMenuAzzeraModalitaPagamento: TPopupMenu;
+    AzzeraModalitaPagamento1: TMenuItem;
     procedure RxSpeedButtonUscitaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
@@ -625,6 +629,10 @@ type
     procedure DBEFOrzaIVAKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure AzzeraStato1Click(Sender: TObject);
     procedure DBEditStatoDocumentoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure AzzeraBanca1Click(Sender: TObject);
+    procedure BancaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure AzzeraModalitaPagamento1Click(Sender: TObject);
+    procedure DescrizionePagamentoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     // FOrm della mappa
@@ -1584,6 +1592,12 @@ begin
   DM1.Explore(QrySoggSitoInternet.AsString);
 end;
 
+procedure TAnagCliForm.BancaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if RxSpeedModifica.Down and ((Ord(Key) = VK_BACK) or (Ord(Key) = VK_DELETE)) then
+    AzzeraBanca1Click(AzzeraBanca1);
+end;
+
 procedure TAnagCliForm.BitBtnBancaClick(Sender: TObject);
 begin
       DM1.Attendere;
@@ -1841,6 +1855,12 @@ begin
     AzzeraAliquotaIVA1Click(AzzeraAliquotaIVA1);
 end;
 
+procedure TAnagCliForm.DescrizionePagamentoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if RxSpeedModifica.Down and ((Ord(Key) = VK_BACK) or (Ord(Key) = VK_DELETE)) then
+    AzzeraModalitaPagamento1Click(AzzeraModalitaPagamento1);
+end;
+
 procedure TAnagCliForm.AzzeraAliquotaIVA1Click(Sender: TObject);
 begin
   if not RxSpeedModifica.Down then
@@ -1854,6 +1874,43 @@ begin
     QrySoggCODICEIVA.Clear;
     DBECodiceFiscale.SetFocus;
     DBEFOrzaIVA.SetFocus;
+  end;
+end;
+
+procedure TAnagCliForm.AzzeraBanca1Click(Sender: TObject);
+begin
+  if not RxSpeedModifica.Down then
+  begin
+    DM1.Messaggi('Levante', 'Devi essere in modalità di modifica', '', [mbOk], 0, nil);
+    Exit;
+  end;
+
+  if DM1.Messaggi('Azzera Banca', 'Confermi di voler azzerare la banca?', '', [mbYes, mbNo], 0, nil) = mrYes then
+  begin
+    QrySoggABI.Clear;
+    QrySoggCAB.Clear;
+    AnagCliForm.Banca.Text := '';
+    AnagCliForm.ABI.Text := '';
+    AnagCliForm.CAB.Text := '';
+    DBECodiceFiscale.SetFocus;
+    Banca.SetFocus;
+  end;
+end;
+
+procedure TAnagCliForm.AzzeraModalitaPagamento1Click(Sender: TObject);
+begin
+  if not RxSpeedModifica.Down then
+  begin
+    DM1.Messaggi('Levante', 'Devi essere in modalità di modifica', '', [mbOk], 0, nil);
+    Exit;
+  end;
+
+  if DM1.Messaggi('Azzera modalità di pagamento', 'Confermi di voler azzerare la modalità di pagamento?', '', [mbYes, mbNo], 0, nil) = mrYes then
+  begin
+    QrySoggPAGAMENTO.Clear;
+    DescrizionePagamento.Text := '';
+    DBECodiceFiscale.SetFocus;
+    DescrizionePagamento.SetFocus;
   end;
 end;
 

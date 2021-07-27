@@ -220,6 +220,7 @@ object ArchivioBancheForm: TArchivioBancheForm
       object tvDiBa: TcxGridTableView
         DragMode = dmAutomatic
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -530,8 +531,8 @@ object ArchivioBancheForm: TArchivioBancheForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 64
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -549,8 +550,8 @@ object ArchivioBancheForm: TArchivioBancheForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 90
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -569,8 +570,8 @@ object ArchivioBancheForm: TArchivioBancheForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 90
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -589,8 +590,8 @@ object ArchivioBancheForm: TArchivioBancheForm
           HeaderAlignmentHorz = taCenter
           MinWidth = 90
           Options.Filtering = False
-          Options.FilteringMRUItemsList = False
           Options.IncSearch = False
+          Options.FilteringMRUItemsList = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -1008,6 +1009,7 @@ object ArchivioBancheForm: TArchivioBancheForm
       end
       object cvTot: TcxGridCardView
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -1104,6 +1106,7 @@ object ArchivioBancheForm: TArchivioBancheForm
       end
       object tvOre: TcxGridTableView
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -1405,6 +1408,7 @@ object ArchivioBancheForm: TArchivioBancheForm
         OnDblClick = tvListDblClick
         OnKeyUp = tvListKeyUp
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.DataSource = DataSourceBanche
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
@@ -1463,7 +1467,8 @@ object ArchivioBancheForm: TArchivioBancheForm
     Height = 68
     Alignment = taLeftJustify
     BevelOuter = bvNone
-    Color = clGray
+    Color = clSilver
+    ParentBackground = False
     TabOrder = 1
     object RxSpeedButtonResetQuery: TSpeedButton
       Left = 312
@@ -1679,15 +1684,11 @@ object ArchivioBancheForm: TArchivioBancheForm
     end
   end
   object QryBanche: TIBOQuery
-    DatabaseName = 'c:\winproject\levantedev\prova\prova.gdb'
     IB_Connection = DM1.DBAzienda
     PessimisticLocking = True
-    PreparedEdits = True
-    PreparedInserts = False
     RecordCountAccurate = True
     SQL.Strings = (
       'SELECT BANCA, ABI, CAB, BANCABIC FROM BANCHE')
-    FieldOptions = []
     Left = 576
     Top = 8
     object QryBancheBANCA: TStringField

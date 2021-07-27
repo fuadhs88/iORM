@@ -1445,6 +1445,10 @@ type
     AggiornairicarichiperfascedicostoCOLORIGHISELEZIONATI2: TMenuItem;
     dbeFETipoDocumento: TDBText;
     QryDocumentoFE_TIPODOCUMENTO: TStringField;
+    PopupMenuAzzeraBanca: TPopupMenu;
+    AzzeraBanca1: TMenuItem;
+    PopupMenuAzzeraModalitaPagamento: TPopupMenu;
+    AzzeraModalitaPagamento1: TMenuItem;
     procedure RxSpeedButtonUscitaClick(Sender: TObject);
     procedure RxSpeedModificaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1817,6 +1821,10 @@ type
     procedure AggiornairicarichiperfascedicostoTUTTIIRIGHI1Click(Sender: TObject);
     procedure AggiornairicarichiperfascedicostoSOLORIGHISELEZIONATI1Click(Sender: TObject);
     procedure QryDocumentoFE_TIPODOCUMENTOGetText(Sender: TField; var Text: string; DisplayText: Boolean);
+    procedure AzzeraBanca1Click(Sender: TObject);
+    procedure BancaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure AzzeraModalitaPagamento1Click(Sender: TObject);
+    procedure DescrizionePagamentoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     fFirstCaricaLayoutDocumento: Boolean;
@@ -10392,6 +10400,12 @@ begin
   DatiRigoForm.eRicaricoImporto.Properties.DecimalPlaces := DM1.DecMicroPrz;
 end;
 
+procedure TPreventiviOrdiniForm.BancaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if RxSpeedModifica.Down and ((Ord(Key) = VK_BACK) or (Ord(Key) = VK_DELETE)) then
+    AzzeraBanca1Click(AzzeraBanca1);
+end;
+
 procedure TPreventiviOrdiniForm.BeginUpdate;
 begin
   tvCorpo.DataController.BeginUpdate;;
@@ -11570,6 +11584,12 @@ begin
       Close;
     end;
   end;
+end;
+
+procedure TPreventiviOrdiniForm.DescrizionePagamentoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if RxSpeedModifica.Down and ((Ord(Key) = VK_BACK) or (Ord(Key) = VK_DELETE)) then
+    AzzeraModalitaPagamento1Click(AzzeraModalitaPagamento1);
 end;
 
 procedure TPreventiviOrdiniForm.Deselezionacantiereimpianto1Click(Sender: TObject);
@@ -17262,6 +17282,29 @@ begin
   end;
 end;
 
+procedure TPreventiviOrdiniForm.AzzeraBanca1Click(Sender: TObject);
+begin
+  if not RxSpeedModifica.Down then
+  begin
+    DM1.Messaggi('Levante', 'Devi essere in modalità di modifica', '', [mbOk], 0, nil);
+    Exit;
+  end;
+
+  if DM1.Messaggi('Azzera Banca', 'Confermi di voler azzerare la banca?', '', [mbYes, mbNo], 0, nil) = mrYes then
+  begin
+    QryDocumentoABI.Clear;
+    QryDocumentoCAB.Clear;
+
+    Banca.Text := '';
+    ABI.Text := '';
+    CAB.Text := '';
+    BIC.Text := '';
+    dbeIBAN.Text := '';
+
+    Banca.SetFocus;
+  end;
+end;
+
 procedure TPreventiviOrdiniForm.Azzeragliscontideirighiselezionati1Click(Sender: TObject);
 var
   i: Integer;
@@ -17329,6 +17372,22 @@ begin
     finally
       DM1.CloseWait;
     end;
+  end;
+end;
+
+procedure TPreventiviOrdiniForm.AzzeraModalitaPagamento1Click(Sender: TObject);
+begin
+  if not RxSpeedModifica.Down then
+  begin
+    DM1.Messaggi('Levante', 'Devi essere in modalità di modifica', '', [mbOk], 0, nil);
+    Exit;
+  end;
+
+  if DM1.Messaggi('Azzera modalità di pagamento', 'Confermi di voler azzerare la modalità di pagamento?', '', [mbYes, mbNo], 0, nil) = mrYes then
+  begin
+    QryDocumentoPAGAMENTO.Clear;
+    DescrizionePagamento.Text := '';
+    DescrizionePagamento.SetFocus;
   end;
 end;
 

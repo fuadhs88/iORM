@@ -12,7 +12,7 @@ uses
   cxControls, cxGridCustomView, cxGrid, StdCtrls, ExtCtrls, DBCtrls, Mask,
   ComCtrls, Buttons, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxLookAndFeels, cxLookAndFeelPainters, cxNavigator,
-  cxGridCustomLayoutView, cxContainer, cxMaskEdit, cxLookupEdit, cxDBLookupEdit;
+  cxGridCustomLayoutView, cxContainer, cxMaskEdit, cxLookupEdit, cxDBLookupEdit, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TPagamentiForm = class(TForm)

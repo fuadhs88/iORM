@@ -10,7 +10,7 @@ uses
   cxGridLevel, cxGridCardView, cxGridCustomTableView, cxGridTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, IBODataset,
   bmpPanel, StdCtrls, CheckLst, ExtCtrls, Buttons, cxLookAndFeels,
-  cxLookAndFeelPainters, cxNavigator, cxGridCustomLayoutView;
+  cxLookAndFeelPainters, cxNavigator, cxGridCustomLayoutView, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TArchivioBancheForm = class(TForm)

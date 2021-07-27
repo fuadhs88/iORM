@@ -65,7 +65,7 @@ const
 //  LEVARCO_MODE = False;
 //  LEVARCO_PASSWORD = True;
   LEVARCO_PASSWORD = False;
-  LEVARCO_ABSOLUTE_LOCK_DATE = '31/07/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
+  LEVARCO_ABSOLUTE_LOCK_DATE = '31/10/2022'; // Nella 4.11.128 per Levarco era al 31/12/2016
   // --------------------------------------------------------------------------
   // Costanti di parametri per la versione DEMO
   // --------------------------------------------------------------------------

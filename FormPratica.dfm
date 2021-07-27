@@ -8256,7 +8256,7 @@ object PraticaForm: TPraticaForm
             end
             object LabelTipoPersona: TLabel
               Left = 3
-              Top = 22
+              Top = 23
               Width = 46
               Height = 26
               Alignment = taCenter
@@ -8553,7 +8553,7 @@ object PraticaForm: TPraticaForm
             end
             object dbeNaturaGiuridica: TcxDBRadioGroup
               Left = 48
-              Top = 13
+              Top = 3
               Cursor = crHandPoint
               DataBinding.DataField = 'NATURAGIURIDICARESPIMP'
               DataBinding.DataSource = SourcePrat
@@ -8570,7 +8570,7 @@ object PraticaForm: TPraticaForm
                   Value = 'G'
                 end>
               Properties.OnChange = dbeNaturaGiuridicaPropertiesChange
-              Style.BorderStyle = ebsUltraFlat
+              Style.BorderStyle = ebsNone
               Style.Edges = []
               Style.Font.Charset = ANSI_CHARSET
               Style.Font.Color = clGray
@@ -8579,7 +8579,7 @@ object PraticaForm: TPraticaForm
               Style.Font.Style = []
               Style.IsFontAssigned = True
               TabOrder = 0
-              Height = 41
+              Height = 51
               Width = 75
             end
             object eRagSocRespImp: TDBEdit
